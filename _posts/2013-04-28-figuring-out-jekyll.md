@@ -1,4 +1,5 @@
 ---
+date: 2013-04-28 14:00:00
 layout: pages
 ---
 ## [{{page.title}}]({{page.url}}) <small>{{page.date | date_to_string}}</small>
