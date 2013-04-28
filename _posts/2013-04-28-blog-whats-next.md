@@ -11,4 +11,5 @@ So, what's next for the blog?
 * Add disqus.
 * Add post to twitter.
 * Add RSS feed.
+* Add gravatar.
 * What else?
