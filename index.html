@@ -4,8 +4,8 @@ title: While My PC Gently Weeps
 ---
 {% for post in site.posts %}
 <div>
-<p><h2><a href="/blog{{post.url}}">{{post.title}}</a>{{post.date | date_to_string}}</h2></p>
+<p><h2><a href="{{post.url}}">{{post.title}}</a>{{post.date | date_to_string}}</h2></p>
 <p>{{post.content | strip_html | truncatewords: 55}}</p>
-<p><a href="/blog{{post.url}}">Read more...</a></p>
+<p><a href="{{post.url}}">Read more...</a></p>
 </div>
 {% endfor %}
