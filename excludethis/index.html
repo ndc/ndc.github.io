@@ -1,0 +1,70 @@
+---
+title: While My PC Gently Weeps
+---
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>{{page.title}}</title>
+
+<link rel="stylesheet" href="/stylesheets/modernist.css">
+<link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+<script src="/javascripts/scale.fix.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="wrapper">
+
+<header>
+<h1>{{site.title}}</h1>
+<p>{{site.tagline}}</p>
+<!--
+<nav role="navigation">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/archive">Archive</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+</nav>
+-->
+</header>
+
+<section>
+
+{% for post in paginator.posts %}
+<div>
+<p><h2><a href="{{post.url}}">{{post.title}}</a> {{post.date | date_to_string}}</h2></p>
+<p>{{post.content | strip_html | truncatewords: 55}}</p>
+<p><a href="{{post.url}}">Read more...</a></p>
+</div>
+{% endfor %}
+
+<nav>
+{% if paginator.previous_page %}
+{% if paginator.previous_page == 1 %}
+<a href="/" title="Previous Page">Previous</a>
+{% else %}
+<a href="/page{{ paginator.previous_page }}/" title="Previous Page">Previous</a>
+{% endif %}
+{% endif %}
+
+{% if paginator.next_page %}
+<a href="/page{{ paginator.next_page }}/" title="Next Page">Next</a>
+{% endif %}
+</nav>
+
+</section>
+</div>
+
+<footer>
+<p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+</footer>
+
+<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+</body>
+</html>
