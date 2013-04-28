@@ -2,10 +2,24 @@
 layout: default
 title: While My PC Gently Weeps
 ---
-{% for post in site.posts %}
+{% for post in paginator.posts %}
 <div>
 <p><h2><a href="{{post.url}}">{{post.title}}</a> {{post.date | date_to_string}}</h2></p>
 <p>{{post.content | strip_html | truncatewords: 55}}</p>
 <p><a href="{{post.url}}">Read more...</a></p>
 </div>
 {% endfor %}
+
+<nav>
+{% if paginator.previous_page %}
+{% if paginator.previous_page == 1 %}
+<a href="/" title="Previous Page">Previous</a>
+{% else %}
+<a href="/page{{ paginator.previous_page }}/" title="Previous Page">Previous</a>
+{% endif %}
+{% endif %}
+
+{% if paginator.next_page %}
+<a href="/page{{ paginator.next_page }}/" title="Next Page">Next</a>
+{% endif %}
+</nav>
