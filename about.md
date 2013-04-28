@@ -1,6 +1,6 @@
 ---
 layout: pages
-title: About Endy Tjahjono
+title: About
 ---
 
 A quick brown fox jumps over the lazy dog.
