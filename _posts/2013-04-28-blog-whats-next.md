@@ -7,6 +7,7 @@ title: What's Next for the Blog?
 
 So, what's next for the blog?
 * Buy a domain for the blog.
+* Find DNS host.
 * Add google analytics.
 * Add disqus.
 * Add post to twitter.
