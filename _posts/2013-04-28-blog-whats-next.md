@@ -5,6 +5,7 @@ layout: blogdetail
 ---
 
 So, what's next for the blog?
+
 * Buy a domain for the blog.
 * Find DNS host.
 * Add google analytics.
