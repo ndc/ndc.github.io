@@ -17,6 +17,8 @@
 
 {% include navigationbar.html %}
 
+<h2><a href="{{page.url}}">{{page.title}}</a> <small>{{page.date | date_to_string}}</small></h2>
+
 {{content}}
 
 {% include footer.html %}

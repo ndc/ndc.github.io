@@ -1,7 +1,8 @@
 ---
-layout: pages
+title: My First Domain
+date: 2013-04-29
+layout: blogdetail
 ---
-## [{{page.title}}]({{page.url}}) <small>{{page.date | date_to_string}}</small>
 
 Just bought a domain for the blog from namecheap. Before that I found an article about [how a domain registrar can cheat its customers](http://www.domainwarning.com/).
 

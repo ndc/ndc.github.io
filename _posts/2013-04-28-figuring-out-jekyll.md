@@ -1,8 +1,8 @@
 ---
+title: Figuring Out Jekyll
 date: 2013-04-28 14:00:00
-layout: pages
+layout: blogdetail
 ---
-## [{{page.title}}]({{page.url}}) <small>{{page.date | date_to_string}}</small>
 
 From someone who is trying Jekyll for the first time (me):
 * At first I thought I had to install jekyll gem, but further reading suggested that I can just git push the raw markdown to github and github will process the markdown.
