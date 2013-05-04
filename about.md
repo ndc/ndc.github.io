@@ -17,7 +17,7 @@ I would like to thank [GitHub Pages](http://pages.github.com/) for hosting this 
 
 My name is Endy Tjahjono. I am someone who loves to tinker with computers. I work as a software developer. In my spare time I love to play with my son and fiddling with my ipad, sometimes at the same time.
 
-You can find me on [Twitter](https://twitter.com/endy_tj).
+You can find me on <i class="icon-twitter"></i> [Twitter](https://twitter.com/endy_tj).
 
 I posted a lot of questions and a few answers on [stackoverflow](http://stackoverflow.com/users/196451/endy-tjahjono) and the other stackexchange sites.
 
