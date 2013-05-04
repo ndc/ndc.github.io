@@ -2,6 +2,7 @@
 title: My First Domain
 date: 2013-04-29
 layout: blogdetail
+published: true
 ---
 
 Just bought a domain for the blog from namecheap. Before that I found an article about [how a domain registrar can cheat its customers](http://www.domainwarning.com/).

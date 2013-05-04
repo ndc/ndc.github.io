@@ -2,6 +2,7 @@
 title: What's Next for the Blog?
 date: 2013-04-28 22:30:00
 layout: blogdetail
+published: true
 ---
 
 So, what's next for the blog?

@@ -2,6 +2,7 @@
 title: Figuring Out Jekyll
 date: 2013-04-28 14:00:00
 layout: blogdetail
+published: true
 ---
 
 From someone who is trying Jekyll for the first time (me):
