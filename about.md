@@ -9,7 +9,7 @@ Here you can find my writings and some stuff that I have built. I write here mos
 
 I try to keep each post focused on one topic, and I tend to update old posts instead of creating a new one with the same topic.
 
-I would like to thank [GitHub Pages](http://pages.github.com/) for hosting this website and [Photobucket](http://photobucket.com/) for hosting the images. If you are interested to see how I set up my publishing workflow for this website, I have written [a post about it]({% post_url 2013-05-04-my-publishing-workflow %}).
+I would like to thank [GitHub Pages](http://pages.github.com/) for hosting this website and [Photobucket](http://photobucket.com/) for hosting the images. If you are interested to see how I set up my publishing workflow for this website, I have written [a post about it](http://endycahyono.com/blog/my-publishing-workflow/).
 
 ### About Me
 
