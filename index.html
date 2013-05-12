@@ -10,7 +10,7 @@ layout: pages
 
 {% for post in paginator.posts %}
 
-<h2><a href="{{post.url}}">{{post.title}}</a> <small>{{post.date | date_to_string}}</small></h2>
+<h2><a href="{{post.url}}">{{post.title}}</a> <small>{{post.date | date_to_string}} <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{post.url}}" data-text="{{post.title}}" data-via="endy_tj">Tweet</a></small></h2>
 
 {{post.content}}
 

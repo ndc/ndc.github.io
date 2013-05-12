@@ -17,7 +17,7 @@
 
 {% include navigationbar.html %}
 
-<h2>{{page.title}} <small>{{page.date | date_to_string}}</small></h2>
+<h2>{{page.title}} <small>{{page.date | date_to_string}} <a href="https://twitter.com/share" class="twitter-share-button" data-via="endy_tj">Tweet</a></small></h2>
 
 {{content}}
 
@@ -25,5 +25,6 @@
 
 </div>
 {% include googleanalytics.html %}
+{% include twitter-button-generator.html %}
 </body>
 </html>
