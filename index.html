@@ -19,11 +19,11 @@ layout: pages
 {% if paginator.previous_page == 1 %}
 <li><a href="/">Older Posts</a></li>
 {% else %}
-<li><a href="/page{{paginator.previous_page}}">Older Posts</a></li>
+<li><a href="/page{{paginator.previous_page}}">More Recent Posts</a></li>
 {% endif %}
 {% endif %}
 {% if paginator.next_page %}
-<li><a href="/page{{paginator.next_page}}">More Recent Posts</a></li>
+<li><a href="/page{{paginator.next_page}}">Older Posts</a></li>
 {% endif %}
 </ul>
 </div>
