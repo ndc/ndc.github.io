@@ -12,6 +12,7 @@ I have just tried it and it's so cool! Example:
     github near:"jakarta" within:40mi
 
 Some more examples:
+
 * searching for github or bitbucket (using OR): `github OR bitbucket`
 * searching for github tweet that is NOT a retweet (using the negative sign): `github -RT`
 * searching for github tweet where the tweeter's device's language is set to Bahasa Indonesia (using "lang"): `github lang:in`
@@ -21,6 +22,7 @@ Some more examples:
 * searching for exact phrase (using quote): `"git hub"`
 
 Mixing it up:
+
 * back and forth conversation: `from:github OR to:github`
 
 Do you have an interesting twitter query?
