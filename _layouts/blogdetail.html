@@ -18,8 +18,8 @@
 
 {% include navigationbar.html %}
 
-<h2>{{page.title}} <small>{{page.date | date_to_string}}</small></h2>
-<p><a href="https://twitter.com/share" class="twitter-share-button" data-via="endy_tj">Tweet</a></p>
+<h2>{{page.title}}</h2>
+<p>By {{site.owner}}. Last update {{page.date | date_to_string}} <a href="https://twitter.com/share" class="twitter-share-button" data-via="endy_tj">Tweet</a></p>
 
 {{content}}
 

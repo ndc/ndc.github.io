@@ -15,7 +15,7 @@ This website is hosted on [GitHub Pages](http://pages.github.com/) (thanks GitHu
 
 ![gravatar image](http://www.gravatar.com/avatar/568da03c8b2c0b8dbf4210d2d30111fd.png)
 
-My name is Endy Tjahjono. I am someone who loves to tinker with computers. I work as a software developer. In my spare time I love to play with my son and fiddling with my ipad, sometimes at the same time.
+My name is {{site.owner}}. I am someone who loves to tinker with computers. I work as a software developer. In my spare time I love to play with my son and fiddling with my ipad, sometimes at the same time.
 
 You can find me on <i class="icon-twitter"></i> [Twitter](https://twitter.com/endy_tj).
 
