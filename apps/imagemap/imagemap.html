@@ -1,0 +1,58 @@
+<div class="span2">
+    <div>
+        <h4>Image URL</h4>
+    </div>
+    <div>
+        <input id="imagepath" type="url" ng-model="image.imagepath"
+            placeholder="http://localhost/image.jpg" style="width: auto" />
+    </div>
+    <button type="button" ng-click="loadimage()">Load Image</button>
+    <br />
+    <div>
+        <h4>Areas</h4>
+    </div>
+    <table class="table table-striped">
+        <tr ng-repeat="area in data.areas">
+            <td>
+                <div ng-hide="areaiscurrent(area)">
+                    <button type="button" ng-click="delarea(area)"><i class="icon-minus"></i></button>
+                    <a ng-click="loadarea(area)">{{area.shape}} {{area.alt}}</a>
+                </div>
+                <div ng-show="areaiscurrent(area)">
+                    <button type="button" ng-click="delarea(area)"><i class="icon-minus"></i></button>
+                    Delete This Area
+                        <div>
+                            <input type="text" placeholder="Area Description (alt)" ng-model="area.alt" style="width: auto" />
+                        </div>
+                    <div>
+                        <input type="url" placeholder="Link URL (href)" ng-model="area.href" style="width: auto" />
+                    </div>
+                    <div>
+                        <label>Coordinates</label>
+                    </div>
+                    <div ng-hide="currentarea.coordinates.length > 0">
+                        <small>Click the image to set coordinates</small>
+                    </div>
+                    <div ng-repeat="c in currentarea.coordinates">
+                        <button type="button" ng-click="delcoordinate(c)"><i class="icon-minus"></i></button>
+                        {{c.x}},{{c.y}}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <button type="button" ng-click="newarea()"><i class="icon-plus"></i></button>
+    Add New Area
+    <br />
+    <div>
+        <h4>Result</h4>
+    </div>
+    <textarea style="width: auto; height: auto">{{getresultstring()}}</textarea>
+</div>
+<div class="span10">
+    <div style="position: relative; width: {{image.width}}px; height: {{image.height}}px">
+        <img ng-src="{{data.imagepath}}" ng-click="clickimage($event)" />
+        <img src="dot.gif" ng-repeat="c in currentarea.coordinates"
+            style="position: absolute; left: {{c.x}}px; top: {{c.y}}px; width: 2px; height: 2px" />
+    </div>
+</div>
