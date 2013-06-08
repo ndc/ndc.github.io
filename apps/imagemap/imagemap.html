@@ -43,13 +43,18 @@
     </table>
     <button type="button" ng-click="newarea()"><i class="icon-plus"></i></button>
     Add New Area
-    <br />
+</div>
+<div class="span10">
     <div>
         <h4>Result</h4>
     </div>
-    <textarea style="width: auto; height: auto">{{getresultstring()}}</textarea>
-</div>
-<div class="span10">
+    <textarea class="span6" style="height: auto">{{getresultstring()}}</textarea>
+    <div>
+        <h4>Image</h4>
+    </div>
+    <div ng-hide="data.imagepath.length > 0">
+        <small>Please input the URL of the image and press <em>Load Image</em>.</small>
+    </div>
     <div style="position: relative; width: {{image.width}}px; height: {{image.height}}px">
         <img ng-src="{{data.imagepath}}" ng-click="clickimage($event)" />
         <img src="dot.gif" ng-repeat="c in currentarea.coordinates"
