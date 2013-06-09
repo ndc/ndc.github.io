@@ -1,4 +1,4 @@
-<div class="span2">
+<div class="span3">
     <div>
         <h4>Image URL</h4>
     </div>
@@ -44,20 +44,44 @@
     <button type="button" ng-click="newarea()"><i class="icon-plus"></i></button>
     Add New Area
 </div>
-<div class="span10">
-    <div>
-        <h4>Result</h4>
+<div class="span9">
+    <div class="row">
+        <div class="span6">
+            <div>
+                <h4>Result</h4>
+            </div>
+            <textarea class="span6" style="height: 80px">{{getresultstring()}}</textarea>
+        </div>
+        <div class="span3 text-right">
+            Do you like this tool?
+            <br />
+            Tip the author!
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="X7DRATU66CAKA" />
+                <input
+                    type="image"
+                    src="http://i1144.photobucket.com/albums/o484/nnddcc/article/tipjar01_zpsd283f712.gif"
+                    style="border: 0px; width: 45px; height: 72px"
+                    name="submit"
+                    alt="PayPal - The safer, easier way to pay online!" />
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+        </div>
     </div>
-    <textarea class="span6" style="height: 80px">{{getresultstring()}}</textarea>
-    <div>
-        <h4>Image</h4>
-    </div>
-    <div ng-hide="data.imagepath.length > 0">
-        <small>Please input the URL of the image and press <em>Load Image</em>.</small>
-    </div>
-    <div style="position: relative; width: {{image.width}}px; height: {{image.height}}px">
-        <img ng-src="{{data.imagepath}}" ng-click="clickimage($event)" />
-        <img src="dot.gif" ng-repeat="c in currentarea.coordinates"
-            style="position: absolute; left: {{c.x}}px; top: {{c.y}}px; width: 2px; height: 2px" />
+    <div class="row">
+        <div class="span9">
+            <div>
+                <h4>Image</h4>
+            </div>
+            <div ng-hide="data.imagepath.length > 0">
+                <small>Please input the URL of the image and press <em>Load Image</em>.</small>
+            </div>
+            <div style="position: relative; width: {{image.width}}px; height: {{image.height}}px">
+                <img ng-src="{{data.imagepath}}" ng-click="clickimage($event)" />
+                <img src="dot.gif" ng-repeat="c in currentarea.coordinates"
+                    style="position: absolute; left: {{c.x}}px; top: {{c.y}}px; width: 2px; height: 2px" />
+            </div>
+        </div>
     </div>
 </div>
