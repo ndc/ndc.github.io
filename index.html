@@ -12,6 +12,8 @@ changefreq: daily
 
 {{post.content}}
 
+<p><a href="{{post.url}}/#disqus_thread">Comments</a></p>
+
 {% endfor %}
 
 <div>
@@ -28,3 +30,6 @@ changefreq: daily
 {% endif %}
 </ul>
 </div>
+
+{% include twitter-button-generator.html %}
+{% include disquscount.html %}
