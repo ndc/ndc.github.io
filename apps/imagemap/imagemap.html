@@ -1,18 +1,18 @@
 <div class="span3">
+    <h4>Choose image</h4>
     <div>
-        <h4>Image URL</h4>
+        <input type="file" fileread="image.imagepath" style="width: auto" />
     </div>
+    <h4>Or input image URL</h4>
     <div>
-        <input id="imagepath" type="url" ng-model="image.imagepath"
+        <input type="url" ng-model="image.imagepath"
             placeholder="http://localhost/image.jpg" style="width: auto" />
     </div>
     <div>
         <button type="button" ng-click="loadimage()">Load Image</button>
     </div>
     <br />
-    <div>
-        <h4>Areas</h4>
-    </div>
+    <h4>Areas</h4>
     <table class="table table-striped">
         <tr ng-repeat="area in data.areas">
             <td>
@@ -32,10 +32,10 @@
                     <div>
                         <label>Coordinates</label>
                     </div>
-                    <div ng-hide="currentarea.coordinates.length > 0">
+                    <div ng-hide="currentarea.coords.length > 0">
                         <small>Click the image to set coordinates</small>
                     </div>
-                    <div ng-repeat="c in currentarea.coordinates">
+                    <div ng-repeat="c in currentarea.coords">
                         <button type="button" ng-click="delcoordinate(c)"><i class="icon-minus"></i></button>
                         {{c.x}},{{c.y}}
                     </div>
@@ -81,7 +81,7 @@
             </div>
             <div style="position: relative; width: {{image.width}}px; height: {{image.height}}px">
                 <img ng-src="{{data.imagepath}}" ng-click="clickimage($event)" />
-                <img src="dot.gif" ng-repeat="c in currentarea.coordinates"
+                <img src="dot.gif" ng-repeat="c in currentarea.coords"
                     style="position: absolute; left: {{c.x}}px; top: {{c.y}}px; width: 2px; height: 2px" />
             </div>
         </div>

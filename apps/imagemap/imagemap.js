@@ -20,7 +20,7 @@ angular
 
 angular
 .module("ImageMap")
-.controller("MainCtrl", ["$scope", "$location", "$http", function ($scope, $location, $http) {
+.controller("MainCtrl", ["$scope", function ($scope) {
     $scope.data = {
         imagepath: "",
         areas: []
@@ -47,7 +47,7 @@ angular
             shape: "poly",
             alt: "",
             href: "",
-            coordinates: []
+            coords: []
         };
         $scope.data.areas.push($scope.currentarea);
     }
@@ -73,11 +73,11 @@ angular
     $scope.clickimage = function (event) {
         if ($scope.currentarea != null) {
             var c = getcoordinate(event);
-            $scope.currentarea.coordinates.push(c);
+            $scope.currentarea.coords.push(c);
         }
     }
     $scope.delcoordinate = function (c) {
-        $scope.currentarea.coordinates.splice($scope.currentarea.coordinates.indexOf(c), 1);
+        $scope.currentarea.coords.splice($scope.currentarea.coords.indexOf(c), 1);
     }
     $scope.xytos = function (ca) {
         return _.chain(ca)
@@ -98,7 +98,7 @@ angular
                 + 'shape="' + $scope.data.areas[i].shape + '" '
                 + 'alt="' + $scope.data.areas[i].alt + '" '
                 + 'href="' + $scope.data.areas[i].href + '" '
-                + 'coords="' + $scope.xytos($scope.data.areas[i].coordinates) + '" '
+                + 'coords="' + $scope.xytos($scope.data.areas[i].coords) + '" '
                 + '/>';
         }
 
@@ -106,6 +106,27 @@ angular
             + '</map>';
 
         return result;
+    }
+}]);
+
+angular
+.module("ImageMap")
+.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
     }
 }]);
 
@@ -124,7 +145,7 @@ angular
             + 'shape="{{x.shape}}" '
             + 'alt="{{x.alt}}" '
             + 'href="{{x.href}}" '
-            + 'coords="{{xytos(x.coordinates)}}" '
+            + 'coords="{{xytos(x.coords)}}" '
             + '/>'
             + '</map>'
             + '',
