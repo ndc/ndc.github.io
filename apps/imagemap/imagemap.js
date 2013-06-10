@@ -32,10 +32,14 @@ angular
     }
     $scope.loadimage = function () {
         var img = new Image();
+        img.onload = function () {
+            $scope.$apply(function () {
+                $scope.image.width = img.width;
+                $scope.image.height = img.height;
+                $scope.data.imagepath = $scope.image.imagepath;
+            });
+        }
         img.src = $scope.image.imagepath;
-        $scope.image.width = img.width;
-        $scope.image.height = img.height;
-        $scope.data.imagepath = $scope.image.imagepath;
     }
     $scope.currentarea = null;
     $scope.newarea = function () {
