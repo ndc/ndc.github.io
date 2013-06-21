@@ -5,9 +5,9 @@ layout: blogdetail
 published: true
 ---
 
-I was setting up [forms authentication](https://github.com/NancyFx/Nancy/wiki/Forms-Authentication) in a web app project that uses [Nancy](http://nancyfx.org/), and this is my implementation notes.
+This is my implementation notes when I was setting up [forms authentication](https://github.com/NancyFx/Nancy/wiki/Forms-Authentication) in a web app project that uses [Nancy](http://nancyfx.org/).
 
-Nancy forms authentication allows user to login with username and password. It then converts this username and password into a token, sends the token into user's browser as a cookie. The next time user sends a request to the Nancy server, the cookie will be included in the request. Nancy can then deduct the user from the token, and allow or deny access to the page.
+Nancy forms authentication allows user to login with username and password. It then converts this username and password into a token, and then sends the token into user's browser as a cookie. The next time user sends a request to the Nancy server, the cookie will be included in the request. Nancy can then deduct the user from the token, and allow or deny access to the page.
 
 First step is to nuget Nancy forms authentication:
 
