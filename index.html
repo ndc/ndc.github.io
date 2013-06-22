@@ -8,7 +8,11 @@ changefreq: daily
 
 <br />
 <h2><a href="{{post.url}}/">{{post.title}}</a></h2>
-<p>Last update {{post.date | date_to_string}}. <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.url}}{{post.url}}/" data-text="{{post.title}}" data-via="endy_tj">Tweet</a></p>
+<p>
+Last update {{post.date | date_to_string}}.
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.url}}{{post.url}}/" data-text="{{post.title}}" data-via="endy_tj">Tweet</a>
+<div class="g-plusone" data-size="medium" data-href="{{site.url}}{{post.url}}/"></div>
+</p>
 
 {{post.content}}
 
@@ -32,4 +36,5 @@ changefreq: daily
 </div>
 
 {% include twitter-button-generator.html %}
+{% include googleplusone.html %}
 {% include disquscount.html %}
