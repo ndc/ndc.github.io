@@ -21,7 +21,6 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
 
     In Nancy the closest thing to a controller is a 'module'. Here's a simple module:
 
-        {% highlight c# %}
         public class HiModule : Nancy.NancyModule
         {
             public HiModule()
@@ -29,7 +28,6 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
                 Get["/"] = x => "Hello World!";
             }
         }
-        {% endhighlight %}
 
     It's a useless module I know, but that's the code that piqued my interest to explore Nancy :)
 
@@ -41,15 +39,13 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
 
 5. Create a new class deriving from Nancy.NancyModule called HelloModule in the Modules folder.
 
-```c#
-public class HelloModule : Nancy.NancyModule
-{
-    public HelloModule()
-    {
-        Get["/"] = x => View["Index"];
-    }
-}
-```
+        public class HelloModule : Nancy.NancyModule
+        {
+            public HelloModule()
+            {
+                Get["/"] = x => View["Index"];
+            }
+        }
 
 6. Add a `Hello` folder in Views folder.
 7. Add a `Index.html` file in folder Hello.
@@ -77,36 +73,32 @@ What if I want to use a viewmodel?
 
 1. Create a class for the viewmodel with a name that starts with the name of the view and ends with ...Model (it's a Nancy convention).
 
-```c#
-public class IndexModel
-{
-    public int? Version { get; set; }
-    public DateTime? LastUpdate { get; set; }
-    public bool? Published { get; set; }
-    public IEnumerable<string> Tags { get; set; }
+        public class IndexModel
+        {
+            public int? Version { get; set; }
+            public DateTime? LastUpdate { get; set; }
+            public bool? Published { get; set; }
+            public IEnumerable<string> Tags { get; set; }
 
-    public IndexModel()
-    {
-        Tags = new List<string>();
-    }
-}
-```
+            public IndexModel()
+            {
+                Tags = new List<string>();
+            }
+        }
 
 2. Instantiate the viewmodel from within a controller action
 
-```c#
-private dynamic Index(dynamic parameters)
-{
-    var data = new IndexModel()
-    {
-        Version = 1,
-        LastUpdate = DateTime.Now,
-        Published = false,
-        Tags = new List<string>() { "web", "programming" }
-    };
-    return data;
-}
-```
+        private dynamic Index(dynamic parameters)
+        {
+            var data = new IndexModel()
+            {
+                Version = 1,
+                LastUpdate = DateTime.Now,
+                Published = false,
+                Tags = new List<string>() { "web", "programming" }
+            };
+            return data;
+        }
 
 3. Rename Index.html into Index.cshtml to activate razor.
 4. Add `@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<IndexModel>` at the beginning of Index.cshtml.
@@ -153,24 +145,22 @@ Next, what about model binding? How do I populate a model from query parameters,
 2. Create the class that will accept the parameters.
 3. Within a controller action, call `this.Bind`
 
-```c#
-private dynamic Index(dynamic parameters)
-{
-    var input = this.Bind<IndexModel>();
+        private dynamic Index(dynamic parameters)
+        {
+            var input = this.Bind<IndexModel>();
 
-    // or
-    // IndexModel input = this.Bind();
+            // or
+            // IndexModel input = this.Bind();
 
-    var data = new IndexModel()
-    {
-        Version = input.Version + 1,
-        LastUpdate = input.LastUpdate.Value.AddMinutes(5),
-        Published = !input.Published,
-        Tags = new List<string>() { "web", "programming" }
-    };
-    return data;
-}
-```
+            var data = new IndexModel()
+            {
+                Version = input.Version + 1,
+                LastUpdate = input.LastUpdate.Value.AddMinutes(5),
+                Published = !input.Published,
+                Tags = new List<string>() { "web", "programming" }
+            };
+            return data;
+        }
 
 In ASP.NET MVC, it is possible to bind to a list of objects or to a dictionary with query parameters that look like:
 
