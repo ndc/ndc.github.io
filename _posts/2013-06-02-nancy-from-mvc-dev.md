@@ -21,15 +21,15 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
 
     In Nancy the closest thing to a controller is a 'module'. Here's a simple module:
 
-```c#
-public class HiModule : Nancy.NancyModule
-{
-    public HiModule()
-    {
-        Get["/"] = x => "Hello World!";
-    }
-}
-```
+        ```c#
+        public class HiModule : Nancy.NancyModule
+        {
+            public HiModule()
+            {
+                Get["/"] = x => "Hello World!";
+            }
+        }
+        ```
 
     It's a useless module I know, but that's the code that piqued my interest to explore Nancy :)
 
