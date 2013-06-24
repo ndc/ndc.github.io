@@ -13,31 +13,33 @@ I did this on June 2013: current version of Visual Studio is Visual Studio 2012,
 
 So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspnet-mvc-to-nancy-part-1) that to get a Nancy environment that is as close as possible to an ASP.NET MVC environment, I should:
 
-1. Create a new project in Visual Studio using the `ASP.NET Empty Web Application` template.
-2. `Install-Package Nancy.Hosting.Aspnet`. This will nuget Nancy as dependency.
-3. `Install-Package Nancy.Viewengines.Razor`.
+1/ Create a new project in Visual Studio using the `ASP.NET Empty Web Application` template.
+2/ `Install-Package Nancy.Hosting.Aspnet`. This will nuget Nancy as dependency.
+3/ `Install-Package Nancy.Viewengines.Razor`.
 
     I ended up with an empty looking project containing only a Web.config file. Where's my controller?
 
     In Nancy the closest thing to a controller is a 'module'. Here's a simple module:
 
-        public class HiModule : Nancy.NancyModule
-        {
-            public HiModule()
-            {
-                Get["/"] = x => "Hello World!";
-            }
-        }
+```c#
+public class HiModule : Nancy.NancyModule
+{
+    public HiModule()
+    {
+        Get["/"] = x => "Hello World!";
+    }
+}
+```
 
     It's a useless module I know, but that's the code that piqued my interest to explore Nancy :)
 
     To make the project structure more similar to MVC:
 
-4. Add a `Modules` folder and a `Views` folder.
+4/ Add a `Modules` folder and a `Views` folder.
 
     Pretending this is an MVC app, let's create a new route, a controller, an action, and a view:
 
-5. Create a new class deriving from Nancy.NancyModule called HelloModule in the Modules folder.
+5/ Create a new class deriving from Nancy.NancyModule called HelloModule in the Modules folder.
 
         public class HelloModule : Nancy.NancyModule
         {
@@ -47,8 +49,8 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
             }
         }
 
-6. Add a `Hello` folder in Views folder.
-7. Add a `Index.html` file in folder Hello.
+6/ Add a `Hello` folder in Views folder.
+7/ Add a `Index.html` file in folder Hello.
 
 If you browse to "/", you will get the content of Index.html.
 
