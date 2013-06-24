@@ -11,6 +11,8 @@ I try to keep each post focused on one topic, and I tend to update old posts ins
 
 This website is hosted on [GitHub Pages](http://pages.github.com/) (thanks GitHub Pages!). If you are interested to see how I set up my publishing workflow for this website, you can read about it [on this post](http://endycahyono.com/article/my-publishing-workflow/).
 
+Background image is from [Subtle Patterns](http://subtlepatterns.com/) website.
+
 ### About Me
 
 ![gravatar image](http://www.gravatar.com/avatar/568da03c8b2c0b8dbf4210d2d30111fd.png)
