@@ -85,7 +85,9 @@ With this setting, I can use IDocumentSession in a module like so.
 
         public MyModule(Raven.Client.IDocumentSession session)
         {
+            // save IDocumentSession in a private instance variable
             DB = session;
+            
             Get["/"] = HomeIndex;
         }
 
@@ -93,6 +95,8 @@ With this setting, I can use IDocumentSession in a module like so.
         {
             ...
             var usr = new User { Name = "Agus" };
+            
+            // use IDocumentSession
             DB.Store(usr);
             DB.SaveChanges();
             ...
