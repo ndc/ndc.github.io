@@ -21,7 +21,7 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
 
     In Nancy the closest thing to a controller is a 'module'. Here's a simple module:
 
-        ```c#
+        {% highlight c# %}
         public class HiModule : Nancy.NancyModule
         {
             public HiModule()
@@ -29,7 +29,7 @@ So, how do I start using Nancy? [I've been told](http://jhovgaard.net/from-aspne
                 Get["/"] = x => "Hello World!";
             }
         }
-        ```
+        {% endhighlight %}
 
     It's a useless module I know, but that's the code that piqued my interest to explore Nancy :)
 
