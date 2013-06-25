@@ -104,10 +104,10 @@ var splitTransformReduce = orders.GroupBy(
     o => o.Items.Sum(
         i => i.Quantity * i.UnitPrice
     ),
-    (cust, ordrs) => new
+    (cust, sls) => new
     {
         customer = cust,
-        sales = ordrs.Sum()
+        sales = sls.Sum()
     }
 );
 ```
