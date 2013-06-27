@@ -332,6 +332,8 @@ But! For creating links, you can just use `~`. For example: `<a href="~/otherpag
 
 Nancy has `BeforeRequest`, `AfterRequest`, and `OnError`. Filters are set up in bootstrapper's [RequestStartup](https://github.com/NancyFx/Nancy/wiki/The-before-and-after-module-hooks) or [ApplicationStartup](https://github.com/NancyFx/Nancy/wiki/The-Application-Before%2C-After-and-OnError-pipelines).
 
+UPDATE: Filters can also be defined inside a module and they will apply only for that module (thanks Phillip Haydon!).
+
 ```c#
 public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
 {
@@ -384,6 +386,19 @@ public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
     private Nancy.Response HandleThisError(Nancy.NancyContext ctx, Exception ex)
     {
         return null;
+    }
+}
+```
+
+Example of a filter inside a module:
+
+```c#
+public class HomeModule : Nancy.NancyModule
+{
+    public HomeModule()
+    {
+        Get["/"] = _ => "Hello!";
+        Before += ctx => null;      // a Before filter
     }
 }
 ```
