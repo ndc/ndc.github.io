@@ -190,7 +190,9 @@ public class HelloModule : Nancy.NancyModule
 
 In the razor view:
 
-`<p>@ViewBag.data</p>`
+```html
+<p>@ViewBag.data</p>
+```
 
 ### Redirect
 
@@ -262,7 +264,7 @@ Looks like there is no TempData equivalent in Nancy for now, so message passing 
 
 ### Master and Partial Page
 
-Razor master page and partial page is available in Nancy. For example there is a layout page in Layout\Base.cshtml containing:
+Razor master page and partial page is available in Nancy. For example there is a layout page in `Layout\Base.cshtml` containing:
 
 ```html
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
@@ -278,7 +280,7 @@ Razor master page and partial page is available in Nancy. For example there is a
 </html>
 ```
 
-And a razor page in Home\WithMaster.cshtml containing:
+And a razor page in `Home\WithMaster.cshtml` containing:
 
 ```html
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
@@ -296,9 +298,11 @@ And a razor page in Home\WithMaster.cshtml containing:
 }
 ```
 
-And a partial page in Home\SmallPartial.cshtml containing:
+And a partial page in `Home\SmallPartial.cshtml` containing:
 
-    <p>This is from partial</p>
+```html
+<p>This is from partial</p>
+```
 
 These pages are called from this module:
 
@@ -324,7 +328,7 @@ But! For creating links, you can just use `~`. For example: `<a href="~/otherpag
 
 ### Filters
 
-Nancy has BeforeRequest, AfterRequest, and OnError. Filters are set up in bootstrapper's [RequestStartup](https://github.com/NancyFx/Nancy/wiki/The-before-and-after-module-hooks) or [ApplicationStartup](https://github.com/NancyFx/Nancy/wiki/The-Application-Before%2C-After-and-OnError-pipelines).
+Nancy has `BeforeRequest`, `AfterRequest`, and `OnError`. Filters are set up in bootstrapper's [RequestStartup](https://github.com/NancyFx/Nancy/wiki/The-before-and-after-module-hooks) or [ApplicationStartup](https://github.com/NancyFx/Nancy/wiki/The-Application-Before%2C-After-and-OnError-pipelines).
 
 ```c#
 public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
@@ -384,7 +388,7 @@ public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
 
 ### Error Handling
 
-Unhandled module errors can be caught with OnError filter.
+Unhandled module errors can be caught with `OnError` filter.
 
 Returning a HTTP error from a module can be done with something like this:
 
@@ -403,7 +407,7 @@ public class HomeModule : Nancy.NancyModule
 
 ### Require HTTPS
 
-Can be implemented as BeforeRequest filter.
+Can be implemented as `BeforeRequest` filter.
 
 ### Output Cache, Generic Cache
 
@@ -413,7 +417,9 @@ As far as I know, there is no built in one. But there is a [sample code](https:/
 
 In MVC, there is a 'File' response type. It is used like this:
 
-    Return File(output, "application/pdf")
+```c#
+return File(output, "application/pdf");
+```
 
 Here is how to do that in Nancy ([source](https://groups.google.com/forum/#!topic/nancy-web-framework/YOejlrL4DHI)):
 
