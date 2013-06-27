@@ -224,6 +224,7 @@ Looks like that is the one and only way to redirect in Nancy. Since routes don't
 
 According to my [limited research](http://blog.csainty.com/2012/05/enabling-sessions-in-nancy.html) there is only one built in session mechanism in Nancy. It uses browser cookie instead of server memory (good decision in my opinion). By default it is not enabled. To enable it, the default Nancy bootstrapper needs to be overridden.
 
+```c#
 public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
 {
     protected override void ApplicationStartup(
@@ -233,6 +234,7 @@ public class CustomNancyBootStrapper : Nancy.DefaultNancyBootstrapper
         Nancy.Session.CookieBasedSessions.Enable(pipelines); // this is the line
     }
 }
+```
 
 To use the session:
 
