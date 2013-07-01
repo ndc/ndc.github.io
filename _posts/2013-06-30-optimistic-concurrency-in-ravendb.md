@@ -11,7 +11,7 @@ Suppose I have a table called `sales`:
 
 ```sql
 create table sales (
-    ID              bigint not null identity,
+    ID              bigint identity constraint PK_SALES primary key,
     ...
     Version         bigint not null     -- this column for optimistic concurrency
 )
@@ -109,7 +109,7 @@ using (var session = store.OpenSession())
 {
     session.Advanced.UseOptimisticConcurrency = true;
 
-    var doc1 = session.Query<Sales>().Where(e => e.Code == 1).FirstOrDefault();
+    var doc1 = session.Query<Sales>().Where(e => e.Code == vmA.Code).FirstOrDefault();
 
     // if the ETag do not match, reject changes
     if (vmA.Etag != doc1.Etag)
