@@ -25,3 +25,7 @@ Example of output:
 
     INSERT INTO MYSQLTABLENAME (COL1, COL2) VALUES ('1',3);
     INSERT INTO MYSQLTABLENAME (COL1, COL2) VALUES ('8',3);
+
+BUT! If your data has some string and the string contains single quote `'`, it is converted to backslash quote `\'` instead of the SQL standard two single quotes `''`.
+
+I haven't found an easy solution for that except mass replacing `\'` with `''`.
