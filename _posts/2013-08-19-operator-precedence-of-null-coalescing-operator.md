@@ -19,8 +19,8 @@ What do you expect to get when you call `stringemup(null, null)`? If you say `cd
 
 So the evaluation flow is like this:
 
-# a is null, so calculate `"c" + b ?? "d"`
-# `"c" + b` evaluates to "c", so return "c"
+1. a is null, so evaluate `"c" + b ?? "d"`
+2. `"c" + b` evaluates to "c", so return "c"
 
 To make the script work as originally intended, I need to add some parentheses:
 
