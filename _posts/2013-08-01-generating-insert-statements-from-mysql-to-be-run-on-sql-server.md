@@ -28,4 +28,9 @@ Example of output:
 
 BUT! If your data has some string and the string contains single quote `'`, it is converted to backslash quote `\'` instead of the SQL standard two single quotes `''`.
 
-I haven't found an easy solution for that except mass replacing `\'` with `''`.
+I haven't found an easy solution for that except mass replacing:
+
+1. `\r\n` with real carriage return line feed
+1. `\"` with `"`
+1. `\'` with `''`
+1. `\\` with `\`
