@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="author" href="https://plus.google.com/100372837324190003490" />
     <title>HTML Image Map Generator</title>
@@ -12,12 +12,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="span12">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <a class="brand" href="/">NNDDCC</a>
-                    </div>
-                </div>
+            <div class="col-md-12">
+                <nav class="navbar navbar-default" role="navigation">
+                    <a class="navbar-brand" href="/">NNDDCC</a>
+                </nav>
                 <h2><a href="http://en.wikipedia.org/wiki/Image_map">HTML Image Map</a> Generator</h2>
                 <p>
                     By Endy Tjahjono. Last update 08 June 2013.
@@ -32,14 +30,14 @@
         <div class="row" ng-app="ImageMap" ng-view>
         </div>
 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
         <script src="imagemap.js"></script>
 
 
 
         <div class="row">
-            <div class="span12">
+            <div class="col-md-12">
                 <footer>
                     <br />
                     <hr />
