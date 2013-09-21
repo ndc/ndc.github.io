@@ -18,6 +18,8 @@
 
 {% include navigationbar.html %}
 
+<div class="postbox">
+
 <h2>{{page.title}}</h2>
 <p>
 By {{site.owner}}.
@@ -33,6 +35,8 @@ Last update {{page.date | date_to_string}}.
 
 {% include disquscomment.html %}
 {% include footer.html %}
+
+</div>
 
 </div>
 {% include googleanalytics.html %}

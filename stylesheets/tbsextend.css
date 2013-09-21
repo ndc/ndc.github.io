@@ -6,3 +6,8 @@ body {
         max-width: 800px;
     }
 }
+
+.postbox {
+    background-color: #FBF0D9;
+    color: #5F4B32;
+}
