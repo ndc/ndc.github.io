@@ -3,7 +3,7 @@ title: About
 layout: pages
 ---
 
-<div class="postbox">
+<div class="row col-md-12 postbox">
 
 ### About This Website
 
