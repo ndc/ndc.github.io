@@ -3,6 +3,8 @@ title: About
 layout: pages
 ---
 
+<div class="row col-md-12 postbox" markdown="1">
+
 ### About This Website
 
 Here you can find my writings and some stuff that I have built. I write here mostly about software development issues, but not always.
@@ -28,3 +30,5 @@ I posted a lot of questions and a few answers on [stackoverflow](http://stackove
 </a>
 
 If you need to email me, send the email to endy_c at(@) yahoo dot(.) com.
+
+</div>
