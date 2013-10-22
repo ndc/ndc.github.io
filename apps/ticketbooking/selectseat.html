@@ -1,0 +1,14 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <svg viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
+             style="height: 0%">
+            <g>
+                <circle ng-repeat="seat in SeatLayout.seats"
+                        cx="{{seat.cx}}"
+                        cy="{{seat.cy}}"
+                        r="0.4">
+                </circle>
+            </g>
+        </svg>
+    </div>
+</div>

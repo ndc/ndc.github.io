@@ -1,0 +1,82 @@
+﻿<div class="row">
+
+    <div class="col-md-4">
+        <p>
+            <label>
+                When do you want to watch?
+            <br />
+                <input
+                    ng-change="ShowDateChanged()"
+                    type="text"
+                    starting-day="1"
+                    show-weeks="false"
+                    datepicker-popup="EEE dd-MMM-yyyy"
+                    ng-model="State.selectedshowdate" />
+            </label>
+            <br />
+            Today is {{BookingState.bndate(moment()) | formatdate:"ddd D MMM YYYY"}}
+        </p>
+
+        <label>On what city do you want to watch?</label>
+        <table class="table table-striped">
+            <tr ng-repeat="city in State.citylist">
+                <td ng-click="changecity(city)">{{city}}
+                    <i class="icon-ok" ng-show="(city == State.selectedcity)"></i>
+                </td>
+            </tr>
+        </table>
+
+        <label>Where do you want to watch?</label>
+        <table class="table table-striped">
+            <tr ng-repeat="cinema in availablecinemas">
+                <td ng-click="changecinema(cinema)">{{cinema.shortname}}
+                    <i class="icon-ok" ng-show="(cinema.code == State.selectedcinema.code)"></i>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <label>What do you want to watch?</label>
+        <table class="table table-striped">
+            <tr ng-repeat="movie in availablemovies">
+                <td ng-click="changemovie(movie)">{{movie.title}}
+                    <i class="icon-ok" ng-show="(movie.code == State.selectedmovie.code)"></i>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <label>Which show do you want to watch?</label>
+        <table class="table table-striped">
+            <tr ng-repeat="show in availableshows">
+                <td ng-click="changeshow(show)">{{show.timeformataudiprice}}
+                    <i class="icon-ok" ng-show="(show.timeformataudiprice == State.selectedshow.timeformataudiprice)"></i>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        Selected showdate: {{State.selectedshowdate | formatdate:"ddd D MMM YYYY"}}
+        <br />
+        Selected city: {{State.selectedcity}}
+        <br />
+        Selected cinema: {{State.selectedcinema.shortname}}
+        <br />
+        Selected movie: {{State.selectedmovie.title}}
+        <br />
+        Selected show: {{State.selectedshow.showtime}}
+        <br />
+        Selected audi: {{State.selectedaudi}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button ng-click="State.reset()">Clear Selection</button>
+        <button ng-disabled="(State.selectedaudi == null)" ng-click="gotoselectseat()">Select Seats</button>
+    </div>
+</div>
