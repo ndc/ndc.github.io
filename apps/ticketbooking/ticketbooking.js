@@ -11,6 +11,9 @@ angular
 .module("TicketBooking")
 .filter("formatdate", [function () {
     var result = function (date, formatstring) {
+        if (formatstring === null) {
+            formatstring = "DD-MMM-YYYY";
+        }
         return moment(date).format(formatstring);
     }
     return result;
