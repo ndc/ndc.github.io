@@ -346,6 +346,8 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         $location.path("/");
     }
 
+    $scope.State = BookingState;
+
     //{
     //    "cinema": "0200",
     //    "audi": "2A",

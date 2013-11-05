@@ -1,5 +1,11 @@
 ﻿<div class="row">
     <div class="col-md-12">
+        <p>
+            Movie {{State.selectedmovie.title}},
+            on {{State.realdatetime(State.selectedshow.showdate, State.selectedshow.showdate) | formatdate:"ddd D MMM YYYY HH:mm"}},
+            in {{State.selectedcinema.shortname}} {{State.selectedcinema.city}} audi {{State.selectedaudi}}
+        </p>
+        <p><label>Which seats do you want to book:</label></p>
         <svg
             viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
             style="height: 0%">
