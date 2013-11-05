@@ -1,16 +1,22 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <svg viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
+        <svg
+            viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
             style="height: 0%">
-            <g>
+            <g
+                style="stroke: black; stroke-width: 0.1; fill: none">
                 <g ng-repeat="seat in SeatLayout.seats">
                     <circle
-                        style="stroke: black; stroke-width: 0.1; fill: none"
                         cx="{{seat.cx}}"
                         cy="{{seat.cy}}"
                         r="0.4">
                     </circle>
-                    <text x="{{seat.cx}}" y="{{seat.cy + 0.2}}" font-size="0.6" textLength="0.8" style="text-anchor: middle">
+                    <text
+                        x="{{seat.cx}}"
+                        y="{{seat.cy + 0.2}}"
+                        font-size="0.4"
+                        textLength="0.6"
+                        style="text-anchor: middle; stroke-width: 0.01; fill: black">
                         {{seat.code}}
                     </text>
                 </g>
