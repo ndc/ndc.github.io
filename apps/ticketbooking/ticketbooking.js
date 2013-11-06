@@ -338,8 +338,8 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
 angular
 .module("TicketBooking")
 .controller("SelectSeat",
-["$scope", "$location", "Settings", "BlitzAPI", "BookingState",
-function ($scope, $location, Settings, BlitzAPI, BookingState) {
+["$scope", "$location", "$q", "Settings", "BlitzAPI", "BookingState",
+function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
 
     if (BookingState.selectedaudi == null) {
         BookingState.reset();
@@ -348,23 +348,49 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
 
-    //{
-    //    "cinema": "0200",
-    //    "audi": "2A",
-    //    "width": 18,
-    //    "height": 5,
-    //    "auditype": "Y",
-    //    "seats": [
-    //        { "code": "A1", "cx": 0, "cy": 0 }, 
-    //        { "code": "C16", "cx": 17, "cy": 4 }
-    //    ]
-    //}
-    BlitzAPI.SeatLayout(BookingState.selectedcinema.code, BookingState.selectedaudi)
-    .success(function (data, status, headers, config) {
-        $scope.SeatLayout = data;
-    })
-    .error(function (data) {
-        toastr.error(data);
+    $q.all([
+        //{
+        //    "cinema": "0200",
+        //    "audi": "2A",
+        //    "width": 18,
+        //    "height": 5,
+        //    "auditype": "Y",
+        //    "seats": [
+        //        { "code": "A1", "cx": 0, "cy": 0 }, 
+        //        { "code": "C16", "cx": 17, "cy": 4 }
+        //    ]
+        //}
+        BlitzAPI.SeatLayout(
+            BookingState.selectedshow.cinema,
+            BookingState.selectedaudi
+        )
+    ])
+    .then(function (responses) {
+        $scope.SeatLayout = responses[0].data;
+        $scope.marktakenseats();
     });
+
+    $scope.marktakenseats = function () {
+        //["D17", "D18"]
+        BlitzAPI.SeatTaken(
+            BookingState.selectedshow.cinema,
+            BookingState.selectedshow.movie,
+            BookingState.selectedshow.showdate,
+            BookingState.selectedaudi,
+            BookingState.selectedshow.showtime
+        )
+        .success(function (data, status, headers, config) {
+            _($scope.SeatLayout.seats).each(function (seat, i, l) {
+                if (_(data).contains(seat.code)) {
+                    seat.taken = true;
+                } else {
+                    seat.taken = false;
+                };
+            });
+        })
+        .error(function (data) {
+            toastr.error(data);
+        });
+    }
 
 }]);
