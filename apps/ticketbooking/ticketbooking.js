@@ -122,6 +122,7 @@ angular
 .controller("SelectShow",
 ["$scope", "$location", "Settings", "BlitzAPI", "BookingState",
 function ($scope, $location, Settings, BlitzAPI, BookingState) {
+
     $scope.State = BookingState;
 
     $scope.changecity = function (c) {

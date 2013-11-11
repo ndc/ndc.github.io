@@ -2,21 +2,17 @@
     <div class="col-md-12">
         <p>
             Movie {{State.selectedmovie.title}},
-            on {{State.realdatetime(State.selectedshow.showdate, State.selectedshow.showdate) | formatdate:"ddd D MMM YYYY HH:mm"}},
+            on {{State.realdatetime(State.selectedshow.showdate, State.selectedshow.showdate) | formatdate:"dddd D MMMM YYYY HH:mm"}},
             in {{State.selectedcinema.shortname}} {{State.selectedcinema.city}} audi {{State.selectedaudi}}
         </p>
-        <p><label>Which seats do you want to book:</label></p>
+        <p>
+            <label>Which seats do you want to book:</label>
+        </p>
         <svg
             viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
             style="height: 0%">
             <g>
                 <g ng-repeat="seat in SeatLayout.seats">
-                    <circle
-                        class="seat"
-                        cx="{{seat.cx}}"
-                        cy="{{seat.cy}}"
-                        r="0.4">
-                    </circle>
                     <text
                         class="seatlabel"
                         x="{{seat.cx}}"
@@ -24,6 +20,26 @@
                         textLength="0.6">
                         {{seat.code}}
                     </text>
+                    <circle
+                        class="seat"
+                        cx="{{seat.cx}}"
+                        cy="{{seat.cy}}"
+                        r="0.4">
+                    </circle>
+                    <line
+                        ng-class="{taken: seat.taken}"
+                        x1="{{seat.cx - 0.4}}"
+                        y1="{{seat.cy - 0.4}}"
+                        x2="{{seat.cx + 0.4}}"
+                        y2="{{seat.cy + 0.4}}">
+                    </line>
+                    <line
+                        ng-class="{taken: seat.taken}"
+                        x1="{{seat.cx - 0.4}}"
+                        y1="{{seat.cy + 0.4}}"
+                        x2="{{seat.cx + 0.4}}"
+                        y2="{{seat.cy - 0.4}}">
+                    </line>
                 </g>
             </g>
             <style type="text/css">
@@ -36,6 +52,11 @@
                 text.seatlabel {
                     text-anchor: middle;
                     font-size: 0.4px;
+                }
+
+                line.taken {
+                    stroke: black;
+                    stroke-width: 0.1;
                 }
             </style>
         </svg>
