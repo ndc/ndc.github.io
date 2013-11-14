@@ -138,12 +138,15 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
 
         BookingState.selectedcity = c;
 
+        $scope.filtercinemas();
+        $scope.filtermovies();
+        $scope.filtershows();
+    }
+
+    $scope.filtercinemas = function () {
         $scope.availablecinemas = _.where(BookingState.cinemalist, {
             city: BookingState.selectedcity
         });
-
-        $scope.filtermovies();
-        $scope.filtershows();
     }
 
     $scope.changecinema = function (c) {
@@ -221,19 +224,6 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         });
     }
 
-    //[
-    //  {
-    //      "cinema": "0400",
-    //      "showdate": "2013-09-13",
-    //      "movie": "MOV1845",
-    //      "price": 30000,
-    //      "showtime": "10:30",
-    //      "auditype": "N",
-    //      "movieformat": "C",
-    //      "midnight": 0,
-    //      "capacity": 197
-    //  }
-    //]
     $scope.ShowDateChanged = function () {
         BookingState.selectedcinema = null;
         BookingState.selectedmovie = null;
@@ -249,6 +239,19 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             "D": "Dining"
         }
 
+        //[
+        //  {
+        //      "cinema": "0400",
+        //      "showdate": "2013-09-13",
+        //      "movie": "MOV1845",
+        //      "price": 30000,
+        //      "showtime": "10:30",
+        //      "auditype": "N",
+        //      "movieformat": "C",
+        //      "midnight": 0,
+        //      "capacity": 197
+        //  }
+        //]
         BlitzAPI.Schedules(selecteddate)
         .success(function (data, status, headers, config) {
             _.each(data, function (d) {
@@ -269,70 +272,85 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         });
     }
 
-    if (BookingState.selectedshowdate == null) {
-        BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
-    }
-
-    $scope.ShowDateChanged();
-
     $scope.gotoselectseat = function () {
         $location.path("/seats");
     }
 
-    //[
-    //  {
-    //      "code": "0100",
-    //      "name": "Paris van Java",
-    //      "shortname": "PVJ",
-    //      "address": "Sukajadi #137 - 139",
-    //      "city": "Bandung",
-    //      "telephone": "+622282063630",
-    //      "auditypes": [
-    //        "N"
-    //      ],
-    //      "image": "https://www.blitzmegaplex.com/uploads/cinemas/PVJ.JPG"
-    //  }
-    //]
-    BlitzAPI.Cinemas()
-    .success(function (data, status, headers, config) {
-        BookingState.cinemalist = data;
-        var cities = _.chain(data).countBy(function (c) { return c.city }).pairs();
+    if (BookingState.selectedcity !== null) {
+        $scope.filtercinemas();
+    }
 
-        BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
+    if (BookingState.selectedcinema !== null) {
+        $scope.filtermovies();
+    }
 
-        if (BookingState.selectedcinema) {
-            BookingState.selectedcity = BookingState.selectedcinema.city;
-        } else {
-            var topcity = cities.sortBy(function (c) { return -c[1] })
-                .first().value()[0];
-            $scope.changecity(topcity);
-        }
-    })
-    .error(function (data) {
-        toastr.error(data);
-    });
+    if (BookingState.selectedmovie !== null) {
+        $scope.filtershows();
+    }
 
-    //[
-    //  {
-    //      "code": "MOV1825",
-    //      "title": "A Werewolf Boy",
-    //      "genre": "ROMANCE",
-    //      "rating": "R",
-    //      "cast": "Song Joong-Ki, Park Bo-Yeong, Jang Young-Nam, Yoo Yeon-Seok, Kim Hyang-Ki",
-    //      "director": "Jo Sung-Hee",
-    //      "language": "KOREAN",
-    //      "subtitle": "BAHASA INDONESIA",
-    //      "thumbnail": "https://www.blitzmegaplex.com/uploads/movie/pictures/MOV1825.JPG",
-    //      "synopsis": "https://www.blitzmegaplex.com/uploads/movie/synopsis/MOV1825.TXT"
-    //  }
-    //]
-    BlitzAPI.Movies()
-    .success(function (data, status, headers, config) {
-        BookingState.movielist = data;
-    })
-    .error(function (data) {
-        toastr.error(data);
-    });
+    if (BookingState.selectedshowdate == null) {
+        BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
+        $scope.ShowDateChanged();
+    }
+
+    if (BookingState.cinemalist === null) {
+        //[
+        //  {
+        //      "code": "0100",
+        //      "name": "Paris van Java",
+        //      "shortname": "PVJ",
+        //      "address": "Sukajadi #137 - 139",
+        //      "city": "Bandung",
+        //      "telephone": "+622282063630",
+        //      "auditypes": [
+        //        "N"
+        //      ],
+        //      "image": "https://www.blitzmegaplex.com/uploads/cinemas/PVJ.JPG"
+        //  }
+        //]
+        BlitzAPI.Cinemas()
+        .success(function (data, status, headers, config) {
+            BookingState.cinemalist = data;
+
+            var cities = _.chain(data).countBy(function (c) { return c.city }).pairs();
+            BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
+
+            if (BookingState.selectedcinema) {
+                BookingState.selectedcity = BookingState.selectedcinema.city;
+            } else {
+                var topcity = cities.sortBy(function (c) { return -c[1] })
+                    .first().value()[0];
+                $scope.changecity(topcity);
+            }
+        })
+        .error(function (data) {
+            toastr.error(data);
+        });
+    }
+
+    if (BookingState.movielist === null) {
+        //[
+        //  {
+        //      "code": "MOV1825",
+        //      "title": "A Werewolf Boy",
+        //      "genre": "ROMANCE",
+        //      "rating": "R",
+        //      "cast": "Song Joong-Ki, Park Bo-Yeong, Jang Young-Nam, Yoo Yeon-Seok, Kim Hyang-Ki",
+        //      "director": "Jo Sung-Hee",
+        //      "language": "KOREAN",
+        //      "subtitle": "BAHASA INDONESIA",
+        //      "thumbnail": "https://www.blitzmegaplex.com/uploads/movie/pictures/MOV1825.JPG",
+        //      "synopsis": "https://www.blitzmegaplex.com/uploads/movie/synopsis/MOV1825.TXT"
+        //  }
+        //]
+        BlitzAPI.Movies()
+        .success(function (data, status, headers, config) {
+            BookingState.movielist = data;
+        })
+        .error(function (data) {
+            toastr.error(data);
+        });
+    }
 
 }]);
 
