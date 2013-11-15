@@ -1,9 +1,10 @@
 ﻿<div class="row">
     <div class="col-md-12">
         <p>
-            Movie {{State.selectedmovie.title}},
+            Movie {{State.selectedmovie.title}} ({{State.selectedshow.movieformat}}),
             on {{State.realdatetime(State.selectedshow.showdate, State.selectedshow.showdate) | formatdate:"dddd D MMMM YYYY HH:mm"}},
-            in {{State.selectedcinema.shortname}} {{State.selectedcinema.city}} audi {{State.selectedaudi}}
+            in {{State.selectedcinema.shortname}} {{State.selectedcinema.city}} audi {{State.selectedaudi}} {{State.selectedshow.auditypedesc}}
+            Rp {{State.selectedshow.price | number}} / seat
         </p>
         <p>
             <label>Which seats do you want to book:</label>

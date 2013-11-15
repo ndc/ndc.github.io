@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 angular
-.module("TicketBooking", ["Globals", "APIWrappers", "ui.bootstrap"]);
+.module("TicketBooking", ["ngRoute", "Globals", "APIWrappers", "ui.bootstrap"]);
 
 angular
 .module("TicketBooking")
@@ -11,6 +11,9 @@ angular
 .module("TicketBooking")
 .filter("formatdate", [function () {
     var result = function (date, formatstring) {
+        if (date === null) {
+            return "";
+        }
         if (formatstring === null) {
             formatstring = "DD-MMM-YYYY";
         }
@@ -124,6 +127,11 @@ angular
 function ($scope, $location, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
+
+    $scope.filtercities = function () {
+        var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
+        BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
+    }
 
     $scope.changecity = function (c) {
         if (BookingState.selectedcity != null
@@ -256,9 +264,10 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         .success(function (data, status, headers, config) {
             _.each(data, function (d) {
                 d.realdatetime = BookingState.realdatetime(d.showdate, d.showtime);
+                d.auditypedesc = auditypes[d.auditype];
                 d.timeformataudiprice = d.showtime + " "
                     + d.movieformat + " "
-                    + auditypes[d.auditype] + " "
+                    + d.auditypedesc + " "
                     + numeral(d.price).format("0,0");
             });
 
@@ -276,24 +285,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         $location.path("/seats");
     }
 
-    if (BookingState.selectedcity !== null) {
-        $scope.filtercinemas();
-    }
-
-    if (BookingState.selectedcinema !== null) {
-        $scope.filtermovies();
-    }
-
-    if (BookingState.selectedmovie !== null) {
-        $scope.filtershows();
-    }
-
-    if (BookingState.selectedshowdate == null) {
-        BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
-        $scope.ShowDateChanged();
-    }
-
-    if (BookingState.cinemalist === null) {
+    $scope.getcinemas = function () {
         //[
         //  {
         //      "code": "0100",
@@ -312,12 +304,10 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         .success(function (data, status, headers, config) {
             BookingState.cinemalist = data;
 
-            var cities = _.chain(data).countBy(function (c) { return c.city }).pairs();
-            BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
+            $scope.filtercities();
 
-            if (BookingState.selectedcinema) {
-                BookingState.selectedcity = BookingState.selectedcinema.city;
-            } else {
+            if (BookingState.selectedcity === null) {
+                var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
                 var topcity = cities.sortBy(function (c) { return -c[1] })
                     .first().value()[0];
                 $scope.changecity(topcity);
@@ -328,7 +318,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         });
     }
 
-    if (BookingState.movielist === null) {
+    $scope.getmovies = function () {
         //[
         //  {
         //      "code": "MOV1825",
@@ -350,6 +340,37 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         .error(function (data) {
             toastr.error(data);
         });
+    }
+
+    $scope.resetselection = function () {
+        BookingState.reset();
+        $scope.getcinemas();
+        $scope.getmovies();
+    }
+
+    if (BookingState.cinemalist === null) {
+        $scope.getcinemas();
+    }
+
+    if (BookingState.movielist === null) {
+        $scope.getmovies();
+    }
+
+    if (BookingState.selectedcity !== null) {
+        $scope.filtercinemas();
+    }
+
+    if (BookingState.selectedcinema !== null) {
+        $scope.filtermovies();
+    }
+
+    if (BookingState.selectedmovie !== null) {
+        $scope.filtershows();
+    }
+
+    if (BookingState.selectedshowdate == null) {
+        BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
+        $scope.ShowDateChanged();
     }
 
 }]);

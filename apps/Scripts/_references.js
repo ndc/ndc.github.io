@@ -1,4 +1,5 @@
 ﻿/// <reference path="angular.js" />
+/// <reference path="angular-route.js" />
 /// <reference path="underscore.js" />
 /// <reference path="moment.js" />
 /// <reference path="numeral.js" />
