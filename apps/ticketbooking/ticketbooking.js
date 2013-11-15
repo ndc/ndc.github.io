@@ -155,6 +155,9 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         $scope.availablecinemas = _.where(BookingState.cinemalist, {
             city: BookingState.selectedcity
         });
+        if (BookingState.selectedcinema === null && $scope.availablecinemas.length == 1) {
+            $scope.changecinema($scope.availablecinemas[0]);
+        }
     }
 
     $scope.changecinema = function (c) {
