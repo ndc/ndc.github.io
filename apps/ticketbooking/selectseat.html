@@ -16,30 +16,30 @@
                 <g ng-repeat="seat in SeatLayout.seats" ng-click="clickseat(seat)">
                     <text
                         class="seatlabel"
-                        x="{{seat.cx}}"
-                        y="{{seat.cy + 20}}"
+                        ng-attr-x="{{seat.cx}}"
+                        ng-attr-y="{{seat.cy + 20}}"
                         textLength="60">
                         {{seat.code}}
                     </text>
                     <circle
                         ng-class="{seat: true, selected: seat.selected}"
-                        cx="{{seat.cx}}"
-                        cy="{{seat.cy}}"
+                        ng-attr-cx="{{seat.cx}}"
+                        ng-attr-cy="{{seat.cy}}"
                         r="40">
                     </circle>
                     <line
                         ng-class="{taken: seat.taken}"
-                        x1="{{seat.cx - 40}}"
-                        y1="{{seat.cy - 40}}"
-                        x2="{{seat.cx + 40}}"
-                        y2="{{seat.cy + 40}}">
+                        ng-attr-x1="{{seat.cx - 40}}"
+                        ng-attr-y1="{{seat.cy - 40}}"
+                        ng-attr-x2="{{seat.cx + 40}}"
+                        ng-attr-y2="{{seat.cy + 40}}">
                     </line>
                     <line
                         ng-class="{taken: seat.taken}"
-                        x1="{{seat.cx - 40}}"
-                        y1="{{seat.cy + 40}}"
-                        x2="{{seat.cx + 40}}"
-                        y2="{{seat.cy - 40}}">
+                        ng-attr-x1="{{seat.cx - 40}}"
+                        ng-attr-y1="{{seat.cy + 40}}"
+                        ng-attr-x2="{{seat.cx + 40}}"
+                        ng-attr-y2="{{seat.cy - 40}}">
                     </line>
                 </g>
             </g>
