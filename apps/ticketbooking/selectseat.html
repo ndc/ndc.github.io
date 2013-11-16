@@ -10,56 +10,67 @@
             <label>Which seats do you want to book:</label>
         </p>
         <svg
-            viewBox="-1 -1 {{SeatLayout.width + 1}} {{SeatLayout.height + 1}}"
+            viewBox="-100 -100 {{SeatLayout.width + 100}} {{SeatLayout.height + 100}}"
             style="height: 0%">
             <g>
-                <g ng-repeat="seat in SeatLayout.seats">
+                <g ng-repeat="seat in SeatLayout.seats" ng-click="clickseat(seat)">
                     <text
                         class="seatlabel"
                         x="{{seat.cx}}"
-                        y="{{seat.cy + 0.2}}"
-                        textLength="0.6">
+                        y="{{seat.cy + 20}}"
+                        textLength="60">
                         {{seat.code}}
                     </text>
                     <circle
-                        class="seat"
+                        ng-class="{seat: true, selected: seat.selected}"
                         cx="{{seat.cx}}"
                         cy="{{seat.cy}}"
-                        r="0.4">
+                        r="40">
                     </circle>
                     <line
                         ng-class="{taken: seat.taken}"
-                        x1="{{seat.cx - 0.4}}"
-                        y1="{{seat.cy - 0.4}}"
-                        x2="{{seat.cx + 0.4}}"
-                        y2="{{seat.cy + 0.4}}">
+                        x1="{{seat.cx - 40}}"
+                        y1="{{seat.cy - 40}}"
+                        x2="{{seat.cx + 40}}"
+                        y2="{{seat.cy + 40}}">
                     </line>
                     <line
                         ng-class="{taken: seat.taken}"
-                        x1="{{seat.cx - 0.4}}"
-                        y1="{{seat.cy + 0.4}}"
-                        x2="{{seat.cx + 0.4}}"
-                        y2="{{seat.cy - 0.4}}">
+                        x1="{{seat.cx - 40}}"
+                        y1="{{seat.cy + 40}}"
+                        x2="{{seat.cx + 40}}"
+                        y2="{{seat.cy - 40}}">
                     </line>
                 </g>
             </g>
             <style type="text/css">
                 circle.seat {
                     stroke: black;
-                    stroke-width: 0.1;
+                    stroke-width: 10;
                     fill: none;
+                }
+
+                circle.selected {
+                    fill: blue;
                 }
 
                 text.seatlabel {
                     text-anchor: middle;
-                    font-size: 0.4px;
+                    font-size: 40px;
                 }
 
                 line.taken {
                     stroke: black;
-                    stroke-width: 0.1;
+                    stroke-width: 10;
                 }
             </style>
         </svg>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button ng-click="gotoselectshow()">Change Shows</button>
+        <button ng-click="resetselection()">Clear Selection</button>
+        <button ng-click="reserveseats()">Reserve Seats</button>
     </div>
 </div>

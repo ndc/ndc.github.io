@@ -410,6 +410,13 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
     ])
     .then(function (responses) {
         $scope.SeatLayout = responses[0].data;
+        $scope.SeatLayout.width *= 100;
+        $scope.SeatLayout.height *= 100;
+        _($scope.SeatLayout.seats).each(function (seat, i, l) {
+            seat.selected = false;
+            seat.cx *= 100;
+            seat.cy *= 100;
+        });
         $scope.marktakenseats();
     });
 
@@ -434,6 +441,31 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
         .error(function (data) {
             toastr.error(data);
         });
+    }
+
+    $scope.clickseat = function (seat) {
+        if (seat.taken) {
+            return;
+        }
+        if (seat.selected === null) {
+            seat.selected = true;
+        } else {
+            seat.selected = !seat.selected;
+        }
+    };
+
+    $scope.gotoselectshow = function () {
+        $location.path("/");
+    }
+
+    $scope.resetselection = function () {
+        _($scope.SeatLayout.seats).each(function (seat, i, l) {
+            seat.selected = false;
+        });
+    }
+
+    $scope.reserveseats = function () {
+
     }
 
 }]);
