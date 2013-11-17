@@ -471,6 +471,7 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             _.each($scope.SeatLayout.seats, function (seat, i, l) {
                 if (_(data).contains(seat.code)) {
                     seat.taken = true;
+                    seat.selected = false;
                 } else {
                     seat.taken = false;
                 };
@@ -500,6 +501,10 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
         _.each($scope.SeatLayout.seats, function (seat, i, l) {
             seat.selected = false;
         });
+    };
+
+    $scope.refreshlayout = function () {
+        $scope.marktakenseats();
     };
 
     $scope.reserveseats = function () {
