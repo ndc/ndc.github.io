@@ -105,12 +105,12 @@ angular
     result.isbooking = function () {
         var me = this;
         if (
-            me.selectedshowdate == null &&
-            me.selectedcinema == null &&
-            me.selectedmovie == null &&
-            me.selectedshow == null &&
-            me.selectedaudi == null &&
-            me.selectedseats == null
+            me.selectedshowdate === null &&
+            me.selectedcinema === null &&
+            me.selectedmovie === null &&
+            me.selectedshow === null &&
+            me.selectedaudi === null &&
+            me.selectedseats === null
         ) {
             return false;
         } else {
@@ -166,8 +166,8 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
     }
 
     $scope.changecity = function (c) {
-        if (BookingState.selectedcity != null
-                && BookingState.selectedcity == c) {
+        if (BookingState.selectedcity !== null
+                && BookingState.selectedcity === c) {
             return;
         }
 
@@ -193,7 +193,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
     }
 
     $scope.changecinema = function (c) {
-        if (BookingState.selectedcinema != null
+        if (BookingState.selectedcinema !== null
                 && BookingState.selectedcinema.code == c.code) {
             return;
         }
@@ -223,7 +223,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
     }
 
     $scope.changemovie = function (m) {
-        if (BookingState.selectedmovie != null
+        if (BookingState.selectedmovie !== null
                 && BookingState.selectedmovie.code == m.code) {
             return;
         }
@@ -249,7 +249,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
     }
 
     $scope.changeshow = function (s) {
-        if (BookingState.selectedshow != null
+        if (BookingState.selectedshow !== null
                 && BookingState.selectedshow.timeformataudiprice == s.timeformataudiprice) {
             return;
         }
@@ -403,7 +403,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         $scope.filtershows();
     }
 
-    if (BookingState.selectedshowdate == null) {
+    if (BookingState.selectedshowdate === null) {
         BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
         $scope.ShowDateChanged();
     }
@@ -416,7 +416,7 @@ angular
 ["$scope", "$location", "$q", "Settings", "BlitzAPI", "BookingState",
 function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
 
-    if (BookingState.selectedaudi == null) {
+    if (BookingState.selectedaudi === null) {
         BookingState.reset();
         $location.path("/");
     }
@@ -519,22 +519,37 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             var seats = grp[1];
             for (var j = 0; j < seats.length; j++) {
                 var seat = seats[j];
-                var farlft = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx - 200 });
+
                 var lft = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx - 100 });
+                while (lft !== undefined && lft.selected) {
+                    lft = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: lft.cx - 100 });
+                };
+                var farlft = lft === undefined ?
+                    undefined :
+                    _.findWhere($scope.SeatLayout.seats, { cy: row, cx: lft.cx - 100 });
+
                 var rgt = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx + 100 });
-                var farrgt = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx + 200 });
+                while (rgt !== undefined && rgt.selected) {
+                    rgt = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: rgt.cx + 100 });
+                };
+                var farrgt = rgt === undefined ?
+                    undefined :
+                    _.findWhere($scope.SeatLayout.seats, { cy: row, cx: rgt.cx + 100 });
 
                 if (
-                        lft !== null && !lft.taken && !lft.selected &&
-                        rgt !== null && !rgt.taken && !rgt.selected
+                        lft !== undefined && !lft.taken && !lft.selected &&
+                        rgt !== undefined && !rgt.taken && !rgt.selected
                 ) {
                     if (
-                            farlft === null ||
-                            farlft !== null && farlft.taken ||
-                            farrgt === null ||
-                            farrgt !== null && farrgt.taken
+                            farlft === undefined ||
+                            farlft !== undefined && farlft.taken
                     ) {
-                        return seat.code;
+                        return lft.code;
+                    } else if (
+                            farrgt === undefined ||
+                            farrgt !== undefined && farrgt.taken
+                    ) {
+                        return rgt.code;
                     };
                 };
             };
