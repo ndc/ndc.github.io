@@ -166,6 +166,8 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
 
+    $scope.isprocessing = false;
+
     $scope.filtercities = function () {
         var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
         BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
@@ -264,12 +266,19 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
 
         BookingState.selectedshow = s;
 
+        $scope.isprocessing = true;
+
         BlitzAPI.AudiNo(s.cinema, s.movie, s.showdate, s.auditype, s.showtime, s.movieformat)
-        .success(function (data, status, headers, config) {
-            BookingState.selectedaudi = data;
-        })
-        .error(function (data) {
-            $scope.$broadcast("notifyError", data);
+        .then(
+            function (response) {
+                BookingState.selectedaudi = response.data;
+            },
+            function (response) {
+                $scope.$broadcast("notifyError", response.data);
+            }
+        )
+        .then(function () {
+            $scope.isprocessing = false;
         });
     }
 
