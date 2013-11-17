@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 angular
-.module("TicketBooking", ["ngRoute", "Globals", "APIWrappers", "ui.bootstrap"]);
+.module("TicketBooking", ["ngRoute", "ngAnimate", "Globals", "APIWrappers", "ui.bootstrap"]);
 
 angular
 .module("TicketBooking")
@@ -47,7 +47,13 @@ angular
     function ($timeout) {
         var drctve = {
             restrict: "A",
-            template: '<alert ng-repeat="alert in messages" type="alert.type" close="closeAlert(alert)">{{alert.msg}}</alert>',
+            template: '<alert ng-repeat="alert in messages"' +
+                ' type="alert.type" ' +
+                ' close="closeAlert(alert)"' +
+                ' class="myanim"' +
+                '>' +
+                '{{alert.msg}}' +
+                '</alert>',
             link: function (scope, element, attributes) {
                 scope.messages = [];
                 scope.$on("notifyError", function (s, arg) {
