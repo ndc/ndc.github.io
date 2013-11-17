@@ -429,6 +429,19 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
 
+    $scope.isprocessing = true;
+
+    $scope.getTakenSeats = function () {
+        //["D17", "D18"]
+        return BlitzAPI.SeatTaken(
+            BookingState.selectedshow.cinema,
+            BookingState.selectedshow.movie,
+            BookingState.selectedshow.showdate,
+            BookingState.selectedaudi,
+            BookingState.selectedshow.showtime
+        );
+    };
+
     $q.all([
         //{
         //    "cinema": "0200",
@@ -444,41 +457,39 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
         BlitzAPI.SeatLayout(
             BookingState.selectedshow.cinema,
             BookingState.selectedaudi
-        )
+        ),
+        $scope.getTakenSeats()
     ])
-    .then(function (responses) {
-        $scope.SeatLayout = responses[0].data;
-        $scope.SeatLayout.width *= 100;
-        $scope.SeatLayout.height *= 100;
-        _.each($scope.SeatLayout.seats, function (seat, i, l) {
-            seat.selected = false;
-            seat.cx *= 100;
-            seat.cy *= 100;
-        });
-        $scope.marktakenseats();
+    .then(
+        function (responses) {
+            $scope.SeatLayout = responses[0].data;
+            $scope.SeatLayout.width *= 100;
+            $scope.SeatLayout.height *= 100;
+            _.each($scope.SeatLayout.seats, function (seat, i, l) {
+                seat.selected = false;
+                seat.cx *= 100;
+                seat.cy *= 100;
+            });
+            $scope.marktakenseats(responses[1].data);
+        },
+        function (responses) {
+            _.each(responses, function (response) {
+                $scope.$broadcast("notifyError", response.data)
+            })
+        }
+    )
+    .then(function () {
+        $scope.isprocessing = false;
     });
 
-    $scope.marktakenseats = function () {
-        //["D17", "D18"]
-        BlitzAPI.SeatTaken(
-            BookingState.selectedshow.cinema,
-            BookingState.selectedshow.movie,
-            BookingState.selectedshow.showdate,
-            BookingState.selectedaudi,
-            BookingState.selectedshow.showtime
-        )
-        .success(function (data, status, headers, config) {
-            _.each($scope.SeatLayout.seats, function (seat, i, l) {
-                if (_(data).contains(seat.code)) {
-                    seat.taken = true;
-                    seat.selected = false;
-                } else {
-                    seat.taken = false;
-                };
-            });
-        })
-        .error(function (data) {
-            $scope.$broadcast("notifyError", data);
+    $scope.marktakenseats = function (takenseats) {
+        _.each($scope.SeatLayout.seats, function (seat, i, l) {
+            if (_.contains(takenseats, seat.code)) {
+                seat.taken = true;
+                seat.selected = false;
+            } else {
+                seat.taken = false;
+            };
         });
     };
 
@@ -504,7 +515,20 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
     };
 
     $scope.refreshlayout = function () {
-        $scope.marktakenseats();
+        $scope.isprocessing = true;
+
+        $scope.getTakenSeats()
+        .then(
+            function (response) {
+                $scope.marktakenseats(response.data);
+            },
+            function (response) {
+                $scope.$broadcast("notifyError", response.data)
+            }
+        )
+        .then(function () {
+            $scope.isprocessing = false;
+        });
     };
 
     $scope.reserveseats = function () {
