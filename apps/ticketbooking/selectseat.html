@@ -14,6 +14,12 @@
             style="height: 0%">
             <g>
                 <g ng-repeat="seat in SeatLayout.seats" ng-click="clickseat(seat)">
+                    <circle
+                        ng-class="{seat: true, selected: seat.selected}"
+                        ng-attr-cx="{{seat.cx}}"
+                        ng-attr-cy="{{seat.cy}}"
+                        r="40">
+                    </circle>
                     <text
                         class="seatlabel"
                         ng-attr-x="{{seat.cx}}"
@@ -21,12 +27,6 @@
                         textLength="60">
                         {{seat.code}}
                     </text>
-                    <circle
-                        ng-class="{seat: true, selected: seat.selected}"
-                        ng-attr-cx="{{seat.cx}}"
-                        ng-attr-cy="{{seat.cy}}"
-                        r="40">
-                    </circle>
                     <line
                         ng-class="{taken: seat.taken}"
                         ng-attr-x1="{{seat.cx - 40}}"
@@ -69,7 +69,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <button ng-click="gotoselectshow()">Change Shows</button>
+        <button ng-click="gotoselectshow()">Change Show</button>
         <button ng-click="resetselection()">Clear Selection</button>
         <button ng-click="reserveseats()">Reserve Seats</button>
     </div>
