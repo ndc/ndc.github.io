@@ -3,5 +3,4 @@
 /// <reference path="underscore.js" />
 /// <reference path="moment.js" />
 /// <reference path="numeral.js" />
-/// <reference path="toastr.js" />
 /// <reference path="ui-bootstrap-tpls-0.6.0.js" />

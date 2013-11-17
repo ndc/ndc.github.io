@@ -42,6 +42,38 @@ angular
 
 angular
 .module("TicketBooking")
+.directive("notification", [
+    "$timeout",
+    function ($timeout) {
+        var drctve = {
+            restrict: "A",
+            template: '<alert ng-repeat="alert in messages" type="alert.type" close="closeAlert(alert)">{{alert.msg}}</alert>',
+            link: function (scope, element, attributes) {
+                scope.messages = [];
+                scope.$on("notifyError", function (s, arg) {
+                    var msg = {
+                        type: "danger",
+                        msg: arg
+                    };
+                    scope.messages.push(msg);
+                    $timeout(function () {
+                        scope.closeAlert(msg);
+                    }, 10000);
+                });
+                scope.closeAlert = function (alert) {
+                    var idx = scope.messages.indexOf(alert);
+                    if (idx != -1) {
+                        scope.messages.splice(idx, 1);
+                    };
+                };
+            }
+        };
+        return drctve;
+    }
+]);
+
+angular
+.module("TicketBooking")
 .factory("BookingState", [function () {
     var result = {
         cinemalist: null,
@@ -231,7 +263,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             BookingState.selectedaudi = data;
         })
         .error(function (data) {
-            toastr.error(data);
+            $scope.$broadcast("notifyError", data);
         });
     }
 
@@ -280,7 +312,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             $scope.filtershows();
         })
         .error(function (data) {
-            toastr.error(data);
+            $scope.$broadcast("notifyError", data);
         });
     }
 
@@ -317,7 +349,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             }
         })
         .error(function (data) {
-            toastr.error(data);
+            $scope.$broadcast("notifyError", data);
         });
     }
 
@@ -341,7 +373,7 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             BookingState.movielist = data;
         })
         .error(function (data) {
-            toastr.error(data);
+            $scope.$broadcast("notifyError", data);
         });
     }
 
@@ -412,7 +444,7 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
         $scope.SeatLayout = responses[0].data;
         $scope.SeatLayout.width *= 100;
         $scope.SeatLayout.height *= 100;
-        _($scope.SeatLayout.seats).each(function (seat, i, l) {
+        _.each($scope.SeatLayout.seats, function (seat, i, l) {
             seat.selected = false;
             seat.cx *= 100;
             seat.cy *= 100;
@@ -430,7 +462,7 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             BookingState.selectedshow.showtime
         )
         .success(function (data, status, headers, config) {
-            _($scope.SeatLayout.seats).each(function (seat, i, l) {
+            _.each($scope.SeatLayout.seats, function (seat, i, l) {
                 if (_(data).contains(seat.code)) {
                     seat.taken = true;
                 } else {
@@ -439,9 +471,9 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             });
         })
         .error(function (data) {
-            toastr.error(data);
+            $scope.$broadcast("notifyError", data);
         });
-    }
+    };
 
     $scope.clickseat = function (seat) {
         if (seat.taken) {
@@ -456,16 +488,58 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
 
     $scope.gotoselectshow = function () {
         $location.path("/");
-    }
+    };
 
     $scope.resetselection = function () {
-        _($scope.SeatLayout.seats).each(function (seat, i, l) {
+        _.each($scope.SeatLayout.seats, function (seat, i, l) {
             seat.selected = false;
         });
-    }
+    };
 
     $scope.reserveseats = function () {
+        var selectedseats = _.where($scope.SeatLayout.seats, { selected: true });
+        if (selectedseats.length < 1) {
+            $scope.$broadcast("notifyError", "Please select some seats first.");
+            return;
+        }
+        var gap = $scope.checkgap();
+        if (gap) {
+            var msg = "Seat " + gap + ": please do not leave one seat gap.";
+            $scope.$broadcast("notifyError", msg);
+            return;
+        };
+    };
 
-    }
+    $scope.checkgap = function () {
+        var selectedseats = _.where($scope.SeatLayout.seats, { selected: true });
+        var seatsbyrow = _.chain(selectedseats).groupBy("cy").pairs().value();
+        for (var i = 0; i < seatsbyrow.length; i++) {
+            var grp = seatsbyrow[i];
+            var row = parseInt(grp[0]);
+            var seats = grp[1];
+            for (var j = 0; j < seats.length; j++) {
+                var seat = seats[j];
+                var farlft = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx - 200 });
+                var lft = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx - 100 });
+                var rgt = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx + 100 });
+                var farrgt = _.findWhere($scope.SeatLayout.seats, { cy: row, cx: seat.cx + 200 });
+
+                if (
+                        lft !== null && !lft.taken && !lft.selected &&
+                        rgt !== null && !rgt.taken && !rgt.selected
+                ) {
+                    if (
+                            farlft === null ||
+                            farlft !== null && farlft.taken ||
+                            farrgt === null ||
+                            farrgt !== null && farrgt.taken
+                    ) {
+                        return seat.code;
+                    };
+                };
+            };
+        };
+        return null;
+    };
 
 }]);
