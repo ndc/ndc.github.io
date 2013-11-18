@@ -161,62 +161,119 @@ angular
 angular
 .module("TicketBooking")
 .controller("SelectShow",
-["$scope", "$location", "Settings", "BlitzAPI", "BookingState",
-function ($scope, $location, Settings, BlitzAPI, BookingState) {
+["$scope", "$location", "$q", "Settings", "BlitzAPI", "BookingState",
+function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
 
     $scope.isprocessing = false;
 
-    $scope.filtercities = function () {
-        var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
-        BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
-    }
+    $scope.getCinemas = function () {
+        //[
+        //  {
+        //      "code": "0100",
+        //      "name": "Paris van Java",
+        //      "shortname": "PVJ",
+        //      "address": "Sukajadi #137 - 139",
+        //      "city": "Bandung",
+        //      "telephone": "+622282063630",
+        //      "auditypes": [
+        //        "N"
+        //      ],
+        //      "image": "https://www.blitzmegaplex.com/uploads/cinemas/PVJ.JPG"
+        //  }
+        //]
+        return BlitzAPI.Cinemas()
+            .then(
+                function (response) {
+                    BookingState.cinemalist = response.data;
 
-    $scope.changecity = function (c) {
-        if (BookingState.selectedcity !== null
-                && BookingState.selectedcity === c) {
-            return;
-        }
+                    // populate city list
 
-        BookingState.selectedcinema = null;
-        BookingState.selectedmovie = null;
-        BookingState.selectedshow = null;
-        BookingState.selectedaudi = null;
+                    var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
+                    BookingState.citylist = cities.map(function (c) { return c[0] }).sort().value();
+                },
+                function (response) {
+                    $scope.$broadcast("notifyError", response.data);
+                }
+            );
+    };
 
-        BookingState.selectedcity = c;
+    $scope.getMovies = function () {
+        //[
+        //  {
+        //      "code": "MOV1825",
+        //      "title": "A Werewolf Boy",
+        //      "genre": "ROMANCE",
+        //      "rating": "R",
+        //      "cast": "Song Joong-Ki, Park Bo-Yeong, Jang Young-Nam, Yoo Yeon-Seok, Kim Hyang-Ki",
+        //      "director": "Jo Sung-Hee",
+        //      "language": "KOREAN",
+        //      "subtitle": "BAHASA INDONESIA",
+        //      "thumbnail": "https://www.blitzmegaplex.com/uploads/movie/pictures/MOV1825.JPG",
+        //      "synopsis": "https://www.blitzmegaplex.com/uploads/movie/synopsis/MOV1825.TXT"
+        //  }
+        //]
+        return BlitzAPI.Movies()
+            .then(
+                function (response) {
+                    BookingState.movielist = response.data;
+                },
+                function (response) {
+                    $scope.$broadcast("notifyError", response.data);
+                }
+            );
+    };
 
-        $scope.filtercinemas();
-        $scope.filtermovies();
-        $scope.filtershows();
-    }
+    $scope.getSchedules = function (selecteddate) {
+        //[
+        //  {
+        //      "cinema": "0400",
+        //      "showdate": "2013-09-13",
+        //      "movie": "MOV1845",
+        //      "price": 30000,
+        //      "showtime": "10:30",
+        //      "auditype": "N",
+        //      "movieformat": "C",
+        //      "midnight": 0,
+        //      "capacity": 197
+        //  }
+        //]
+        return BlitzAPI.Schedules(selecteddate)
+            .then(
+                function (response) {
+                    var auditypes = {
+                        "N": "Regular",
+                        "Y": "Satin",
+                        "V": "Velvet",
+                        "O": "Velvet Suite",
+                        "D": "Dining"
+                    };
 
-    $scope.filtercinemas = function () {
+                    _.each(response.data, function (d) {
+                        d.realdatetime = BookingState.realdatetime(d.showdate, d.showtime);
+                        d.auditypedesc = auditypes[d.auditype];
+                        d.timeformataudiprice = d.showtime + " "
+                            + d.movieformat + " "
+                            + d.auditypedesc + " "
+                            + numeral(d.price).format("0,0");
+                    });
+
+                    BookingState.showlist = response.data;
+                },
+                function (response) {
+                    $scope.$broadcast("notifyError", response.data);
+                }
+            );
+    };
+
+    $scope.filterCinemas = function () {
         $scope.availablecinemas = _.where(BookingState.cinemalist, {
             city: BookingState.selectedcity
         });
-        if (BookingState.selectedcinema === null && $scope.availablecinemas.length == 1) {
-            $scope.changecinema($scope.availablecinemas[0]);
-        }
-    }
+    };
 
-    $scope.changecinema = function (c) {
-        if (BookingState.selectedcinema !== null
-                && BookingState.selectedcinema.code == c.code) {
-            return;
-        }
-
-        BookingState.selectedmovie = null;
-        BookingState.selectedshow = null;
-        BookingState.selectedaudi = null;
-
-        BookingState.selectedcinema = c;
-
-        $scope.filtermovies();
-        $scope.filtershows();
-    }
-
-    $scope.filtermovies = function () {
+    $scope.filterMovies = function () {
         $scope.availablemovies = _.chain(BookingState.showlist)
             .where({
                 cinema: BookingState.selectedcinema ? BookingState.selectedcinema.code : null
@@ -226,41 +283,88 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
             .map(function (m) {
                 return _.findWhere(BookingState.movielist, { code: m });
             })
-            .sortBy(function (m) { return m.title })
+            .sortBy(function (m) { return m.title; })
             .value();
-    }
+    };
 
-    $scope.changemovie = function (m) {
-        if (BookingState.selectedmovie !== null
-                && BookingState.selectedmovie.code == m.code) {
-            return;
-        }
-
-        BookingState.selectedshow = null;
-        BookingState.selectedaudi = null;
-
-        BookingState.selectedmovie = m;
-
-        $scope.filtershows();
-    }
-
-    $scope.filtershows = function () {
+    $scope.filterShows = function () {
         $scope.availableshows = _.chain(BookingState.showlist)
             .where({
                 cinema: BookingState.selectedcinema ? BookingState.selectedcinema.code : null,
                 movie: BookingState.selectedmovie ? BookingState.selectedmovie.code : null
             })
             .filter(function (s) {
-                return (moment(s.realdatetime) >= moment())
+                return (moment(s.realdatetime) >= moment());
             })
             .value();
-    }
+    };
 
-    $scope.changeshow = function (s) {
+    $scope.getTopCity = function () {
+        var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
+        var topcity = cities.sortBy(function (c) { return -c[1] }).first().value()[0];
+        return topcity;
+    };
+
+    // these are event handlers
+
+    $scope.changeCity = function (c) {
+        if (BookingState.selectedcity !== null
+                && BookingState.selectedcity === c) {
+            return;
+        };
+
+        BookingState.selectedcinema = null;
+        BookingState.selectedmovie = null;
+        BookingState.selectedshow = null;
+        BookingState.selectedaudi = null;
+
+        BookingState.selectedcity = c;
+
+        $scope.filterCinemas();
+
+        if ($scope.availablecinemas.length == 1) {
+            $scope.changeCinema($scope.availablecinemas[0]);
+        } else {
+            $scope.filterMovies();
+            $scope.filterShows();
+        };
+    };
+
+    $scope.changeCinema = function (c) {
+        if (BookingState.selectedcinema !== null
+                && BookingState.selectedcinema.code == c.code) {
+            return;
+        };
+
+        BookingState.selectedmovie = null;
+        BookingState.selectedshow = null;
+        BookingState.selectedaudi = null;
+
+        BookingState.selectedcinema = c;
+
+        $scope.filterMovies();
+        $scope.filterShows();
+    };
+
+    $scope.changeMovie = function (m) {
+        if (BookingState.selectedmovie !== null
+                && BookingState.selectedmovie.code == m.code) {
+            return;
+        };
+
+        BookingState.selectedshow = null;
+        BookingState.selectedaudi = null;
+
+        BookingState.selectedmovie = m;
+
+        $scope.filterShows();
+    };
+
+    $scope.changeShow = function (s) {
         if (BookingState.selectedshow !== null
                 && BookingState.selectedshow.timeformataudiprice == s.timeformataudiprice) {
             return;
-        }
+        };
 
         BookingState.selectedaudi = null;
 
@@ -280,148 +384,86 @@ function ($scope, $location, Settings, BlitzAPI, BookingState) {
         .then(function () {
             $scope.isprocessing = false;
         });
-    }
+    };
 
-    $scope.ShowDateChanged = function () {
-        BookingState.selectedcinema = null;
+    $scope.changeShowDate = function () {
         BookingState.selectedmovie = null;
         BookingState.selectedshow = null;
+        BookingState.selectedaudi = null;
 
         var selecteddate = moment(BookingState.selectedshowdate).format("YYYY-MM-DD");
 
-        var auditypes = {
-            "N": "Regular",
-            "Y": "Satin",
-            "V": "Velvet",
-            "O": "Velvet Suite",
-            "D": "Dining"
-        }
+        $scope.isprocessing = true;
 
-        //[
-        //  {
-        //      "cinema": "0400",
-        //      "showdate": "2013-09-13",
-        //      "movie": "MOV1845",
-        //      "price": 30000,
-        //      "showtime": "10:30",
-        //      "auditype": "N",
-        //      "movieformat": "C",
-        //      "midnight": 0,
-        //      "capacity": 197
-        //  }
-        //]
-        BlitzAPI.Schedules(selecteddate)
-        .success(function (data, status, headers, config) {
-            _.each(data, function (d) {
-                d.realdatetime = BookingState.realdatetime(d.showdate, d.showtime);
-                d.auditypedesc = auditypes[d.auditype];
-                d.timeformataudiprice = d.showtime + " "
-                    + d.movieformat + " "
-                    + d.auditypedesc + " "
-                    + numeral(d.price).format("0,0");
+        $scope.getSchedules(selecteddate)
+            .then(function () {
+                $scope.filterMovies();
+                $scope.filterShows();
+            })
+            .then(function () {
+                $scope.isprocessing = false;
             });
+    };
 
-            BookingState.showlist = data;
-
-            $scope.filtermovies();
-            $scope.filtershows();
-        })
-        .error(function (data) {
-            $scope.$broadcast("notifyError", data);
-        });
-    }
-
-    $scope.gotoselectseat = function () {
+    $scope.goToSelectSeat = function () {
         $location.path("/seats");
-    }
+    };
 
-    $scope.getcinemas = function () {
-        //[
-        //  {
-        //      "code": "0100",
-        //      "name": "Paris van Java",
-        //      "shortname": "PVJ",
-        //      "address": "Sukajadi #137 - 139",
-        //      "city": "Bandung",
-        //      "telephone": "+622282063630",
-        //      "auditypes": [
-        //        "N"
-        //      ],
-        //      "image": "https://www.blitzmegaplex.com/uploads/cinemas/PVJ.JPG"
-        //  }
-        //]
-        BlitzAPI.Cinemas()
-        .success(function (data, status, headers, config) {
-            BookingState.cinemalist = data;
-
-            $scope.filtercities();
-
-            if (BookingState.selectedcity === null) {
-                var cities = _.chain(BookingState.cinemalist).countBy(function (c) { return c.city }).pairs();
-                var topcity = cities.sortBy(function (c) { return -c[1] })
-                    .first().value()[0];
-                $scope.changecity(topcity);
-            }
-        })
-        .error(function (data) {
-            $scope.$broadcast("notifyError", data);
-        });
-    }
-
-    $scope.getmovies = function () {
-        //[
-        //  {
-        //      "code": "MOV1825",
-        //      "title": "A Werewolf Boy",
-        //      "genre": "ROMANCE",
-        //      "rating": "R",
-        //      "cast": "Song Joong-Ki, Park Bo-Yeong, Jang Young-Nam, Yoo Yeon-Seok, Kim Hyang-Ki",
-        //      "director": "Jo Sung-Hee",
-        //      "language": "KOREAN",
-        //      "subtitle": "BAHASA INDONESIA",
-        //      "thumbnail": "https://www.blitzmegaplex.com/uploads/movie/pictures/MOV1825.JPG",
-        //      "synopsis": "https://www.blitzmegaplex.com/uploads/movie/synopsis/MOV1825.TXT"
-        //  }
-        //]
-        BlitzAPI.Movies()
-        .success(function (data, status, headers, config) {
-            BookingState.movielist = data;
-        })
-        .error(function (data) {
-            $scope.$broadcast("notifyError", data);
-        });
-    }
-
-    $scope.resetselection = function () {
+    $scope.resetSelection = function () {
         BookingState.reset();
-        $scope.getcinemas();
-        $scope.getmovies();
-    }
 
-    if (BookingState.cinemalist === null) {
-        $scope.getcinemas();
-    }
+        $scope.isprocessing = true;
 
-    if (BookingState.movielist === null) {
-        $scope.getmovies();
-    }
+        $q.all([
+            $scope.getCinemas(),
+            $scope.getMovies()
+        ])
+        .then(function () {
+            $scope.changeCity($scope.getTopCity());
+        })
+        .then(function () {
+            $scope.isprocessing = false;
+        });
+    };
+
+    // this block is to rearrange lists when coming from seat selection
 
     if (BookingState.selectedcity !== null) {
-        $scope.filtercinemas();
-    }
+        $scope.filterCinemas();
+    };
 
     if (BookingState.selectedcinema !== null) {
-        $scope.filtermovies();
-    }
+        $scope.filterMovies();
+    };
 
     if (BookingState.selectedmovie !== null) {
-        $scope.filtershows();
-    }
+        $scope.filterShows();
+    };
 
-    if (BookingState.selectedshowdate === null) {
+    // this block is to populate lists for the first time
+
+    if (
+            BookingState.cinemalist === null ||
+            BookingState.movielist === null ||
+            BookingState.selectedshowdate === null
+    ) {
         BookingState.selectedshowdate = moment(BookingState.bndate(moment())).format("YYYY-MM-DD");
-        $scope.ShowDateChanged();
-    }
+
+        $scope.isprocessing = true;
+
+        $q.all([
+            $scope.getCinemas(),
+            $scope.getMovies(),
+            $scope.getSchedules(BookingState.selectedshowdate)
+        ])
+        .then(function () {
+            $scope.filterMovies();
+            $scope.filterShows();
+        })
+        .then(function () {
+            $scope.isprocessing = false;
+        });
+    };
 
 }]);
 
@@ -434,7 +476,8 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
     if (BookingState.selectedaudi === null) {
         BookingState.reset();
         $location.path("/");
-    }
+        return;
+    };
 
     $scope.State = BookingState;
 
@@ -505,12 +548,8 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
     $scope.clickseat = function (seat) {
         if (seat.taken) {
             return;
-        }
-        if (seat.selected === null) {
-            seat.selected = true;
-        } else {
-            seat.selected = !seat.selected;
-        }
+        };
+        seat.selected = !seat.selected;
     };
 
     $scope.gotoselectshow = function () {
