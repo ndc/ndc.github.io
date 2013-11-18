@@ -278,12 +278,17 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             .where({
                 cinema: BookingState.selectedcinema ? BookingState.selectedcinema.code : null
             })
-            .pluck("movie")
-            .uniq()
-            .map(function (m) {
-                return _.findWhere(BookingState.movielist, { code: m });
+            .countBy(function (s) { return s.movie; })
+            .pairs()
+            .map(function (s) {
+                return [
+                    _.findWhere(BookingState.movielist, { code: s[0] }),
+                    s[1]
+                ];
             })
-            .sortBy(function (m) { return m.title; })
+            .sortBy(function (a) { return a[0].title; })
+            .sortBy(function (a) { return -a[1]; })
+            .map(function (a) { return a[0]; })
             .value();
     };
 
