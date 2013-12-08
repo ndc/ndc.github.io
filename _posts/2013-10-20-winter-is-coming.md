@@ -18,3 +18,16 @@ Sesudah cari-cari informasi di internet, strategi yang banyak dianjurkan untuk t
 Bulan Desember akan saya update thermal underwear mana yang paling bagus dan yang tidak efektif.
 
 Stay tuned!
+
+UPDATE 8 DESEMBER 2013
+
+Saya sudah balik!
+
+Beberapa temuan menarik:
+
+* Badan saya ternyata bisa dengan cepat menyesuaikan diri.
+* Kalau tidak ada angin, tidak terlalu dingin. Tetapi begitu tertiup angin bisa langsung menggigil.
+* Bila di dalam ruangan, tidak perlu pusing memikirkan pakaian karena ada pemanas.
+* Untuk outdoor ternyata cukup dengan atasan baju lengan panjang non katun (akrilik, poliester, wool) dan jaket, bawahan longjohn non katun dan jeans.
+* Dari ketiga longjohn, yang paling efektif Uniqlo, kemudian Coldwear, dan terakhir yang dari Mangga Dua. Tetapi ketiganya cukup membantu memerangi suhu dingin.
+* Ternyata saya hanya butuh longjohn celana saja, karena baju pakai baju biasa.
