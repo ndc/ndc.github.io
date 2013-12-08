@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 angular
-.module("TicketBooking", ["ngRoute", "ngAnimate", "Globals", "APIWrappers", "ui.bootstrap"]);
+.module("TicketBooking", ["ngRoute", "ngAnimate", "ngSanitize", "Globals", "APIWrappers", "ui.bootstrap"]);
 
 angular
 .module("TicketBooking")
@@ -161,8 +161,8 @@ angular
 angular
 .module("TicketBooking")
 .controller("SelectShow",
-["$scope", "$location", "$q", "Settings", "BlitzAPI", "BookingState",
-function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
+["$scope", "$location", "$q", "$modal", "Settings", "BlitzAPI", "BookingState",
+function ($scope, $location, $q, $modal, Settings, BlitzAPI, BookingState) {
 
     $scope.State = BookingState;
 
@@ -428,6 +428,32 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
         })
         .then(function () {
             $scope.isprocessing = false;
+        });
+    };
+
+    $scope.openMovieDetail = function (movie) {
+        $modal.open({
+            templateUrl: "MyModalContent.html",
+            controller: ["$scope", "$modalInstance", "items", "BlitzAPI", function ($scope, $modalInstance, items, BlitzAPI) {
+                $scope.movie = items;
+                $scope.close = function () {
+                    $modalInstance.close();
+                };
+                BlitzAPI.MovieSynopsis($scope.movie.code)
+                .then(
+                    function (response) {
+                        $scope.synopsis = response.data.replace(/\n/g, "<br />");
+                    },
+                    function (response) {
+                        $scope.$broadcast("notifyError", response.data);
+                    }
+                );
+            }],
+            resolve: {
+                items: function () {
+                    return movie;
+                }
+            }
         });
     };
 

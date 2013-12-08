@@ -12,6 +12,14 @@ angular
         });
         return movies;
     };
+    Wrapper.MovieSynopsis = function (movie) {
+        var synopsis = $http({
+            method: "GET",
+            url: Settings.BookingURL + "/moviesynopsis/" + movie,
+            cache: true
+        });
+        return synopsis;
+    };
     Wrapper.Schedules = function (showdate, cinema, movie) {
         var schedules = $http({
             method: "GET",

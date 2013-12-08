@@ -1,20 +1,45 @@
 ﻿<div data-notification="" style="position: fixed; text-align: right; top: 10px; right: 10px;">
 </div>
 
+<script type="text/ng-template" id="MyModalContent.html">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-5">
+                        <h2>{{movie.title}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <img ng-src="{{movie.thumbnail}}" />
+                    </div>
+                    <div class="col-md-7">
+                        <div ng-bind-html="synopsis">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="close()" class="btn btn-primary">Close</button>
+            </div>
+        </div>
+    </div>
+</script>
+
 <div ng-class="{row: true, isprocessing: isprocessing}">
 
     <div class="col-md-4">
         <p>
             <label>
                 When do you want to watch?
-            <br />
-                <input
-                    ng-change="changeShowDate()"
-                    type="text"
-                    starting-day="1"
-                    show-weeks="false"
-                    datepicker-popup="EEE dd MMM yyyy"
-                    ng-model="State.selectedshowdate" />
+                <br />
+                <input ng-change="changeShowDate()"
+                       type="text"
+                       starting-day="1"
+                       show-weeks="false"
+                       datepicker-popup="EEE dd MMM yyyy"
+                       ng-model="State.selectedshowdate" />
             </label>
             <br />
             Today is {{State.bndate(moment()) | formatdate:"ddd DD MMM YYYY"}}
@@ -23,7 +48,8 @@
         <label>On what city do you want to watch?</label>
         <table class="table table-striped">
             <tr ng-repeat="city in State.citylist">
-                <td ng-click="changeCity(city)">{{city}}
+                <td ng-click="changeCity(city)">
+                    {{city}}
                     <i class="icon-ok" ng-show="(city == State.selectedcity)"></i>
                 </td>
             </tr>
@@ -32,7 +58,8 @@
         <label>Where do you want to watch?</label>
         <table class="table table-striped">
             <tr ng-repeat="cinema in availablecinemas">
-                <td ng-click="changeCinema(cinema)">{{cinema.shortname}}
+                <td ng-click="changeCinema(cinema)">
+                    {{cinema.shortname}}
                     <i class="icon-ok" ng-show="(cinema.code == State.selectedcinema.code)"></i>
                 </td>
             </tr>
@@ -43,8 +70,12 @@
         <label>What do you want to watch?</label>
         <table class="table table-striped">
             <tr ng-repeat="movie in availablemovies">
-                <td ng-click="changeMovie(movie)">{{movie.title}}
+                <td ng-click="changeMovie(movie)" style="vertical-align: middle;">
+                    {{movie.title}}
                     <i class="icon-ok" ng-show="(movie.code == State.selectedmovie.code)"></i>
+                </td>
+                <td>
+                    <a ng-click="openMovieDetail(movie)" class="btn btn-default btn-sm">Detail</a>
                 </td>
             </tr>
         </table>
@@ -54,7 +85,8 @@
         <label>Which show do you want to watch?</label>
         <table class="table table-striped">
             <tr ng-repeat="show in availableshows">
-                <td ng-click="changeShow(show)">{{show.timeformataudiprice}}
+                <td ng-click="changeShow(show)">
+                    {{show.timeformataudiprice}}
                     <i class="icon-ok" ng-show="(show.timeformataudiprice == State.selectedshow.timeformataudiprice)"></i>
                 </td>
             </tr>
