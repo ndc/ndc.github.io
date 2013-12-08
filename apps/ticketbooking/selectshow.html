@@ -50,7 +50,7 @@
             <tr ng-repeat="city in State.citylist">
                 <td ng-click="changeCity(city)">
                     {{city}}
-                    <i class="icon-ok" ng-show="(city == State.selectedcity)"></i>
+                    <i class="fa fa-check" ng-show="(city == State.selectedcity)"></i>
                 </td>
             </tr>
         </table>
@@ -60,7 +60,7 @@
             <tr ng-repeat="cinema in availablecinemas">
                 <td ng-click="changeCinema(cinema)">
                     {{cinema.shortname}}
-                    <i class="icon-ok" ng-show="(cinema.code == State.selectedcinema.code)"></i>
+                    <i class="fa fa-check" ng-show="(cinema.code == State.selectedcinema.code)"></i>
                 </td>
             </tr>
         </table>
@@ -72,7 +72,7 @@
             <tr ng-repeat="movie in availablemovies">
                 <td ng-click="changeMovie(movie)" style="vertical-align: middle;">
                     {{movie.title}}
-                    <i class="icon-ok" ng-show="(movie.code == State.selectedmovie.code)"></i>
+                    <i class="fa fa-check" ng-show="(movie.code == State.selectedmovie.code)"></i>
                 </td>
                 <td>
                     <a ng-click="openMovieDetail(movie)" class="btn btn-default btn-sm">Detail</a>
@@ -87,7 +87,7 @@
             <tr ng-repeat="show in availableshows">
                 <td ng-click="changeShow(show)">
                     {{show.timeformataudiprice}}
-                    <i class="icon-ok" ng-show="(show.timeformataudiprice == State.selectedshow.timeformataudiprice)"></i>
+                    <i class="fa fa-check" ng-show="(show.timeformataudiprice == State.selectedshow.timeformataudiprice)"></i>
                 </td>
             </tr>
         </table>
