@@ -9,7 +9,7 @@ Here you can find my writings and some stuff that I have built. I write here mos
 
 I try to keep each post focused on one topic, and I tend to update old posts instead of creating a new one with the same topic.
 
-This website is hosted on [GitHub Pages](http://pages.github.com/) (thanks GitHub Pages!). If you are interested to see how I set up my publishing workflow for this website, you can read about it [on this post](http://endycahyono.com/article/my-publishing-workflow/).
+This website is hosted on [GitHub Pages](http://pages.github.com/) (thanks GitHub Pages!). If you are interested to see how I set up my publishing workflow for this website, you can read about it [on this post](http://www.endycahyono.com/article/my-publishing-workflow/).
 
 Background image is from [Subtle Patterns](http://subtlepatterns.com/) website.
 
