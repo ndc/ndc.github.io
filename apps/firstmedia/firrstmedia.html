@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <title>angular-ui-bootstrap</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+</head>
+<body class="container">
+
+    <div ng-controller="MyCtrl">
+
+        <form class="form-horizontal" ng-submit="getschedule()">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input ng-model="data.showdate"
+                               type="text" class="form-control" placeholder="Date"
+                               datepicker-popup="EEE dd MMM yyyy" is-open="vm.ShowDateOpened" />
+                        <div class="input-group-addon">
+                            <button ng-click="vm.ShowDateClick($event)">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Channel</label>
+                <div class="col-sm-10">
+                    <input ng-model="vm.Channel"
+                           type="text" class="form-control" placeholder="Channel"
+                           typeahead="c.Name + ' (' + c.StudentCode + ')' for c in vm.ChannelTypeAhead($viewValue)"
+                           typeahead-on-select="vm.ChannelOnSelect($item, $model, $label)"
+                           typeahead-wait-ms="1000"
+                           typeahead-editable="false" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-default">Get</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        "use strict";
+
+        angular.module('MyApp', ['ui.router', 'ui.bootstrap']);
+
+        angular.module("MyApp").controller("MyCtrl", [
+            "$scope", "$http",
+            function ($scope, $http) {
+
+                $scope.data = {
+                    showdate: moment({ hour: 0 }).toDate(),
+                    channel: null
+                };
+
+                $scope.vm = {};
+
+                $scope.vm.ShowDateOpened = false;
+                $scope.vm.ShowDateClick = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    $scope.vm.ShowDateOpened = !$scope.vm.ShowDateOpened;
+                };
+
+                $scope.vm.Channel = null;
+                $scope.vm.ChannelTypeAhead = function (keyword) {
+                    var filtered = _.filter($scope.channels, function (c) {
+                        return c.indexOf(keyword) > -1;
+                    });
+                    return filtered;
+                };
+                $scope.vm.ChannelOnSelect = function (item, model, label) {
+                    $scope.data.channel = item;
+                };
+
+                $scope.getschedule = function () {
+                    var url = "http://firstmedia.com/tv-guides/selected_date:" +
+                        moment($scope.data.showdate).format("YYYY-MM-DD") +
+                        "/selected_channels:" +
+                        $scope.data.channel +
+                        "/get.json";
+                    $http({
+                        method: "GET",
+                        url: url,
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest"
+                        }
+                    }).then(function (response) {
+                        $scope.schedules = response.data;
+                    });
+                };
+
+                $http({
+                    method: "GET",
+                    url: "http://firstmedia.com/shows/channels/autocomplete.json"
+                }).then(function (response) {
+                    $scope.channels = response.data;
+                });
+
+            }
+        ]);
+
+    </script>
+
+</body>
+</html>
