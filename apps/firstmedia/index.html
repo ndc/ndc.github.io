@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html ng-app="MyApp">
 <head>
-    <title>angular-ui-bootstrap</title>
+    <title>FirstMedia</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
@@ -16,27 +16,18 @@
 
     <div ng-controller="MyCtrl">
 
-        <form class="form-horizontal" ng-submit="getschedule()">
+        <form ng-submit="getschedule()" class="form-inline">
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-10">
-                    <div class="input-group">
-                        <input ng-model="data.showdate"
-                               type="text" class="form-control" placeholder="Date"
-                               datepicker-popup="EEE dd MMM yyyy" is-open="vm.ShowDateOpened" />
-                        <div class="input-group-addon">
-                            <button ng-click="vm.ShowDateClick($event)">
-                                <i class="fa fa-calendar"></i>
-                            </button>
-                        </div>
-                    </div>
+                <div class="input-group">
+                    <input ng-model="data.showdate"
+                           type="text" class="form-control" placeholder="Date"
+                           datepicker-popup="EEE dd MMM yyyy" />
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Channel</label>
-                <div class="col-sm-10">
+                <div class="input-group">
                     <input ng-model="vm.Channel"
                            type="text" class="form-control" placeholder="Channel"
                            typeahead="c.label + ' (' + c.id + ')' for c in vm.ChannelTypeAhead($viewValue)"
@@ -46,32 +37,43 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-10 col-sm-offset-2">
+                <div class="input-group">
                     <button type="submit" class="btn btn-default">Get</button>
                 </div>
             </div>
 
         </form>
 
-        <table class="table" ng-repeat="channel in schedules">
-            <caption>{{channel.Channel}}</caption>
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="show in channel.Schedules">
-                    <td>{{show.ShowTime}}</td>
-                    <td>{{show.Title}}</td>
-                    <td>{{show.Description}}</td>
-                    <td>{{show.Length}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-sm-2">
+            <div class="radio" ng-repeat="channel in channels">
+                <label>
+                    <input type="radio" ng-model="data.channels" ng-value="channel.id" ng-click="getschedule()" />
+                    {{channel.label}}
+                </label>
+            </div>
+        </div>
+
+        <div class="col-sm-10">
+            <table class="table" ng-repeat="channel in schedules">
+                <caption>{{channel.Channel}}</caption>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="show in channel.Schedules">
+                        <td>{{show.ShowTime}}</td>
+                        <td>{{show.Title}}</td>
+                        <td>{{show.Description}}</td>
+                        <td>{{show.Length}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
@@ -85,19 +87,11 @@
             function ($scope, $http) {
 
                 $scope.data = {
-                    showdate: moment({ hour: 0 }).toDate(),
+                    showdate: moment({ hour: 0 }).format("ddd DD MMM YYYY"),
                     channels: null
                 };
 
                 $scope.vm = {};
-
-                $scope.vm.ShowDateOpened = false;
-                $scope.vm.ShowDateClick = function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    $scope.vm.ShowDateOpened = !$scope.vm.ShowDateOpened;
-                };
 
                 $scope.vm.Channel = null;
                 $scope.vm.ChannelTypeAhead = function (keyword) {
@@ -117,6 +111,11 @@
                         params: $scope.data
                     }).then(function (response) {
                         $scope.schedules = response.data;
+                        _.each($scope.schedules, function (c) {
+                            _.each(c.Schedules, function (s) {
+                                s.ShowTime = moment(s.ShowTime).format("ddd HH:mm");
+                            });
+                        });
                     });
                 };
 
@@ -124,7 +123,9 @@
                     method: "GET",
                     url: "https://uspcahharhjy5eb4.apphb.com/firstmedia/channels"
                 }).then(function (response) {
-                    $scope.channels = response.data;
+                    $scope.channels = _.sortBy(response.data, function (c) {
+                        return c.label;
+                    });
                 });
 
             }

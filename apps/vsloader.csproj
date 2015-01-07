@@ -57,7 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="firstmedia\firrstmedia.html" />
+    <Content Include="firstmedia\index.html" />
     <Content Include="imagemap\dot.gif" />
     <Content Include="imagemap\imagemap.html" />
     <Content Include="imagemap\imagemap.js" />
