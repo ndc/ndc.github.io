@@ -30,7 +30,12 @@
                 <div class="input-group">
                     <input ng-model="data.showdate"
                            type="text" class="form-control" placeholder="Date"
-                           datepicker-popup="EEE dd MMM yyyy" />
+                           datepicker-popup="EEE dd MMM yyyy" is-open="vm.ShowDateOpened" />
+                    <div class="input-group-addon">
+                        <button ng-click="vm.ShowDateClick($event)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -100,6 +105,14 @@
                 };
 
                 $scope.vm = {};
+
+                $scope.vm.ShowDateOpened = false;
+                $scope.vm.ShowDateClick = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    $scope.vm.ShowDateOpened = !$scope.vm.ShowDateOpened;
+                };
 
                 $scope.vm.Channel = null;
                 $scope.vm.ChannelTypeAhead = function (keyword) {
