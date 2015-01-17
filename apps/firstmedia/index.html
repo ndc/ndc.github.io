@@ -57,13 +57,20 @@
                 </div>
             </div>
 
+            <div class="checkbox">
+                <label>
+                    <input ng-model="vm.sortByTime" type="checkbox" ng-change="saveSortSetting()">
+                    Sort by Time
+                </label>
+            </div>
+
             <button type="submit" class="btn btn-default">Get</button>
 
         </form>
 
         <div>&nbsp;</div>
 
-        <table class="table" ng-repeat="channel in schedules">
+        <table ng-repeat="channel in schedules" ng-hide="vm.sortByTime" class="table">
             <caption>{{channel.Channel}}</caption>
             <thead>
                 <tr>
@@ -75,10 +82,29 @@
             </thead>
             <tbody>
                 <tr ng-repeat="show in channel.Schedules">
-                    <td>{{show.ShowTime}}</td>
+                    <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
                     <td>{{show.Title}}</td>
                     <td>{{show.Description}}</td>
                     <td class="text-right">{{show.Length}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table ng-show="vm.sortByTime" class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Channel</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="show in schedulesByTime">
+                    <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
+                    <td>{{show.Channel}}</td>
+                    <td>{{show.Title}}</td>
+                    <td>{{show.Description}}</td>
                 </tr>
             </tbody>
         </table>
@@ -98,12 +124,15 @@
                     showdate: moment({ hour: 0 }).toDate()
                 };
 
-                var storeKey = "firstmediaSchedule.channels";
-                var channels = MyLocalStore.get(storeKey);
+                var storeKey = "firstmediaSchedule";
+                var storeKeyChannel = storeKey + ".channels";
+                var storeKeySortByTime = storeKey + ".sortByTime";
+
+                var channels = MyLocalStore.get(storeKeyChannel);
 
                 if (channels == null) {
                     $scope.data.channels = [];
-                    MyLocalStore.set(storeKey, $scope.data.channels);
+                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
                 } else {
                     $scope.data.channels = channels;
                 };
@@ -120,13 +149,19 @@
                 $scope.vm.ChannelOnSelect = function (item, model, label) {
                     $scope.data.channels.push(item.id);
                     $scope.data.channels = _($scope.data.channels).uniq().value().sort();
-                    MyLocalStore.set(storeKey, $scope.data.channels);
+                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
+                };
+
+                $scope.vm.sortByTime = MyLocalStore.get(storeKeySortByTime) || false;
+
+                $scope.saveSortSetting = function () {
+                    MyLocalStore.set(storeKeySortByTime, $scope.vm.sortByTime);
                 };
 
                 $scope.removeChannel = function (channel) {
                     var idx = $scope.data.channels.indexOf(channel);
                     $scope.data.channels.splice(idx, 1);
-                    MyLocalStore.set(storeKey, $scope.data.channels);
+                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
                 };
 
                 $scope.getschedule = function () {
@@ -140,11 +175,25 @@
                         params: params
                     }).then(function (response) {
                         $scope.schedules = response.data;
+
                         _.each($scope.schedules, function (c) {
                             _.each(c.Schedules, function (s) {
-                                s.ShowTime = moment(s.ShowTime).format("ddd HH:mm");
+                                s.ShowTime = new Date(parseInt(s.ShowTime.substr(6)));
                             });
                         });
+
+                        $scope.schedulesByTime = _(response.data).map(function (c) {
+                            var sched = _.map(c.Schedules, function (s) {
+                                return {
+                                    ShowTime: s.ShowTime,
+                                    Channel: c.Channel,
+                                    Title: s.Title,
+                                    Description: s.Description,
+                                    Length: s.Length
+                                };
+                            });
+                            return sched;
+                        }).flatten().sortBy(["ShowTime", "Channel"]).value();
                     });
                 };
 
