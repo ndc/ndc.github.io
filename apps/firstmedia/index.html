@@ -27,7 +27,16 @@
     <div ng-controller="MyCtrl">
 
         <div>
-            <span ng-repeat="channel in data.channels">
+            <label ng-repeat="chlist in settings.channelLists"
+                   class="radio-inline">
+                <input ng-model="settings.selectedList" ng-value="$index"
+                       type="radio" />
+                {{chlist.name}}
+            </label>
+        </div>
+
+        <div>
+            <span ng-repeat="channel in settings.channelLists[settings.selectedList].channels">
 
                 <button ng-click="removeChannel(channel)" class="btn btn-danger">
                     {{channel}} <i class="fa fa-times"></i>
@@ -59,7 +68,7 @@
 
             <div class="checkbox">
                 <label>
-                    <input ng-model="vm.sortByTime" type="checkbox" ng-change="saveSortSetting()">
+                    <input ng-model="settings.sortByTime" type="checkbox" ng-change="saveSortSetting()">
                     Sort by Time
                 </label>
             </div>
@@ -70,7 +79,7 @@
 
         <div>&nbsp;</div>
 
-        <table ng-repeat="channel in schedules" ng-hide="vm.sortByTime" class="table">
+        <table ng-repeat="channel in schedules" ng-hide="settings.sortByTime" class="table">
             <caption>{{channel.Channel}}</caption>
             <thead>
                 <tr>
@@ -90,7 +99,7 @@
             </tbody>
         </table>
 
-        <table ng-show="vm.sortByTime" class="table">
+        <table ng-show="settings.sortByTime" class="table">
             <thead>
                 <tr>
                     <th>Time</th>
@@ -125,16 +134,66 @@
                 };
 
                 var storeKey = "firstmediaSchedule";
-                var storeKeyChannel = storeKey + ".channels";
-                var storeKeySortByTime = storeKey + ".sortByTime";
+                var storeKeySettings = storeKey + ".settings";
 
-                var channels = MyLocalStore.get(storeKeyChannel);
+                $scope.clearSettings = function () {
+                    MyLocalStore.clear();
 
-                if (channels == null) {
-                    $scope.data.channels = [];
-                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
-                } else {
-                    $scope.data.channels = channels;
+                    $scope.settings = {
+                        sortByTime: true,
+                        channelLists: [
+                            {
+                                name: "chlist1",
+                                channels: []
+                            },
+                            {
+                                name: "chlist2",
+                                channels: []
+                            }
+                        ]
+                    };
+
+                    $scope.settings.selectedList = 0;
+
+                    MyLocalStore.set(storeKeySettings, $scope.settings);
+                };
+
+                $scope.settingsIsValid = function (settings) {
+                    if (settings == null) {
+                        return false;
+                    };
+
+                    if (typeof settings !== "object") {
+                        return false;
+                    };
+
+                    if (!("channelLists" in settings)) {
+                        return false;
+                    };
+
+                    if (!(settings.channelLists instanceof Array)) {
+                        return false;
+                    };
+
+                    if (!("selectedList" in settings)) {
+                        return false;
+                    };
+
+                    if (!("channels" in settings.channelLists[settings.selectedList])) {
+                        return false;
+                    };
+
+                    return true;
+                };
+
+                try {
+                    $scope.settings = MyLocalStore.get(storeKeySettings);
+                } catch (exc) {
+                    $scope.clearSettings();
+                };
+
+                if (!$scope.settingsIsValid($scope.settings)) {
+                    $scope.clearSettings();
                 };
 
                 $scope.vm = {};
@@ -147,30 +206,33 @@
                     return filtered;
                 };
                 $scope.vm.ChannelOnSelect = function (item, model, label) {
-                    $scope.data.channels.push(item.id);
-                    $scope.data.channels = _($scope.data.channels).uniq().value().sort();
-                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
+                    var chlist = $scope.settings.channelLists[$scope.settings.selectedList];
+                    chlist.channels.push(item.id);
+                    chlist.channels = _(chlist.channels).uniq().value().sort();
+                    MyLocalStore.set(storeKeySettings, $scope.settings);
                 };
 
-                $scope.vm.sortByTime = MyLocalStore.get(storeKeySortByTime) || false;
-
                 $scope.saveSortSetting = function () {
-                    MyLocalStore.set(storeKeySortByTime, $scope.vm.sortByTime);
+                    MyLocalStore.set(storeKeySettings, $scope.settings);
                 };
 
                 $scope.removeChannel = function (channel) {
-                    var idx = $scope.data.channels.indexOf(channel);
-                    $scope.data.channels.splice(idx, 1);
-                    MyLocalStore.set(storeKeyChannel, $scope.data.channels);
+                    var chlist = $scope.settings.channelLists[$scope.settings.selectedList];
+                    var idx = chlist.channels.indexOf(channel);
+                    chlist.channels.splice(idx, 1);
+                    MyLocalStore.set(storeKeySettings, $scope.settings);
                 };
 
                 $scope.getschedule = function () {
                     BusyIndicatorHandler.show();
 
+                    var chlist = $scope.settings.channelLists[$scope.settings.selectedList];
+
                     var params = {
                         showdate: moment($scope.data.showdate).format("YYYY-MM-DD"),
-                        channels: $scope.data.channels.join(",")
+                        channels: chlist.channels.join(",")
                     };
+
                     return $http({
                         method: "GET",
                         url: "https://uspcahharhjy5eb4.apphb.com/firstmedia/schedules",
@@ -210,7 +272,7 @@
                     });
                 });
 
-                if ($scope.data.channels.length > 0) {
+                if ($scope.settings.channelLists[$scope.settings.selectedList].channels.length > 0) {
                     $scope.getschedule();
                 };
 
