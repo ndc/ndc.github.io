@@ -165,6 +165,8 @@
                 };
 
                 $scope.getschedule = function () {
+                    BusyIndicatorHandler.show();
+
                     var params = {
                         showdate: moment($scope.data.showdate).format("YYYY-MM-DD"),
                         channels: $scope.data.channels.join(",")
@@ -194,10 +196,10 @@
                             });
                             return sched;
                         }).flatten().sortBy(["ShowTime", "Channel"]).value();
+                    }).finally(function () {
+                        BusyIndicatorHandler.hide();
                     });
                 };
-
-                BusyIndicatorHandler.show();
 
                 $http({
                     method: "GET",
@@ -206,8 +208,6 @@
                     $scope.channels = _.sortBy(response.data, function (c) {
                         return c.label;
                     });
-                }).finally(function () {
-                    BusyIndicatorHandler.hide();
                 });
 
                 if ($scope.data.channels.length > 0) {
