@@ -26,7 +26,7 @@
 
     <div ng-controller="MyCtrl">
 
-        <div>
+        <div class="form-group">
             <label ng-repeat="chlist in settings.channelLists"
                    class="radio-inline">
                 <input ng-model="settings.selectedList" ng-value="$index"
@@ -35,26 +35,20 @@
             </label>
         </div>
 
-        <div>
+        <div class="form-group">
             <span ng-repeat="channel in settings.channelLists[settings.selectedList].channels">
-
-                <button ng-click="removeChannel(channel)" class="btn btn-danger">
+                <button ng-click="removeChannel(channel)" class="btn btn-danger btn-xs">
                     {{channel}} <i class="fa fa-times"></i>
                 </button>
-
             </span>
+        </div>
 
-            <div>&nbsp;</div>
-
-            <div class="form-group">
-                <div class="input-group">
-                    <input ng-model="vm.Channel"
-                           type="text" class="form-control" placeholder="Add Channel"
-                           typeahead="c.label + ' (' + c.id + ')' for c in vm.ChannelTypeAhead($viewValue)"
-                           typeahead-on-select="vm.ChannelOnSelect($item, $model, $label)"
-                           typeahead-editable="false" />
-                </div>
-            </div>
+        <div class="form-group">
+            <input ng-model="vm.Channel"
+                   type="text" class="form-control" placeholder="Add Channel"
+                   typeahead="c.label + ' (' + c.id + ')' for c in vm.ChannelTypeAhead($viewValue)"
+                   typeahead-on-select="vm.ChannelOnSelect($item, $model, $label)"
+                   typeahead-editable="false" />
         </div>
 
         <form ng-submit="getschedule()" class="form-inline">
@@ -66,12 +60,16 @@
                 </div>
             </div>
 
+            &nbsp;
+
             <div class="checkbox">
                 <label>
                     <input ng-model="settings.sortByTime" type="checkbox" ng-change="saveSortSetting()">
                     Sort by Time
                 </label>
             </div>
+
+            &nbsp;
 
             <button type="submit" class="btn btn-default">Get</button>
 
