@@ -78,7 +78,7 @@
         <div>&nbsp;</div>
 
         <table ng-repeat="channel in schedules" ng-hide="settings.sortByTime" class="table">
-            <caption>{{channel.Channel}}</caption>
+            <caption>{{channel.Channel}} ({{channel.ChannelNumber}})</caption>
             <thead>
                 <tr>
                     <th>Time</th>
@@ -109,7 +109,7 @@
             <tbody>
                 <tr ng-repeat="show in schedulesByTime">
                     <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
-                    <td>{{show.Channel}}</td>
+                    <td>{{show.Channel}} ({{show.ChannelNumber}})</td>
                     <td>{{show.Title}}</td>
                     <td>{{show.Description}}</td>
                 </tr>
@@ -240,7 +240,7 @@
 
                         _.each($scope.schedules, function (c) {
                             _.each(c.Schedules, function (s) {
-                                s.ShowTime = new Date(parseInt(s.ShowTime.substr(6)));
+                                s.ShowTime = moment(s.ShowTime).toDate();
                             });
                         });
 
