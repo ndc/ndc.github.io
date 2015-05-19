@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <title>Multiplication Drill</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+</head>
+<body class="container">
+
+    <nav class="navbar navbar-default" role="navigation">
+        <a class="navbar-brand" href="/">NNDDCC</a>
+    </nav>
+
+    <busy-indicator></busy-indicator>
+
+    <h2>Multiplication Drill</h2>
+
+    <br />
+
+    <ui-view></ui-view>
+
+    <script>
+        "use strict";
+
+        angular.module('MyApp', ['ui.router', 'ui.bootstrap']);
+
+        angular.module("MyApp").config([
+            "$stateProvider", "$urlRouterProvider",
+            function ($stateProvider, $urlRouterProvider) {
+
+                $urlRouterProvider.otherwise("/drill");
+
+                $stateProvider.state("drill", {
+                    url: "/drill",
+                    templateUrl: "drill.html",
+                    controller: "DrillController"
+                });
+
+                $stateProvider.state("result", {
+                    url: "/drill/result",
+                    templateUrl: "drillresult.html",
+                    controller: "DrillResultController"
+                });
+
+            }
+        ]);
+
+        angular.module("MyApp").controller("DrillController", [
+            "$scope", "$state",
+            function ($scope, $state) {
+
+                $scope.generate = function () {
+                    var result = {
+                        first: _.random(0, 10),
+                        second: _.random(0, 10),
+                        question: _.random(0, 2),
+                        input: null
+                    };
+                    result.answer = result.first * result.second;
+                    return result;
+                };
+
+                $scope.questions = [];
+
+                _.times(10, function () {
+                    $scope.questions.push($scope.generate());
+                });
+
+            }
+        ]);
+
+    </script>
+
+</body>
+</html>

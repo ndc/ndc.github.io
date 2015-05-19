@@ -62,6 +62,9 @@
     <Content Include="imagemap\imagemap.html" />
     <Content Include="imagemap\imagemap.js" />
     <Content Include="imagemap\index.html" />
+    <Content Include="multiplication\drill.html" />
+    <Content Include="multiplication\drillresult.html" />
+    <Content Include="multiplication\index.html" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
