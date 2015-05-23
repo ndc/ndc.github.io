@@ -35,48 +35,157 @@
             "$stateProvider", "$urlRouterProvider",
             function ($stateProvider, $urlRouterProvider) {
 
-                $urlRouterProvider.otherwise("/drill");
+                $urlRouterProvider.otherwise("/");
+
+                $stateProvider.state("home", {
+                    url: "/",
+                    templateUrl: "home.html",
+                    controller: "HomeController"
+                });
 
                 $stateProvider.state("drill", {
-                    url: "/drill",
+                    url: "/drill?questionCount",
                     templateUrl: "drill.html",
                     controller: "DrillController"
                 });
 
-                $stateProvider.state("result", {
-                    url: "/drill/result",
-                    templateUrl: "drillresult.html",
-                    controller: "DrillResultController"
-                });
+            }
+        ]);
+
+        angular.module("MyApp").controller("HomeController", [
+            "$scope", "$state",
+            function ($scope, $state) {
+
+                $scope.data = {
+                    questionCount: 30
+                };
+
+                $scope.start = function () {
+                    if (isNaN($scope.data.questionCount) || $scope.data.questionCount % 1 !== 0) {
+                        return;
+                    };
+
+                    $state.go("drill", { questionCount: $scope.data.questionCount }, { reload: true });
+                };
 
             }
         ]);
 
         angular.module("MyApp").controller("DrillController", [
-            "$scope", "$state",
-            function ($scope, $state) {
+            "$scope", "$state", "$stateParams", "$window", "$timeout", "FocusHelper",
+            function ($scope, $state, $stateParams, $window, $timeout, FocusHelper) {
 
-                $scope.generate = function () {
-                    var result = {
-                        first: _.random(0, 10),
-                        second: _.random(0, 10),
-                        question: _.random(0, 2),
-                        input: null
-                    };
-                    result.answer = result.first * result.second;
-                    return result;
-                };
+                $scope.counter = 0;
 
                 $scope.questions = [];
 
-                _.times(10, function () {
-                    $scope.questions.push($scope.generate());
-                });
+                $scope.finished = false;
+
+                $scope.summary = {
+                    questionCount: 0,
+                    correctCount: 0,
+                    score: 0
+                };
+
+                $scope.generate = function () {
+                    var result = {};
+
+                    $scope.counter += 1;
+                    result.id = "q" + $scope.counter;
+
+                    result.first = _.random(0, 10);
+                    result.second = _.random(0, 10);
+                    result.third = result.first * result.second;
+
+                    var r = _.random(0, 5);
+                    if (r > 1) {
+                        result.question = 2;
+                    } else {
+                        result.question = r;
+                    };
+
+                    result.answer = null;
+                    result.answered = false;
+                    result.correct = false;
+                    return result;
+                };
+
+                $scope.submitAnswer = function (answer) {
+                    if (isNaN(answer.answer) || answer.answer == null) {
+                        return;
+                    };
+
+                    answer.answered = true;
+
+                    switch (answer.question) {
+                        case 0:
+                            if (answer.answer * answer.second == answer.third) {
+                                answer.correct = true;
+                            };
+                            break;
+                        case 1:
+                            if (answer.first * answer.answer == answer.third) {
+                                answer.correct = true;
+                            };
+                            break;
+                        default:
+                            if (answer.first * answer.second == answer.answer) {
+                                answer.correct = true;
+                            };
+                    };
+
+                    if ($scope.questions.length < $stateParams.questionCount) {
+                        $scope.setUpNewQuestion();
+                    } else {
+                        $scope.finished = true;
+                        $scope.summary.questionCount = $scope.questions.length;
+                        $scope.summary.correctCount = _.where($scope.questions, { correct: true }).length;
+                        $scope.summary.score = Math.round($scope.summary.correctCount / $scope.summary.questionCount * 100);
+
+                        $timeout(function () {
+                            $window.scrollTo(0, $window.document.body.scrollHeight);
+                        }, 100);
+                    };
+                };
+
+                $scope.setUpNewQuestion = function () {
+                    var newquestion = $scope.generate();
+                    $scope.questions.push(newquestion);
+                    FocusHelper.setFocusById(newquestion.id);
+                };
+
+                $scope.setUpNewQuestion();
 
             }
         ]);
 
+        angular.module("MyApp").factory("FocusHelper", [
+            "$timeout", "$window",
+            function ($timeout, $window) {
+                var svc = {};
+                svc.setFocusById = function (id) {
+                    $timeout(function () {
+                        var element = $window.document.getElementById(id);
+                        if (element) {
+                            element.focus();
+                        };
+                    });
+                };
+                return svc;
+            }
+        ]);
+
     </script>
+
+    <style>
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
 
 </body>
 </html>
