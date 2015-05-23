@@ -58,4 +58,6 @@
 <div ng-show="finished">
     <p>{{summary.correctCount}} correct out of {{summary.questionCount}} questions.</p>
     <h1>{{summary.score}}</h1>
+    <a ui-sref="home" class="btn btn-default">Home</a>
+    <button ng-click="restart()" id="restartbutton" class="btn btn-default">Repeat</button>
 </div>
