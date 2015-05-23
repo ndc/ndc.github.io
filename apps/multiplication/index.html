@@ -53,8 +53,8 @@
         ]);
 
         angular.module("MyApp").controller("HomeController", [
-            "$scope", "$state",
-            function ($scope, $state) {
+            "$scope", "$state", "$timeout", "FocusHelper",
+            function ($scope, $state, $timeout, FocusHelper) {
 
                 $scope.data = {
                     questionCount: 30
@@ -67,6 +67,10 @@
 
                     $state.go("drill", { questionCount: $scope.data.questionCount }, { reload: true });
                 };
+
+                $timeout(function () {
+                    FocusHelper.setFocusById("qcount");
+                }, 100);
 
             }
         ]);
