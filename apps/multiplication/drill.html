@@ -1,53 +1,55 @@
 ﻿
 <div ng-repeat="question in questions" ng-switch="question.answered">
-    <div ng-switch-default class="form-inline">
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.first}}</p>
-            <p ng-switch-when="0" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static">
+    <div ng-switch-default class="form row">
+        <div ng-switch="question.question" class="form-group col-xs-3 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.first}}</p>
+            <p ng-switch-when="0" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static cntr">
                 {{question.answer}}
             </p>
         </div>
-        <div class="form-group">
-            <p class="form-control-static"><i class="fa fa-times"></i></p>
+        <div class="form-group col-xs-1 col-sm-1">
+            <p class="form-control-static cntr"><i class="fa fa-times"></i></p>
         </div>
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.second}}</p>
-            <p ng-switch-when="1" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static">
+        <div ng-switch="question.question" class="form-group col-xs-3 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.second}}</p>
+            <p ng-switch-when="1" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static cntr">
                 {{question.answer}}
             </p>
         </div>
-        <div class="form-group">
-            <p class="form-control-static">=</p>
+        <div class="form-group col-xs-1 col-sm-1">
+            <p class="form-control-static cntr">=</p>
         </div>
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.third}}</p>
-            <p ng-switch-when="2" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static">
+        <div ng-switch="question.question" class="form-group col-xs-3 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.third}}</p>
+            <p ng-switch-when="2" ng-class="question.correct ? 'correct' : 'incorrect'" class="form-control-static cntr">
                 {{question.answer}}
             </p>
         </div>
     </div>
-    <form ng-switch-when="false" ng-submit="submitAnswer(question)" class="form-inline">
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.first}}</p>
+    <form ng-switch-when="false" ng-submit="submitAnswer(question)" class="form row">
+        <div ng-switch="question.question" class="form-group col-xs-5 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.first}}</p>
             <input ng-switch-when="0" ng-model="question.answer" id="{{question.id}}" type="number" class="form-control" />
         </div>
-        <div class="form-group">
-            <p class="form-control-static"><i class="fa fa-times"></i></p>
+        <div class="form-group col-xs-2 col-sm-1">
+            <p class="form-control-static cntr"><i class="fa fa-times"></i></p>
         </div>
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.second}}</p>
+        <div ng-switch="question.question" class="form-group col-xs-5 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.second}}</p>
             <input ng-switch-when="1" ng-model="question.answer" id="{{question.id}}" type="number" class="form-control" />
         </div>
-        <div class="form-group">
-            <p class="form-control-static">=</p>
+        <div class="form-group col-xs-2 col-sm-1">
+            <p class="form-control-static cntr">=</p>
         </div>
-        <div class="form-group" ng-switch="question.question">
-            <p ng-switch-default class="form-control-static">{{question.third}}</p>
+        <div ng-switch="question.question" class="form-group col-xs-5 col-sm-2">
+            <p ng-switch-default class="form-control-static cntr">{{question.third}}</p>
             <input ng-switch-when="2" ng-model="question.answer" id="{{question.id}}" type="number" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-default">
-            Next
-        </button>
+        <div class="form-group col-xs-5 col-sm-2">
+            <button type="submit" class="btn btn-default form-control">
+                Next
+            </button>
+        </div>
     </form>
 </div>
 
