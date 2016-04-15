@@ -1,6 +1,4 @@
 auto: true
-markdown: kramdown
-pygments: true
 permalink: /article/:title
 paginate: 5
 exclude: excludethis
