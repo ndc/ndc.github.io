@@ -1,5 +1,5 @@
 auto: true
-markdown: redcarpet
+markdown: kramdown
 pygments: true
 permalink: /article/:title
 paginate: 5
