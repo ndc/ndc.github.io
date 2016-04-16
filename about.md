@@ -1,6 +1,7 @@
 ---
 title: About
 layout: pages
+permalink: /about.html
 ---
 
 ### About This Website
