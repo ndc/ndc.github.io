@@ -7,19 +7,19 @@ changefreq: daily
 {% for post in paginator.posts %}
 <div class="row col-md-12 postbox">
 
-<h2><a href="{{post.url}}/">{{post.title}}</a></h2>
+<h2><a href="{{post.url}}">{{post.title}}</a></h2>
 <p>
 Last update {{post.date | date_to_string}}.
 </p>
 <p>
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.url}}{{post.url}}/" data-text="{{post.title}}" data-via="endy_tj">Tweet</a>
-<span class="g-plusone" data-size="medium" data-href="{{site.url}}{{post.url}}/"></span>
-<span class="fb-like" data-href="{{site.url}}{{post.url}}/" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="arial" style=".fb_iframe_widget{display:inline}"></span>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.url}}{{post.url}}" data-text="{{post.title}}" data-via="endy_tj">Tweet</a>
+<span class="g-plusone" data-size="medium" data-href="{{site.url}}{{post.url}}"></span>
+<span class="fb-like" data-href="{{site.url}}{{post.url}}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="arial" style=".fb_iframe_widget{display:inline}"></span>
 </p>
 
 {{post.content}}
 
-<p><a href="{{post.url}}/#disqus_thread">Comments</a></p>
+<p><a href="{{post.url}}#disqus_thread">Comments</a></p>
 
 </div>
 <br />
