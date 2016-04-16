@@ -2,7 +2,7 @@
 title: Perpanjang Paspor Online 2016
 date: 2016-04-15 16:52:00
 layout: blogdetail
-published: false
+published: true
 ---
 
 Berikut catatan saya waktu mencoba melakukan perpanjangan paspor (passport? pasport?) secara online, supaya tidak lupa prosedurnya lima tahun yang akan datang (kalau prosedurnya belum berubah tentunya :).
