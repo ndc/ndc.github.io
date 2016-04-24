@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Channel</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="show in vm.Schedules" ng-class="{'text-muted': show.isPast}">
+            <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
+            <td>{{show.ChannelCode}} ({{show.ChannelNumber}})</td>
+            <td>{{show.Title}}</td>
+            <td>{{show.Description}}</td>
+        </tr>
+    </tbody>
+</table>

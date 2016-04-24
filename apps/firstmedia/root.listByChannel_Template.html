@@ -1,0 +1,19 @@
+<table ng-repeat="channel in vm.Channels" class="table table-striped">
+    <caption>{{channel.Name}} ({{channel.Number}})</caption>
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th class="text-right">Length</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="show in vm.Schedules | filter:{ChannelCode: channel.Code}" ng-class="{'text-muted': show.isPast}">
+            <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
+            <td>{{show.Title}}</td>
+            <td>{{show.Description}}</td>
+            <td class="text-right">{{show.Length}}</td>
+        </tr>
+    </tbody>
+</table>

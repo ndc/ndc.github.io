@@ -1,0 +1,61 @@
+<div class="container">
+
+    <div class="form-inline">
+        <span class="form-control-static">Channel Lists:</span>
+        <label class="radio-inline" ng-repeat="fav in vm.UserData.Favorites">
+            <input type="radio" ng-model="vm.UserData.SelectedFavorite" 
+                ng-value="vm.UserData.Favorites.indexOf(fav)">
+            {{fav.Code}}
+            <a ui-sref="favoriteEdit({favoriteid:vm.UserData.Favorites.indexOf(fav)})"
+                class="btn btn-default btn-xs" title="Edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            &nbsp;
+        </label>
+        <a ui-sref="favoriteEdit({favoriteid:-1})" class="btn btn-default btn-xs" title="Create">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <p class="form-inline">
+        <span class="form-control-static">Channels:</span>
+        <span ng-repeat="channel in vm.UserData.Favorites[vm.UserData.SelectedFavorite].Channels" class="form-control-static">
+            {{channel}}
+            &nbsp;
+        </span>
+    </p>
+
+    <form ng-submit="vm.Refresh()" class="form-inline">
+        <div class="form-group">
+            <label for="showdate">Date:</label>
+            <input ng-model="vm.ShowDate" type="date" class="form-control" id="showdate" />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input ng-model="vm.UserData.FilterPast" type="checkbox" />
+                Filter Past Shows
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default">
+            Refresh
+        </button>
+    </form>
+
+    <p>&nbsp;</p>
+
+    <div class="form-inline">
+        <button ng-click="vm.SwitchView('ListByTime')" class="btn btn-default">
+            List by Time
+            <i ng-show="vm.UserData.SelectedView == 'ListByTime'" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button ng-click="vm.SwitchView('ListByChannel')" class="btn btn-default">
+            List by Channel
+            <i ng-show="vm.UserData.SelectedView == 'ListByChannel'" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <hr />
+
+    <div ui-view></div>
+
+</div>

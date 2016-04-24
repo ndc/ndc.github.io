@@ -1,0 +1,48 @@
+<div class="container">
+
+    <form ng-submit="vm.Update()">
+
+        <div class="form-group">
+            <label for="code">Name</label>
+            <input ng-model="vm.Favorite.Code" type="text" class="form-control" id="code" placeholder="Code">
+        </div>
+
+        <div class="form-group">
+            <label>Selected</label>
+            <p class="form-control-static">
+                <span ng-repeat="item in vm.GetSelected()">
+                    {{item}}
+                </span>
+            </p>
+        </div>
+
+        <button ng-click="vm.SelectAll()" type="button" class="btn btn-default">
+            Select All
+        </button>
+
+        <button ng-click="vm.DeselectAll()" type="button" class="btn btn-default">
+            Deselect All
+        </button>
+
+        <div ng-repeat="channel in vm.Channels" class="checkbox">
+            <label>
+                <input ng-model="channel[1]" type="checkbox">
+                {{channel[0].Name}} ({{channel[0].Code}})
+            </label>
+        </div>
+
+        <a ui-sref="root" class="btn btn-default">
+            Cancel
+        </a>
+
+        <button ng-click="vm.Delete()" type="button" class="btn btn-danger">
+            Delete
+        </button>
+
+        <button type="submit" class="btn btn-default">
+            S a v e
+        </button>
+
+    </form>
+
+</div>
