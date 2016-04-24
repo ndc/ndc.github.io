@@ -10,9 +10,7 @@ angular.module("MyApp", [
 ]);
 
 angular.module("MyApp").run([
-    "UserData",
-    function (UserData) {
-        UserData.LoadFromStorage();
+    function () {
     }
 ]);
 

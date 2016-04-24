@@ -15,6 +15,10 @@
         <a ui-sref="favoriteEdit({favoriteid:-1})" class="btn btn-default btn-xs" title="Create">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
+        &nbsp;
+        <button ng-click="vm.Reset()" type="button" class="btn btn-danger btn-xs" title="Reset">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
     </div>
 
     <p class="form-inline">
@@ -44,11 +48,11 @@
     <p>&nbsp;</p>
 
     <div class="form-inline">
-        <button ng-click="vm.SwitchView('ListByTime')" class="btn btn-default">
+        <button ng-click="vm.SwitchView('ListByTime')" type="button" class="btn btn-default">
             List by Time
             <i ng-show="vm.UserData.SelectedView == 'ListByTime'" class="fa fa-check" aria-hidden="true"></i>
         </button>
-        <button ng-click="vm.SwitchView('ListByChannel')" class="btn btn-default">
+        <button ng-click="vm.SwitchView('ListByChannel')" type="button" class="btn btn-default">
             List by Channel
             <i ng-show="vm.UserData.SelectedView == 'ListByChannel'" class="fa fa-check" aria-hidden="true"></i>
         </button>

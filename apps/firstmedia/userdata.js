@@ -3,13 +3,15 @@
 angular.module("MyApp").factory("UserData", [
     "MyLocalStore",
     function (MyLocalStore) {
+        var storeKeySettings = "firstmediaSchedule.settings";
+
         var userdata = {};
 
         userdata.LoadFromStorage = LoadFromStorage;
         userdata.SaveToStorage = SaveToStorage;
         userdata.Reset = Reset;
 
-        var storeKeySettings = "firstmediaSchedule.settings";
+        LoadFromStorage();
 
         return userdata;
 

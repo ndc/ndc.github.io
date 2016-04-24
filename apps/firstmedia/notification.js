@@ -46,14 +46,14 @@ angular.module("Notification").directive("notification", [
     function (NotificationHandler) {
         var drctve = {
             restrict: "A",
-            template: '<alert' +
+            template: '<uib-alert' +
             ' ng-repeat="message in messages"' +
             ' ng-style="{\'opacity\': message.opacity}"' +
             ' type="{{message.type}}"' +
             ' close="closeAlert(message)"' +
             '>' +
             '{{message.msg}}' +
-            '</alert>',
+            '</uib-alert>',
             link: function (scope, element, attributes) {
                 scope.messages = NotificationHandler.notifications;
                 scope.closeAlert = closeAlert;

@@ -13,6 +13,7 @@ angular.module("MyApp").controller("root_Controller", [
 
         vm.Refresh = Refresh;
         vm.SwitchView = SwitchView;
+        vm.Reset = Reset;
 
         Initialize();
 
@@ -66,6 +67,11 @@ angular.module("MyApp").controller("root_Controller", [
                 default:
                     break;
             };
+        };
+
+        function Reset() {
+            UserData.Reset();
+            UserData.SaveToStorage();
         };
 
     }
