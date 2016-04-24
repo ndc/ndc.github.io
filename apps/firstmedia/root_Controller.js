@@ -17,7 +17,6 @@ angular.module("MyApp").controller("root_Controller", [
         Initialize();
 
         function Initialize() {
-            Refresh();
         };
 
         function Refresh() {
@@ -34,7 +33,7 @@ angular.module("MyApp").controller("root_Controller", [
                 vm.Channels = response.data.Channels;
                 vm.Schedules = response.data.Schedules;
 
-                var currentTime = moment();
+                var currentTime = moment().subtract(1, "hours");
 
                 _.each(vm.Schedules, function (s) {
                     s.isPast = moment(s.ShowTime).isBefore(currentTime);
