@@ -1,6 +1,6 @@
 ---
 title: FirstMedia Schedule
-date: 2016-04-24 19:59:00
+date: 2016-04-24 00:00:00 +0700
 layout: blogdetail
 published: true
 ---
