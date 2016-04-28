@@ -1,6 +1,6 @@
 ---
 title: Perpanjang Paspor Online 2016
-date: 2016-04-15 16:52:00
+date: 2016-04-27 00:00:00
 layout: blogdetail
 published: true
 ---
@@ -67,6 +67,12 @@ Tunggu dipanggil, foto, scan fingerprint, petugas memberi tahu kapan paspor baru
 
 ### Ambil Paspor Baru
 
-Pengambilan bisa diwakilkan ke orang yang ada dalam kartu keluarga.
+Saya ambil paspor beberapa hari sesudah tanggal yang ditentukan dan tidak dipermasalahkan.
 
-Stay tuned.
+Paspor lama tidak dikembalikan kalau kita tidak minta. Untuk minta paspor lama harus isi form. Form minta paspor lama bisa dibeli di tukang fotokopi.
+
+Kertas pengambilan paspor taruh di keranjang di tempat pengambilan paspor, kemudian tunggu dipanggil. Waktu dipanggil tanda tangan di bukti pengambilan, menyerahkan form minta paspor lama, dan ambil paspor baru dan lama.
+
+Pengambilan paspor anak dan pasangan bisa diwakilkan. Menurut infonya asal masih dalam satu kartu keluarga bisa diwakilkan, tapi saat ambil petugas tidak minta kartu keluarga.
+
+Done!
