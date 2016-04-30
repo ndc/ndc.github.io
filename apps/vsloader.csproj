@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +58,28 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="firstmedia\api.js" />
+    <Content Include="firstmedia\busyindicator.js" />
+    <Content Include="firstmedia\errorhandler.js" />
+    <Content Include="firstmedia\favoriteEdit_Controller.js" />
+    <Content Include="firstmedia\favoriteEdit_Template.html" />
     <Content Include="firstmedia\index.html" />
+    <Content Include="firstmedia\lib\angular-ui-router.min.js" />
+    <Content Include="firstmedia\lib\angular.min.js" />
+    <Content Include="firstmedia\lib\bootstrap.min.css" />
+    <Content Include="firstmedia\lib\lodash.min.js" />
+    <Content Include="firstmedia\lib\moment.min.js" />
+    <Content Include="firstmedia\lib\ui-bootstrap-tpls.min.js" />
+    <Content Include="firstmedia\localstorage.js" />
+    <Content Include="firstmedia\main.js" />
+    <Content Include="firstmedia\notification.js" />
+    <Content Include="firstmedia\root.listByChannel_Controller.js" />
+    <Content Include="firstmedia\root.listByChannel_Template.html" />
+    <Content Include="firstmedia\root.listByTime_Controller.js" />
+    <Content Include="firstmedia\root.listByTime_Template.html" />
+    <Content Include="firstmedia\root_Controller.js" />
+    <Content Include="firstmedia\root_Template.html" />
+    <Content Include="firstmedia\userdata.js" />
     <Content Include="imagemap\dot.gif" />
     <Content Include="imagemap\imagemap.html" />
     <Content Include="imagemap\imagemap.js" />
@@ -87,6 +109,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="firstmedia\runlocal.cmd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
