@@ -15,9 +15,9 @@ angular.module("MyApp").factory("API", [
 
         function Schedules(params) {
             var cmd = $http({
-                method: "GET",
+                method: "POST",
                 url: rootUrl + "/firstmedia/schedules",
-                params: params
+                data: params
             });
             return cmd;
         };

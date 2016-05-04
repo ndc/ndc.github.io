@@ -24,7 +24,7 @@
         <tr ng-repeat="cs in vm.ChannelShows">
             <td>{{cs.Channel.Code}} ({{cs.Channel.Number}})</td>
             <td ng-show="cs.LeftPad > 0" colspan="{{cs.LeftPad}}"></td>
-            <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}">
+            <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}" ng-class="{'text-muted': show.isPast}">
                 {{sched.Title}}
                 <br /> {{sched.StartFrom}}
             </td>
