@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="form-inline">
+        <div class="checkbox">
+            <label>
+                <input ng-model="vm.UserData.FilterPast" ng-change="vm.ChangeFilterPast()" type="checkbox" />
+                Filter Past Shows
+            </label>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Channel</th>
+            <th ng-repeat="milestone in vm.Milestones">
+                {{milestone | date:"HH:mm"}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cs in vm.ChannelShows">
+            <td>{{cs.Channel.Code}} ({{cs.Channel.Number}})</td>
+            <td ng-show="cs.LeftPad > 0" colspan="{{cs.LeftPad}}"></td>
+            <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}">
+                {{sched.Title}} {{sched.StartFrom}}
+            </td>
+        </tr>
+    </tbody>
+</table>

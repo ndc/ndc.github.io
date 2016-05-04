@@ -18,12 +18,10 @@ angular.module("MyApp").config([
     "$stateProvider", "$urlRouterProvider",
     function ($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise("/root");
-
-        $urlRouterProvider.when("/", "/root");
+        $urlRouterProvider.otherwise("/r");
 
         $stateProvider.state("root", {
-            url: "/root",
+            url: "/r",
             templateUrl: "root_Template.html",
             controller: "root_Controller as vm"
         });
@@ -44,6 +42,12 @@ angular.module("MyApp").config([
             url: "/listbychannel",
             templateUrl: "root.listByChannel_Template.html",
             controller: "root.listByTime_Controller as vm"
+        });
+
+        $stateProvider.state("root.gantt", {
+            url: "/gantt",
+            templateUrl: "root.gantt_Template.html",
+            controller: "root.gantt_Controller as vm"
         });
 
     }

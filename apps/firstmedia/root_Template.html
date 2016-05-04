@@ -43,13 +43,17 @@
     <p>&nbsp;</p>
 
     <div class="form-inline">
-        <button ng-click="vm.SwitchView('ListByTime')" type="button" class="btn btn-default">
-            List by Time
-            <i ng-show="vm.UserData.SelectedView == 'ListByTime'" class="fa fa-check" aria-hidden="true"></i>
+        <button ng-click="vm.SwitchView('gantt')" type="button" class="btn btn-default">
+            Gantt
+            <i ng-show="vm.UserData.SelectedView == 'gantt'" class="fa fa-check" aria-hidden="true"></i>
         </button>
-        <button ng-click="vm.SwitchView('ListByChannel')" type="button" class="btn btn-default">
+        <button ng-click="vm.SwitchView('listByTime')" type="button" class="btn btn-default">
+            List by Time
+            <i ng-show="vm.UserData.SelectedView == 'listByTime'" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button ng-click="vm.SwitchView('listByChannel')" type="button" class="btn btn-default">
             List by Channel
-            <i ng-show="vm.UserData.SelectedView == 'ListByChannel'" class="fa fa-check" aria-hidden="true"></i>
+            <i ng-show="vm.UserData.SelectedView == 'listByChannel'" class="fa fa-check" aria-hidden="true"></i>
         </button>
     </div>
 

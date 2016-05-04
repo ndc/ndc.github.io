@@ -43,8 +43,9 @@ angular.module("MyApp").controller("root_Controller", [
 
         function SwitchView(viewName) {
             switch (viewName) {
-                case "ListByTime":
-                case "ListByChannel":
+                case "gantt":
+                case "listByTime":
+                case "listByChannel":
                     UserData.SelectedView = viewName;
                     UserData.SaveToStorage();
                     switchToView(viewName);
@@ -55,16 +56,8 @@ angular.module("MyApp").controller("root_Controller", [
         };
 
         function switchToView(viewName) {
-            switch (viewName) {
-                case "ListByTime":
-                    $state.go("root.listByTime", null, { reload: true });
-                    break;
-                case "ListByChannel":
-                    $state.go("root.listByChannel", null, { reload: true });
-                    break;
-                default:
-                    break;
-            };
+            var stateName = "root." + viewName;
+            $state.go(stateName, null, { reload: true });
         };
 
         function Reset() {
