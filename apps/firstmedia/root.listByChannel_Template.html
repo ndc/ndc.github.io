@@ -1,5 +1,14 @@
 <div class="container">
 
+    <div class="form-inline">
+        <div class="checkbox">
+            <label>
+                <input ng-model="vm.UserData.FilterPast" ng-change="vm.ChangeFilterPast()" type="checkbox" />
+                Filter Past Shows
+            </label>
+        </div>
+    </div>
+
     <table ng-repeat="channel in vm.Channels" class="table table-striped">
         <caption>{{channel.Name}} ({{channel.Number}})</caption>
         <thead>

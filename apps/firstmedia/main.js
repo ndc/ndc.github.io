@@ -37,13 +37,13 @@ angular.module("MyApp").config([
         $stateProvider.state("root.listByTime", {
             url: "/listbytime",
             templateUrl: "root.listByTime_Template.html",
-            controller: "root.listByTime_Controller as vmv"
+            controller: "root.listByTime_Controller as vm"
         });
 
         $stateProvider.state("root.listByChannel", {
             url: "/listbychannel",
             templateUrl: "root.listByChannel_Template.html",
-            controller: "root.listByChannel_Controller as vmv"
+            controller: "root.listByTime_Controller as vm"
         });
 
     }

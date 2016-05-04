@@ -1,9 +1,10 @@
 <div class="container">
 
-    <div class="form-inline">
-        <span class="form-control-static">Channel Lists:</span>
+    <form ng-submit="vm.Refresh()" class="form-inline">
+        <label>Channel Lists:</label>
         <label class="radio-inline" ng-repeat="fav in vm.UserData.Favorites">
-            <input type="radio" ng-model="vm.UserData.SelectedFavorite" 
+            <input type="radio" ng-model="vm.UserData.SelectedFavorite"
+                ng-change="vm.ChangeFavorite()"
                 ng-value="vm.UserData.Favorites.indexOf(fav)">
             {{fav.Code}}
             <a ui-sref="favoriteEdit({favoriteid:vm.UserData.Favorites.indexOf(fav)})"
@@ -18,32 +19,26 @@
         &nbsp;
         <button ng-click="vm.Reset()" type="button" class="btn btn-danger btn-xs" title="Reset">
             <i class="fa fa-trash" aria-hidden="true"></i>
-        </button>
-    </div>
-
-    <p class="form-inline">
-        <span class="form-control-static">Channels:</span>
-        <span ng-repeat="channel in vm.UserData.Favorites[vm.UserData.SelectedFavorite].Channels" class="form-control-static">
-            {{channel}}
-            &nbsp;
-        </span>
-    </p>
-
-    <form ng-submit="vm.Refresh()" class="form-inline">
+        </button> &nbsp;
         <div class="form-group">
             <label for="showdate">Date:</label>
             <input ng-model="vm.ShowDate" type="date" class="form-control" id="showdate" />
-        </div>
-        <div class="checkbox">
-            <label>
-                <input ng-model="vm.UserData.FilterPast" type="checkbox" />
-                Filter Past Shows
-            </label>
         </div>
         <button type="submit" class="btn btn-default">
             Refresh
         </button>
     </form>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Channels:</label>
+            <span class="form-control-static"></span>
+            <span ng-repeat="channel in vm.UserData.Favorites[vm.UserData.SelectedFavorite].Channels" class="form-control-static">
+                {{channel}}
+                &nbsp;
+            </span>
+        </div>
+    </div>
 
     <p>&nbsp;</p>
 

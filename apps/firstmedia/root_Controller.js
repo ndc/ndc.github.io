@@ -1,16 +1,19 @@
 "use strict";
 
 angular.module("MyApp").controller("root_Controller", [
-    "$state", "UserData", "API", "ErrorHandler", "BusyIndicatorHandler",
-    function ($state, UserData, API, ErrorHandler, BusyIndicatorHandler) {
+    "$state", "UserData", "Schedule",
+    "ErrorHandler", "BusyIndicatorHandler",
+    function (
+        $state, UserData, Schedule,
+        ErrorHandler, BusyIndicatorHandler
+    ) {
 
         var vm = this;
 
         vm.UserData = UserData;
         vm.ShowDate = moment({ hour: 0 }).toDate();
-        vm.Channels = [];
-        vm.Schedules = [];
 
+        vm.ChangeFavorite = ChangeFavorite;
         vm.Refresh = Refresh;
         vm.SwitchView = SwitchView;
         vm.Reset = Reset;
@@ -20,33 +23,19 @@ angular.module("MyApp").controller("root_Controller", [
         function Initialize() {
         };
 
-        function Refresh() {
+        function ChangeFavorite() {
             UserData.SaveToStorage();
+        };
 
-            var request = {};
-            request.ShowDate = !!vm.ShowDate ? moment(vm.ShowDate).format("YYYY-MM-DD") : null;
-            request.Channels = UserData.Favorites[UserData.SelectedFavorite].Channels;
-            request.FakeData = false;
+        function Refresh() {
+            var ShowDate = !!vm.ShowDate ? moment(vm.ShowDate).format("YYYY-MM-DD") : null;
+            var Channels = UserData.Favorites[UserData.SelectedFavorite].Channels;
+            var FakeData = false;
 
             BusyIndicatorHandler.show();
 
-            return API.Schedules(request).then(function (response) {
-                vm.Channels = response.data.Channels;
-                vm.Schedules = response.data.Schedules;
-
-                var currentTime = moment().subtract(1, "hours");
-
-                _.each(vm.Schedules, function (s) {
-                    s.isPast = moment(s.ShowTime).isBefore(currentTime);
-                });
-
-                if (UserData.FilterPast) {
-                    vm.Schedules = _.filter(vm.Schedules, function (s) {
-                        return !s.isPast;
-                    });
-                };
-
-                SwitchView(UserData.SelectedView);
+            return Schedule.Refresh(ShowDate, Channels, FakeData).then(function (response) {
+                switchToView(UserData.SelectedView);
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });
@@ -55,14 +44,23 @@ angular.module("MyApp").controller("root_Controller", [
         function SwitchView(viewName) {
             switch (viewName) {
                 case "ListByTime":
-                    UserData.SelectedView = viewName;
-                    UserData.SaveToStorage();
-                    $state.go("root.listByTime");
-                    break;
                 case "ListByChannel":
                     UserData.SelectedView = viewName;
                     UserData.SaveToStorage();
-                    $state.go("root.listByChannel");
+                    switchToView(viewName);
+                    break;
+                default:
+                    break;
+            };
+        };
+
+        function switchToView(viewName) {
+            switch (viewName) {
+                case "ListByTime":
+                    $state.go("root.listByTime", null, { reload: true });
+                    break;
+                case "ListByChannel":
+                    $state.go("root.listByChannel", null, { reload: true });
                     break;
                 default:
                     break;
