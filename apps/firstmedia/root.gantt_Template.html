@@ -25,7 +25,8 @@
             <td>{{cs.Channel.Code}} ({{cs.Channel.Number}})</td>
             <td ng-show="cs.LeftPad > 0" colspan="{{cs.LeftPad}}"></td>
             <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}">
-                {{sched.Title}} {{sched.StartFrom}}
+                {{sched.Title}}
+                <br /> {{sched.StartFrom}}
             </td>
         </tr>
     </tbody>
