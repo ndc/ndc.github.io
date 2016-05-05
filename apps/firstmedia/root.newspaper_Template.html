@@ -25,10 +25,10 @@
         <tr ng-repeat="(timeIdx, row) in vm.Matrix">
             <td>{{vm.Milestones[timeIdx] | date:"HH:mm"}}</td>
             <td ng-repeat="(channelIdx, col) in row" ng-if="col.Generate" rowspan="{{col.Show.ColSpan}}" ng-class="{'text-muted': col.Show.isPast}">
+                <span ng-if="!!col.Show">{{col.Show.Title}}</span>
+                <br/>
                 <span ng-if="!!col.Show">
-                    {{col.Show.Title}}
-                    <br/>
-                    {{col.Channel.Code}} ({{col.Channel.Number}}) {{col.Show.ShowTime | date:"HH:mm"}}
+                    {{col.Channel.Code}} ({{col.Channel.Number}}) {{col.Show.StartFrom}}
                 </span>
             </td>
         </tr>
