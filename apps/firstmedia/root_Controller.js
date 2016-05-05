@@ -44,7 +44,7 @@ angular.module("MyApp").controller("root_Controller", [
         function SwitchView(viewName) {
             switch (viewName) {
                 case "grid":
-                case "ganttVertical":
+                case "newspaper":
                 case "listByTime":
                 case "listByChannel":
                     UserData.SelectedView = viewName;

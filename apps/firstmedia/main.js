@@ -50,9 +50,9 @@ angular.module("MyApp").config([
             controller: "root.grid_Controller as vm"
         });
 
-        $stateProvider.state("root.ganttVertical", {
-            url: "/gantt",
-            templateUrl: "root.ganttVertical_Template.html",
+        $stateProvider.state("root.newspaper", {
+            url: "/newspaper",
+            templateUrl: "root.newspaper_Template.html",
             controller: "root.grid_Controller as vm"
         });
 
