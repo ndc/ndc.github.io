@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("MyApp").controller("root.gantt_Controller", [
+angular.module("MyApp").controller("root.grid_Controller", [
     "$state", "UserData", "Schedule",
     function ($state, UserData, Schedule) {
 

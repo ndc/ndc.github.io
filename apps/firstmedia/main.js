@@ -44,16 +44,16 @@ angular.module("MyApp").config([
             controller: "root.listByTime_Controller as vm"
         });
 
-        $stateProvider.state("root.gantt", {
-            url: "/gantt",
-            templateUrl: "root.gantt_Template.html",
-            controller: "root.gantt_Controller as vm"
+        $stateProvider.state("root.grid", {
+            url: "/grid",
+            templateUrl: "root.grid_Template.html",
+            controller: "root.grid_Controller as vm"
         });
 
         $stateProvider.state("root.ganttVertical", {
             url: "/gantt",
             templateUrl: "root.ganttVertical_Template.html",
-            controller: "root.gantt_Controller as vm"
+            controller: "root.grid_Controller as vm"
         });
 
     }

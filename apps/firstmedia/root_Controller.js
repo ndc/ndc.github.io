@@ -43,7 +43,7 @@ angular.module("MyApp").controller("root_Controller", [
 
         function SwitchView(viewName) {
             switch (viewName) {
-                case "gantt":
+                case "grid":
                 case "ganttVertical":
                 case "listByTime":
                 case "listByChannel":
