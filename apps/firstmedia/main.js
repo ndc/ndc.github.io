@@ -50,5 +50,11 @@ angular.module("MyApp").config([
             controller: "root.gantt_Controller as vm"
         });
 
+        $stateProvider.state("root.ganttVertical", {
+            url: "/gantt",
+            templateUrl: "root.ganttVertical_Template.html",
+            controller: "root.gantt_Controller as vm"
+        });
+
     }
 ]);

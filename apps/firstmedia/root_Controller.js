@@ -44,6 +44,7 @@ angular.module("MyApp").controller("root_Controller", [
         function SwitchView(viewName) {
             switch (viewName) {
                 case "gantt":
+                case "ganttVertical":
                 case "listByTime":
                 case "listByChannel":
                     UserData.SelectedView = viewName;

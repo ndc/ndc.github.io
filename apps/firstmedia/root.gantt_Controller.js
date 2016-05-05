@@ -12,6 +12,7 @@ angular.module("MyApp").controller("root.gantt_Controller", [
         vm.Milestones = [];
 
         vm.ChangeFilterPast = ChangeFilterPast;
+        vm.GetShow = GetShow;
 
         Initialize();
 
@@ -68,7 +69,22 @@ angular.module("MyApp").controller("root.gantt_Controller", [
 
                 return cs;
             });
+        };
 
+        function GetShow(showtime, channelCode) {
+            var cs = _.find(vm.ChannelShows, function (channelShow) {
+                return channelShow.Channel.Code == channelCode;
+            });
+
+            if (!cs) {
+                return cs;
+            };
+
+            var show = _.find(cs.Shows, function (s) {
+                return s.ShowTime == showtime;
+            });
+
+            return show;
         };
 
     }
