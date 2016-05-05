@@ -10,9 +10,9 @@ angular.module("MyApp").controller("root.grid_Controller", [
         vm.Schedule = Schedule;
         vm.ChannelShows = [];
         vm.Milestones = [];
+        vm.Matrix = [];
 
         vm.ChangeFilterPast = ChangeFilterPast;
-        vm.GetShow = GetShow;
 
         Initialize();
 
@@ -69,22 +69,23 @@ angular.module("MyApp").controller("root.grid_Controller", [
 
                 return cs;
             });
-        };
 
-        function GetShow(showtime, channelCode) {
-            var cs = _.find(vm.ChannelShows, function (channelShow) {
-                return channelShow.Channel.Code == channelCode;
-            });
-
-            if (!cs) {
-                return cs;
+            vm.Matrix = [];
+            for (var timeIdx = 0; timeIdx < vm.Milestones.length; timeIdx++) {
+                var row = [];
+                vm.Matrix.push(row);
+                for (var channelIdx = 0; channelIdx < vm.ChannelShows.length; channelIdx++) {
+                    var col = {};
+                    row.push(col);
+                    var showtime = vm.Milestones[timeIdx];
+                    col.Channel = vm.ChannelShows[channelIdx].Channel;
+                    col.Show = _.find(vm.ChannelShows[channelIdx].Shows, function (show) {
+                        return show.ShowTime <= showtime && show.Until > showtime;
+                    });
+                    col.Generate = !col.Show || showtime == col.Show.ShowTime;
+                };
             };
 
-            var show = _.find(cs.Shows, function (s) {
-                return s.ShowTime == showtime;
-            });
-
-            return show;
         };
 
     }

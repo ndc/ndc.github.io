@@ -21,13 +21,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="milestone in vm.Milestones">
-            <td>{{milestone | date:"HH:mm"}}</td>
-            <td ng-repeat="cs in vm.ChannelShows" ng-if="!!vm.GetShow(milestone, cs.Channel.Code)" rowspan="{{vm.GetShow(milestone, cs.Channel.Code).ColSpan}}"
-                ng-class="{'text-muted': vm.GetShow(milestone, cs.Channel.Code).isPast}">
-                {{vm.GetShow(milestone, cs.Channel.Code).Title}}
-                <br /> {{cs.Channel.Code}} ({{cs.Channel.Number}})
+
+        <tr ng-repeat="(timeIdx, row) in vm.Matrix">
+            <td>{{vm.Milestones[timeIdx] | date:"HH:mm"}}</td>
+            <td ng-repeat="(channelIdx, col) in row" ng-if="col.Generate" rowspan="{{col.Show.ColSpan}}" ng-class="{'text-muted': col.Show.isPast}">
+                <span ng-if="!!col.Show">
+                    {{col.Show.Title}}
+                    <br/>
+                    {{col.Channel.Code}} {{col.Channel.Number}}
+                </span>
             </td>
         </tr>
+
     </tbody>
 </table>
