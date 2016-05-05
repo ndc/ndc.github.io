@@ -28,7 +28,7 @@
                 <span ng-if="!!col.Show">
                     {{col.Show.Title}}
                     <br/>
-                    {{col.Channel.Code}} {{col.Channel.Number}}
+                    {{col.Channel.Code}} ({{col.Channel.Number}}) {{col.Show.ShowTime | date:"HH:mm"}}
                 </span>
             </td>
         </tr>
