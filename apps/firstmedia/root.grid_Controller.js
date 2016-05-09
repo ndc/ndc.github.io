@@ -80,7 +80,7 @@ angular.module("MyApp").controller("root.grid_Controller", [
                     var showtime = vm.Milestones[timeIdx];
                     col.Channel = vm.ChannelShows[channelIdx].Channel;
                     col.Show = _.find(vm.ChannelShows[channelIdx].Shows, function (show) {
-                        return show.ShowTime <= showtime && show.Until > showtime;
+                        return show.ShowTime <= showtime && (show.Until > showtime || show.Until == null);
                     });
                     col.Generate = !col.Show || showtime == col.Show.ShowTime;
                 };
