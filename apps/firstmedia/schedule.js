@@ -21,6 +21,11 @@ angular.module("MyApp").factory("Schedule", [
             var promise = API.Schedules(request).then(function (response) {
                 svc.Channels = response.data.Channels;
                 svc.Schedules = response.data.Schedules;
+
+                var idx = 1;
+                _.each(svc.Schedules, function (schedule) {
+                    schedule.ID = idx++;
+                });
             });
 
             return promise;
