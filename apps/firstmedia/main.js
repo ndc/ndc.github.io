@@ -56,15 +56,5 @@ angular.module("MyApp").config([
             controller: "root.grid_Controller as vm"
         });
 
-        $stateProvider.state("root.newspaper.detail", {
-            url: "/{showid}",
-            views: {
-                "@root": {
-                    templateUrl: "root.showDetail_Template.html",
-                    controller: "root.showDetail_Controller as vm"
-                }
-            }
-        });
-
     }
 ]);

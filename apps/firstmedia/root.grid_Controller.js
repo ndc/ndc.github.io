@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").controller("root.grid_Controller", [
-    "$state", "UserData", "Schedule",
-    function ($state, UserData, Schedule) {
+    "$state", "UserData", "Schedule", "$uibModal",
+    function ($state, UserData, Schedule, $uibModal) {
 
         var vm = this;
 
@@ -13,6 +13,7 @@ angular.module("MyApp").controller("root.grid_Controller", [
         vm.Matrix = [];
 
         vm.ChangeFilterPast = ChangeFilterPast;
+        vm.ShowDetail = ShowDetail;
 
         Initialize();
 
@@ -86,6 +87,27 @@ angular.module("MyApp").controller("root.grid_Controller", [
                 };
             };
 
+        };
+
+        function ShowDetail(show) {
+            var modalOptions = {
+                templateUrl: "showDetail_Template.html",
+                controller: "showDetail_Controller as vm",
+                resolve: {
+                    Show: [
+                        function () {
+                            return show;
+                        }
+                    ]
+                }
+            };
+
+            var modalPromise = $uibModal.open(modalOptions).
+                result.
+                then(function (response) {
+                });
+
+            return modalPromise;
         };
 
     }

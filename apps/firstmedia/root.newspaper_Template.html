@@ -25,7 +25,7 @@
         <tr ng-repeat="(timeIdx, row) in vm.Matrix">
             <td>{{vm.Milestones[timeIdx] | date:"HH:mm"}}</td>
             <td ng-repeat="(channelIdx, col) in row" ng-if="col.Generate" rowspan="{{col.Show.ColSpan}}" ng-class="{'text-muted': col.Show.isPast}">
-                <a ui-sref="root.newspaper.detail({showid:col.Show.ID})" ng-if="!!col.Show">
+                <a ng-if="!!col.Show" ng-click="vm.ShowDetail(col.Show)">
                     {{col.Show.Title}}
                 </a>
                 <br/>
