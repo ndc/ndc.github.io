@@ -25,8 +25,8 @@
             <td>{{cs.Channel.Code}} ({{cs.Channel.Number}})</td>
             <td ng-show="cs.LeftPad > 0" colspan="{{cs.LeftPad}}"></td>
             <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}" ng-class="{'text-muted': show.isPast}">
-                {{sched.Title}}
-                <br /> {{sched.StartFrom}}
+                <a ng-click="vm.ShowDetail(sched)">{{sched.Title}}</a>
+                <br /> {{sched.ChannelCode}} ({{sched.ChannelNumber}}) {{sched.StartFrom}}
             </td>
         </tr>
     </tbody>
