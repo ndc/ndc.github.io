@@ -7,10 +7,11 @@ angular.module("MyApp").controller("root.grid_Controller", [
         var vm = this;
 
         vm.UserData = UserData;
-        vm.Schedule = Schedule;
-        vm.ChannelShows = [];
-        vm.Milestones = [];
-        vm.Matrix = [];
+        vm.Schedules = null;
+        vm.ChannelCodes = null;
+        vm.Milestones = null;
+        vm.ShowTimeRows = null;
+        vm.ChannelRows = null;
 
         vm.ChangeFilterPast = ChangeFilterPast;
         vm.ShowDetail = ShowDetail;
@@ -27,66 +28,58 @@ angular.module("MyApp").controller("root.grid_Controller", [
         };
 
         function populateSchedules() {
-            var schedules = UserData.FilterPast ? Schedule.FilterPastShows() : Schedule.Schedules;
-
             var currentTime = moment();
-            _.each(schedules, function (schedule) {
-                schedule.isPast = moment(schedule.Until) < currentTime;
-            });
 
-            vm.Milestones = _(schedules).
-                map(function (schedule) {
-                    return schedule.ShowTime;
+            vm.Schedules = _(Schedule.Schedules).
+                filter(function (show) {
+                    return UserData.FilterPast ?
+                        moment(show.Until) > currentTime :
+                        true;
                 }).
-                uniq().
                 value();
 
-            vm.ChannelShows = _.map(Schedule.Channels, function (channel) {
-                var cs = {};
-                cs.Channel = channel;
-                cs.Shows = _(schedules).
-                    filter(function (sched) {
-                        return sched.ChannelCode == channel.Code;
-                    }).
-                    sortBy(function (sched) {
-                        return sched.ShowTime;
-                    }).
-                    map(function (sched) {
-                        var start = vm.Milestones.indexOf(sched.ShowTime);
-                        start = start < 0 ? 0 : start;
-                        var end = vm.Milestones.indexOf(sched.Until);
-                        end = end < 0 ? vm.Milestones.length : end;
+            vm.Milestones = _(vm.Schedules).
+                map(function (schedule) { return schedule.ShowTime; }).
+                union(_.map(vm.Schedules, function (s) { return s.Until; })).
+                sortBy(function (showtime) { return showtime; }).
+                value();
 
-                        sched.ColSpan = end - start;
-                        sched.StartFrom = moment(sched.ShowTime).format("HH:mm");
-                        return sched;
-                    }).
-                    value();
+            vm.ChannelCodes = _(vm.Schedules).
+                map(function (s) { return s.ChannelCode; }).
+                uniq().
+                sortBy(function (c) { return c; }).
+                value();
 
-                var earliestShowTime = _(cs.Shows).map(function (show) {
-                    return show.ShowTime;
-                }).min();
-                cs.LeftPad = vm.Milestones.indexOf(earliestShowTime);
-
-                return cs;
-            });
-
-            vm.Matrix = [];
+            vm.ShowTimeRows = [];
             for (var timeIdx = 0; timeIdx < vm.Milestones.length; timeIdx++) {
                 var row = [];
-                vm.Matrix.push(row);
-                for (var channelIdx = 0; channelIdx < vm.ChannelShows.length; channelIdx++) {
+                vm.ShowTimeRows.push(row);
+                for (var channelIdx = 0; channelIdx < vm.ChannelCodes.length; channelIdx++) {
                     var col = {};
                     row.push(col);
-                    var showtime = vm.Milestones[timeIdx];
-                    col.Channel = vm.ChannelShows[channelIdx].Channel;
-                    col.Show = _.find(vm.ChannelShows[channelIdx].Shows, function (show) {
-                        return show.ShowTime <= showtime && (show.Until > showtime || show.Until == null);
+                    var thetime = vm.Milestones[timeIdx];
+                    var channelCode = vm.ChannelCodes[channelIdx];
+                    var currentShow = _.find(vm.Schedules, function (show) {
+                        return show.ChannelCode == channelCode &&
+                            show.ShowTime <= thetime &&
+                            show.Until > thetime;
                     });
-                    col.Generate = !col.Show || showtime == col.Show.ShowTime;
+                    if (!!currentShow && currentShow.ShowTime == thetime) {
+                        col.Show = currentShow;
+
+                        var start = vm.Milestones.indexOf(col.Show.ShowTime);
+                        var end = vm.Milestones.indexOf(col.Show.Until);
+                        col.Show.Span = end - start;
+                    };
+                    col.Generate = !currentShow || !!col.Show;
                 };
             };
 
+            vm.ChannelRows = _.unzip(vm.ShowTimeRows);
+
+            _.each(Schedule.Schedules, function (schedule) {
+                schedule.isPast = moment(schedule.Until) < currentTime;
+            });
         };
 
         function ShowDetail(show) {

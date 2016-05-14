@@ -21,12 +21,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="cs in vm.ChannelShows">
-            <td>{{cs.Channel.Code}} ({{cs.Channel.Number}})</td>
-            <td ng-show="cs.LeftPad > 0" colspan="{{cs.LeftPad}}"></td>
-            <td ng-repeat="sched in cs.Shows" colspan="{{sched.ColSpan}}" ng-class="{'text-muted': show.isPast}">
-                <a ng-click="vm.ShowDetail(sched)">{{sched.Title}}</a>
-                <br /> {{sched.ChannelCode}} ({{sched.ChannelNumber}}) {{sched.StartFrom}}
+        <tr ng-repeat="(channelIdx, row) in vm.ChannelRows">
+            <td>{{vm.ChannelCodes[channelIdx]}}</td>
+            <td ng-repeat="(timeIdx, col) in row" ng-if="col.Generate" colspan="{{col.Show.Span}}" ng-class="{'text-muted': col.Show.isPast}">
+                <a ng-if="!!col.Show" ng-click="vm.ShowDetail(col.Show)">
+                    {{col.Show.Title}}
+                </a>
+                <br/>
+                <span ng-if="!!col.Show">
+                    {{col.Show.ChannelCode}} ({{col.Show.ChannelNumber}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
+                </span>
+                <br/>
             </td>
         </tr>
     </tbody>

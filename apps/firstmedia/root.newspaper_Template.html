@@ -15,22 +15,22 @@
     <thead>
         <tr>
             <th>Time</th>
-            <th ng-repeat="cs in vm.ChannelShows">
-                {{cs.Channel.Code}} ({{cs.Channel.Number}})
+            <th ng-repeat="cs in vm.ChannelCodes">
+                {{cs}}
             </th>
         </tr>
     </thead>
     <tbody>
 
-        <tr ng-repeat="(timeIdx, row) in vm.Matrix">
+        <tr ng-repeat="(timeIdx, row) in vm.ShowTimeRows">
             <td>{{vm.Milestones[timeIdx] | date:"HH:mm"}}</td>
-            <td ng-repeat="(channelIdx, col) in row" ng-if="col.Generate" rowspan="{{col.Show.ColSpan}}" ng-class="{'text-muted': col.Show.isPast}">
+            <td ng-repeat="(channelIdx, col) in row" ng-if="col.Generate" rowspan="{{col.Show.Span}}" ng-class="{'text-muted': col.Show.isPast}">
                 <a ng-if="!!col.Show" ng-click="vm.ShowDetail(col.Show)">
                     {{col.Show.Title}}
                 </a>
                 <br/>
                 <span ng-if="!!col.Show">
-                    {{col.Channel.Code}} ({{col.Channel.Number}}) {{col.Show.StartFrom}}
+                    {{col.Show.ChannelCode}} ({{col.Show.ChannelNumber}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
                 </span>
             </td>
         </tr>

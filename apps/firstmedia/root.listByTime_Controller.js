@@ -8,8 +8,8 @@ angular.module("MyApp").controller("root.listByTime_Controller", [
 
         vm.UserData = UserData;
         vm.Schedule = Schedule;
-        vm.Channels = Schedule.Channels;
-        vm.Schedules = [];
+        vm.Channels = null;
+        vm.Schedules = null;
 
         vm.ChangeFilterPast = ChangeFilterPast;
 
@@ -26,6 +26,10 @@ angular.module("MyApp").controller("root.listByTime_Controller", [
 
         function populateSchedules() {
             vm.Schedules = UserData.FilterPast ? Schedule.FilterPastShows() : Schedule.Schedules;
+            vm.Channels = _(vm.Schedules).
+                map(function (s) { return s.ChannelCode; }).
+                uniq().
+                value();
             var currentTime = moment();
             _.each(vm.Schedules, function (schedule) {
                 schedule.isPast = moment(schedule.Until) < currentTime;

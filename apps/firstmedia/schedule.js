@@ -4,7 +4,6 @@ angular.module("MyApp").factory("Schedule", [
     "API",
     function (API) {
         var svc = {};
-        svc.Channels = [];
         svc.Schedules = [];
 
         svc.Refresh = Refresh;
@@ -19,7 +18,6 @@ angular.module("MyApp").factory("Schedule", [
             request.FakeData = FakeData;
 
             var promise = API.Schedules(request).then(function (response) {
-                svc.Channels = response.data.Channels;
                 svc.Schedules = response.data.Schedules;
 
                 var idx = 1;
