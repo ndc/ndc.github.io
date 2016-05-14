@@ -45,7 +45,7 @@ angular.module("MyApp").factory("UserData", [
             ];
             userdata.FilterPast = true;
             userdata.SelectedFavorite = 0;
-            userdata.SelectedView = "ListByTime";
+            userdata.SelectedView = "newspaper";
         };
     }
 ]);
