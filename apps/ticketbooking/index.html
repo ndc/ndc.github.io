@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="author" href="https://plus.google.com/100372837324190003490" />
     <title>My Take on an Effective Ticket Booking Interface</title>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -19,7 +21,8 @@
                 <h2>My Take on an Effective Ticket Booking Interface</h2>
                 <p>
                     By Endy Tjahjono. Last update 8 December 2013.
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.endycahyono.com/apps/ticketbooking/" data-via="endy_tj">Tweet</a>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.endycahyono.com/apps/ticketbooking/"
+                        data-via="endy_tj">Tweet</a>
                 </p>
             </div>
         </div>
@@ -60,11 +63,11 @@
                 max-width: 800px;
             }
         }
-
+        
         .isprocessing {
             cursor: progress;
         }
-
+        
         .myanim.ng-enter,
         .myanim.ng-leave {
             -moz-transition: 1s linear;
@@ -72,17 +75,17 @@
             -webkit-transition: 1s linear;
             transition: 1s linear;
         }
-
-            .myanim.ng-enter,
-            .myanim.ng-leave.ng-leave-active {
-                opacity: 0;
-            }
-
-                .myanim.ng-enter.ng-enter-active,
-                .myanim.ng-leave {
-                    opacity: 1;
-                }
-
+        
+        .myanim.ng-enter,
+        .myanim.ng-leave.ng-leave-active {
+            opacity: 0;
+        }
+        
+        .myanim.ng-enter.ng-enter-active,
+        .myanim.ng-leave {
+            opacity: 1;
+        }
+        
         .modal {
             display: block;
         }
@@ -100,20 +103,19 @@
         ga('send', 'pageview');
     </script>
 
-    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+    <script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
+    </script>
 
     <script type="text/javascript" id="inspectletjs">
         window.__insp = window.__insp || [];
-        __insp.push(['wid', 1830692624]);
-        (function () {
-            function __ldinsp() { var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
-            if (window.attachEvent) {
-                window.attachEvent('onload', __ldinsp);
-            } else {
-                window.addEventListener('load', __ldinsp, false);
-            }
-        })();
+__insp.push(['wid', 1830692624]);
+(function() {
+function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+})();
     </script>
 
 </body>
+
 </html>
