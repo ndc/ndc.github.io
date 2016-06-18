@@ -51,6 +51,11 @@ angular.module("MyApp").controller("root_Controller", [
                     UserData.SaveToStorage();
                     switchToView(viewName);
                     break;
+                case "masterDetail":
+                    $state.go("root.masterDetail", {
+                        ShowDate: moment(vm.ShowDate).format("YYYY-MM-DD")
+                    }, { reload: true });
+                    break;
                 default:
                     break;
             };

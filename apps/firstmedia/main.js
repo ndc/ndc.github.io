@@ -56,5 +56,11 @@ angular.module("MyApp").config([
             controller: "root.grid_Controller as vm"
         });
 
+        $stateProvider.state("root.masterDetail", {
+            url: "/masterdetail/{ShowDate}",
+            templateUrl: "root.masterDetail_Template.html",
+            controller: "root.masterDetail_Controller as vm"
+        });
+
     }
 ]);

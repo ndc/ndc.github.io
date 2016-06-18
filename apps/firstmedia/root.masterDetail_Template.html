@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div ng-repeat="channel in vm.Channels" class="radio">
+                <label>
+                    <input ng-model="vm.Channel" ng-value="channel" ng-change="vm.ChangeChannel()" type="radio" name="selectedChannel" >
+                    {{channel.Code}} {{channel.Number}}
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <table class="table table-striped">
+                <tbody>
+                    <tr ng-repeat="show in vm.Schedules">
+                        <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
+                        <td>
+                            <p><em>{{show.Title}}</em></p>
+                            <p>{{show.EpiTitle}}</p>
+                            <p>{{show.Description}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -51,6 +51,10 @@
             Newspaper
             <i ng-show="vm.UserData.SelectedView == 'newspaper'" class="fa fa-check" aria-hidden="true"></i>
         </button>
+        <button ng-click="vm.SwitchView('masterDetail')" type="button" class="btn btn-default">
+            Master Detail
+            <i ng-show="vm.UserData.SelectedView == 'masterDetail'" class="fa fa-check" aria-hidden="true"></i>
+        </button>
         <button ng-click="vm.SwitchView('listByTime')" type="button" class="btn btn-default">
             List by Time
             <i ng-show="vm.UserData.SelectedView == 'listByTime'" class="fa fa-check" aria-hidden="true"></i>
