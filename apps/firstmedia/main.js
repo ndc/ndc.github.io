@@ -6,7 +6,8 @@ angular.module("MyApp", [
     "Notification",
     "ErrorHandler",
     "BusyIndicator",
-    "LocalStorage"
+    "LocalStorage",
+    "WindowUtility"
 ]);
 
 angular.module("MyApp").run([

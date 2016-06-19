@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").controller("root.masterDetail_Controller", [
-    "$state", "API", "BusyIndicatorHandler", "ErrorHandler",
-    function ($state, API, BusyIndicatorHandler, ErrorHandler) {
+    "$state", "API", "BusyIndicatorHandler", "ErrorHandler", "FocusHelper",
+    function ($state, API, BusyIndicatorHandler, ErrorHandler, FocusHelper) {
 
         var vm = this;
 
@@ -49,6 +49,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
                     value();
                 if (vm.Schedules.length > 0) {
                     vm.Channel.Number = vm.Schedules[0].ChannelNumber;
+                    FocusHelper.scrollIntoId("topSchedule");
                 };
             });
         };

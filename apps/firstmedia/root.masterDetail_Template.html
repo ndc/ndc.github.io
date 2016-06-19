@@ -9,10 +9,11 @@
             </div>
         </div>
         <div class="col-sm-9">
-            <table class="table table-striped">
+            <table class="table table-striped" id="topSchedule">
+                <caption>{{vm.Channel.Code}} {{vm.Channel.Number}} {{vm.ShowDate | date:"EEE d MMM yyyy"}}</caption>
                 <tbody>
-                    <tr ng-repeat="show in vm.Schedules">
-                        <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
+                    <tr ng-repeat="show in vm.Schedules" tabindex="0">
+                        <td>{{show.ShowTime | date:"EEE HH:mm"}} - {{show.Until | date:"HH:mm"}}</td>
                         <td>
                             <p><em>{{show.Title}}</em></p>
                             <p>{{show.EpiTitle}}</p>
