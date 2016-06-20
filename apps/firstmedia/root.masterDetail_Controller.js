@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").controller("root.masterDetail_Controller", [
-    "$state", "API", "BusyIndicatorHandler", "ErrorHandler", "FocusHelper",
-    function ($state, API, BusyIndicatorHandler, ErrorHandler, FocusHelper) {
+    "$state", "$q", "API", "BusyIndicatorHandler", "ErrorHandler", "FocusHelper",
+    function ($state, $q, API, BusyIndicatorHandler, ErrorHandler, FocusHelper) {
 
         var vm = this;
 
@@ -11,6 +11,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
             moment({ hour: 0 }).toDate();
         vm.Channels = null;
         vm.Channel = null;
+        vm.AllSchedules = null;
         vm.Schedules = null;
 
         vm.ChangeChannel = ChangeChannel;
@@ -22,36 +23,49 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
 
             API.Channels({ FakeData: false }).then(function (response) {
                 vm.Channels = response.data;
+
+                var channelChunked = _(vm.Channels).
+                    chunk(20).
+                    map(function (batch) {
+                        var request = {};
+                        request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
+                        request.Channels = _.map(batch, function (channel) { return channel.Code; });
+                        request.FakeData = false;
+
+                        return API.Schedules(request);
+                    }).
+                    value();
+
+                $q.all(channelChunked).then(function (responses) {
+                    vm.AllSchedules = _(responses).
+                        map(function (response) { return response.data.Schedules; }).
+                        flatten().
+                        value();
+
+                    _.each(vm.Channels, function (channel) {
+                        var sched = _.find(vm.AllSchedules, function (sched) { return sched.ChannelCode == channel.Code; });
+                        if (!!sched) {
+                            channel.Number = sched.ChannelNumber;
+                        };
+                    });
+                });
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });
         };
 
         function ChangeChannel() {
-            BusyIndicatorHandler.show();
-
-            populateSchedules().finally(function () {
-                BusyIndicatorHandler.hide();
-            });
-        };
-
-        function populateSchedules() {
             var currentTime = moment();
 
-            var request = {};
-            request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
-            request.Channels = [vm.Channel.Code];
-            request.FakeData = false;
+            vm.Schedules = _(vm.AllSchedules).
+                filter(function (show) {
+                    var metCondition = show.ChannelCode == vm.Channel.Code &&
+                        moment(show.Until) > currentTime;
+                    return metCondition;
+                }).
+                value();
 
-            return API.Schedules(request).then(function (response) {
-                vm.Schedules = _(response.data.Schedules).
-                    filter(function (show) { return moment(show.Until) > currentTime; }).
-                    value();
-                if (vm.Schedules.length > 0) {
-                    vm.Channel.Number = vm.Schedules[0].ChannelNumber;
-                    FocusHelper.scrollIntoId("topSchedule");
-                };
-            });
+            FocusHelper.scrollIntoId("topSchedule");
         };
 
     }

@@ -9,7 +9,7 @@ angular.module("MyApp").factory("API", [
         endpoints.Channels = Channels;
 
         var rootUrl = "https://uspcahharhjy5eb4.apphb.com";
-        //var rootUrl = "http://localhost:55429";
+        // var rootUrl = "http://localhost:55429";
 
         return endpoints;
 
