@@ -36,7 +36,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
                     }).
                     value();
 
-                $q.all(channelChunked).then(function (responses) {
+                return $q.all(channelChunked).then(function (responses) {
                     vm.AllSchedules = _(responses).
                         map(function (response) { return response.data.Schedules; }).
                         flatten().
