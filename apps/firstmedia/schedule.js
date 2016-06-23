@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").factory("Schedule", [
-    "API",
-    function (API) {
+    "API", "$q",
+    function (API, $q) {
         var svc = {};
         svc.Schedules = [];
 
@@ -12,13 +12,23 @@ angular.module("MyApp").factory("Schedule", [
         return svc;
 
         function Refresh(ShowDate, Channels, FakeData) {
-            var request = {};
-            request.ShowDate = ShowDate;
-            request.Channels = Channels;
-            request.FakeData = FakeData;
+            var channelsChunked = _(Channels).
+                chunk(10).
+                map(function (batch) {
+                    var request = {};
+                    request.ShowDate = ShowDate;
+                    request.Channels = batch;
+                    request.FakeData = FakeData;
 
-            var promise = API.Schedules(request).then(function (response) {
-                svc.Schedules = response.data.Schedules;
+                    return API.Schedules(request);
+                }).
+                value();
+
+            var promise = $q.all(channelsChunked).then(function (responses) {
+                svc.Schedules = _(responses).
+                    map(function (response) { return response.data.Schedules; }).
+                    flatten().
+                    value();
 
                 var idx = 1;
                 _.each(svc.Schedules, function (schedule) {

@@ -25,7 +25,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
                 vm.Channels = response.data;
 
                 var channelChunked = _(vm.Channels).
-                    chunk(20).
+                    chunk(10).
                     map(function (batch) {
                         var request = {};
                         request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
