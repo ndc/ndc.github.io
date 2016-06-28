@@ -24,31 +24,35 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
             API.Channels({ FakeData: false }).then(function (response) {
                 vm.Channels = response.data;
 
-                var channelChunked = _(vm.Channels).
-                    chunk(10).
-                    map(function (batch) {
-                        var request = {};
-                        request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
-                        request.Channels = _.map(batch, function (channel) { return channel.Code; });
-                        request.FakeData = false;
+                var channelChunked = _.chunk(vm.Channels, 20);
 
-                        return API.Schedules(request);
-                    }).
-                    value();
+                var chain = _.reduce(channelChunked, function (mainChain, channelBatch) {
+                    var request = {};
+                    request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
+                    request.Channels = _.map(channelBatch, function (channel) {
+                        return channel.Code;
+                    });
+                    request.FakeData = false;
 
-                return $q.all(channelChunked).then(function (responses) {
-                    vm.AllSchedules = _(responses).
-                        map(function (response) { return response.data.Schedules; }).
-                        flatten().
-                        value();
+                    return mainChain.then(function (schedules) {
+                        return API.Schedules(request).then(function (response) {
+                            return schedules.concat(response.data.Schedules);
+                        });
+                    });
+                }, $q.when([])).then(function (schedules) {
+                    vm.AllSchedules = schedules;
 
                     _.each(vm.Channels, function (channel) {
-                        var sched = _.find(vm.AllSchedules, function (sched) { return sched.ChannelCode == channel.Code; });
+                        var sched = _.find(vm.AllSchedules, function (sched) {
+                            return sched.ChannelCode == channel.Code;
+                        });
                         if (!!sched) {
                             channel.Number = sched.ChannelNumber;
                         };
                     });
                 });
+
+                return chain;
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });

@@ -12,23 +12,21 @@ angular.module("MyApp").factory("Schedule", [
         return svc;
 
         function Refresh(ShowDate, Channels, FakeData) {
-            var channelsChunked = _(Channels).
-                chunk(10).
-                map(function (batch) {
-                    var request = {};
-                    request.ShowDate = ShowDate;
-                    request.Channels = batch;
-                    request.FakeData = FakeData;
+            var channelsChunked = _.chunk(Channels, 20);
 
-                    return API.Schedules(request);
-                }).
-                value();
+            var promise = _.reduce(channelsChunked, function (chain, chunk) {
+                var request = {};
+                request.ShowDate = ShowDate;
+                request.Channels = chunk;
+                request.FakeData = FakeData;
 
-            var promise = $q.all(channelsChunked).then(function (responses) {
-                svc.Schedules = _(responses).
-                    map(function (response) { return response.data.Schedules; }).
-                    flatten().
-                    value();
+                return chain.then(function (schedules) {
+                    return API.Schedules(request).then(function (response) {
+                        return schedules.concat(response.data.Schedules);
+                    });
+                });
+            }, $q.when([])).then(function (schedules) {
+                svc.Schedules = schedules;
 
                 var idx = 1;
                 _.each(svc.Schedules, function (schedule) {
