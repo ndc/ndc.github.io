@@ -16,7 +16,7 @@ angular.module("MyApp").factory("API", [
         function Schedules(params) {
             var cmd = $http({
                 method: "POST",
-                url: rootUrl + "/firstmedia/schedules",
+                url: rootUrl + "/firstmedia/schedule",
                 data: params
             });
             return cmd;
@@ -25,7 +25,7 @@ angular.module("MyApp").factory("API", [
         function Channels(params) {
             var cmd = $http({
                 method: "GET",
-                url: rootUrl + "/firstmedia/channels",
+                url: rootUrl + "/firstmedia/channel",
                 params: params
             });
             return cmd;

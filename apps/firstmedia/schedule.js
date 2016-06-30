@@ -22,7 +22,7 @@ angular.module("MyApp").factory("Schedule", [
 
                 return chain.then(function (schedules) {
                     return API.Schedules(request).then(function (response) {
-                        return schedules.concat(response.data.Schedules);
+                        return schedules.concat(response.data);
                     });
                 });
             }, $q.when([])).then(function (schedules) {
