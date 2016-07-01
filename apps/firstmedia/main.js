@@ -33,6 +33,12 @@ angular.module("MyApp").config([
             controller: "FavoriteEdit_Controller as vm"
         });
 
+        $stateProvider.state("toolBox", {
+            url: "/toolbox",
+            templateUrl: "toolBox_Template.html",
+            controller: "toolBox_Controller as vm"
+        });
+
         $stateProvider.state("root.listByTime", {
             url: "/listbytime",
             templateUrl: "root.listByTime_Template.html",
