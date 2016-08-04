@@ -8,7 +8,7 @@ angular.module("MyApp").controller("root.grid_Controller", [
 
         vm.UserData = UserData;
         vm.Schedules = null;
-        vm.ChannelCodes = null;
+        vm.Channels = null;
         vm.Milestones = null;
         vm.ShowTimeRows = null;
         vm.ChannelRows = null;
@@ -44,23 +44,23 @@ angular.module("MyApp").controller("root.grid_Controller", [
                 sortBy(function (showtime) { return showtime; }).
                 value();
 
-            vm.ChannelCodes = _(vm.Schedules).
-                map(function (s) { return s.ChannelCode; }).
+            vm.Channels = _(vm.Schedules).
+                map(function (s) { return s.Channel; }).
                 uniq().
-                sortBy(function (c) { return c; }).
+                sortBy(function (c) { return c.Name; }).
                 value();
 
             vm.ShowTimeRows = [];
             for (var timeIdx = 0; timeIdx < vm.Milestones.length; timeIdx++) {
                 var row = [];
                 vm.ShowTimeRows.push(row);
-                for (var channelIdx = 0; channelIdx < vm.ChannelCodes.length; channelIdx++) {
+                for (var channelIdx = 0; channelIdx < vm.Channels.length; channelIdx++) {
                     var col = {};
                     row.push(col);
                     var thetime = vm.Milestones[timeIdx];
-                    var channelCode = vm.ChannelCodes[channelIdx];
+                    var channel = vm.Channels[channelIdx];
                     var currentShow = _.find(vm.Schedules, function (show) {
-                        return show.ChannelCode == channelCode &&
+                        return show.ChannelCode == channel.Code &&
                             show.ShowTime <= thetime &&
                             show.Until > thetime;
                     });

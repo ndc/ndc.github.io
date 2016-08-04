@@ -15,16 +15,14 @@
                 <th>Time</th>
                 <th>Channel</th>
                 <th>Title</th>
-                <th>Episode</th>
                 <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="show in vm.Schedules" ng-class="{'text-muted': show.isPast}">
                 <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
-                <td>{{show.ChannelCode}} ({{show.ChannelNumber}})</td>
+                <td>{{show.Channel.Name}} ({{show.Channel.Number}})</td>
                 <td>{{show.Title}}</td>
-                <td>{{show.EpiTitle}}</td>
                 <td>{{show.Description}}</td>
             </tr>
         </tbody>

@@ -40,7 +40,10 @@ angular.module("MyApp").factory("UserData", [
                 },
                 {
                     Code: "favorite2",
-                    Channels: ["disney-hd", "warner-tv-hd", "universal-hd"]
+                    Channels: [
+                        { Code: "LYS000000108", Name: "Disney Ch", Number: 108, LogoURL: "http://202.73.98.253/pics/EPG/disney.png" },
+                        { Code: "LYS000000259", Name: "Warner TV", Number: 259, LogoURL: "http://202.73.98.253/pics/EPG/warnertv.png" }
+                    ]
                 }
             ];
             userdata.FilterPast = true;

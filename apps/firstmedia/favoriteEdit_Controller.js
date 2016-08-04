@@ -34,10 +34,15 @@ angular.module("MyApp").controller("FavoriteEdit_Controller", [
             BusyIndicatorHandler.show();
 
             API.Channels(request).then(function (response) {
-                vm.Channels = _.map(response.data, function (c) {
-                    var selected = _.includes(vm.Favorite.Channels, c.Code);
-                    return [c, selected];
-                })
+                vm.Channels = _(response.data).
+                    orderBy(["Name", "Code"]).
+                    map(function (c) {
+                        var selected = _.includes(
+                            _.map(vm.Favorite.Channels, function (ch) { return ch.Code; }),
+                            c.Code);
+                        return [c, selected];
+                    }).
+                    value();
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });
@@ -99,12 +104,8 @@ angular.module("MyApp").controller("FavoriteEdit_Controller", [
 
         function GetSelected() {
             var slct = _(vm.Channels).
-                filter(function (c) {
-                    return c[1] == true;
-                }).
-                map(function (c) {
-                    return c[0].Code
-                }).
+                filter(function (c) { return c[1] == true; }).
+                map(function (ar) { return ar[0]; }).
                 value();
             return slct;
         };

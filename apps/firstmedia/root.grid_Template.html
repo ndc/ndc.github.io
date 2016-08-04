@@ -22,14 +22,14 @@
     </thead>
     <tbody>
         <tr ng-repeat="(channelIdx, row) in vm.ChannelRows">
-            <td>{{vm.ChannelCodes[channelIdx]}}</td>
+            <td>{{vm.Channels[channelIdx].Name}}</td>
             <td ng-repeat="(timeIdx, col) in row" ng-if="col.Generate" colspan="{{col.Show.Span}}" ng-class="{'text-muted': col.Show.isPast}">
                 <a ng-if="!!col.Show" ng-click="vm.ShowDetail(col.Show)">
                     {{col.Show.Title}}
                 </a>
                 <br/>
                 <span ng-if="!!col.Show">
-                    {{col.Show.ChannelCode}} ({{col.Show.ChannelNumber}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
+                    {{col.Show.Channel.Name}} ({{col.Show.Channel.Number}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
                 </span>
                 <br/>
             </td>

@@ -10,12 +10,11 @@
     </div>
 
     <table ng-repeat="channel in vm.Channels" class="table table-striped">
-        <caption>{{channel}}</caption>
+        <caption>{{channel.Name}} ({{channel.Number}})</caption>
         <thead>
             <tr>
                 <th>Time</th>
                 <th>Title</th>
-                <th>Episode</th>
                 <th>Description</th>
                 <th class="text-right">Length</th>
             </tr>
@@ -24,7 +23,6 @@
             <tr ng-repeat="show in vm.Schedules | filter:{ChannelCode: channel.Code}" ng-class="{'text-muted': show.isPast}">
                 <td>{{show.ShowTime | date:"EEE HH:mm"}}</td>
                 <td>{{show.Title}}</td>
-                <td>{{show.EpiTitle}}</td>
                 <td>{{show.Description}}</td>
                 <td class="text-right">{{show.Length}}</td>
             </tr>

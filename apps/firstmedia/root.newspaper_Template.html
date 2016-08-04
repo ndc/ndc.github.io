@@ -15,8 +15,8 @@
     <thead>
         <tr>
             <th>Time</th>
-            <th ng-repeat="cs in vm.ChannelCodes">
-                {{cs}}
+            <th ng-repeat="cs in vm.Channels">
+                {{cs.Name}}
             </th>
         </tr>
     </thead>
@@ -30,7 +30,7 @@
                 </a>
                 <br/>
                 <span ng-if="!!col.Show">
-                    {{col.Show.ChannelCode}} ({{col.Show.ChannelNumber}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
+                    {{col.Show.Channel.Name}} ({{col.Show.Channel.Number}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
                 </span>
             </td>
         </tr>

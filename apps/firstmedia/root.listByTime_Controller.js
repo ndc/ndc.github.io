@@ -27,7 +27,7 @@ angular.module("MyApp").controller("root.listByTime_Controller", [
         function populateSchedules() {
             vm.Schedules = UserData.FilterPast ? Schedule.FilterPastShows() : Schedule.Schedules;
             vm.Channels = _(vm.Schedules).
-                map(function (s) { return s.ChannelCode; }).
+                map(function (s) { return s.Channel; }).
                 uniq().
                 value();
             var currentTime = moment();

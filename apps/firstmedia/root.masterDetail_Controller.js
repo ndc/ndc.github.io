@@ -22,35 +22,37 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
             BusyIndicatorHandler.show();
 
             API.Channels({ FakeData: false }).then(function (response) {
-                vm.Channels = response.data;
+                vm.Channels = _.orderBy(response.data, ["Name", "Code"]);
 
-                var channelChunked = _.chunk(vm.Channels, 20);
+                var channelChunked = _(vm.Channels).
+                    map(function (ch) { return ch.Code; }).
+                    chunk(20).
+                    value();
 
-                var chain = _.reduce(channelChunked, function (mainChain, channelBatch) {
-                    var request = {};
-                    request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
-                    request.Channels = _.map(channelBatch, function (channel) {
-                        return channel.Code;
-                    });
-                    request.FakeData = false;
+                var chain = _.reduce(
+                    channelChunked,
+                    function (mainChain, channelBatch) {
+                        var request = {};
+                        request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
+                        request.Channels = channelBatch;
+                        request.FakeData = false;
 
-                    return mainChain.then(function (schedules) {
-                        return API.Schedules(request).then(function (response) {
-                            return schedules.concat(response.data);
+                        return mainChain.then(function (schedules) {
+                            return API.Schedules(request).then(function (response) {
+                                _.each(response.data.Shows, function (show) {
+                                    show.Channel = _.find(response.data.Channels, function (ch) {
+                                        return ch.Code == show.ChannelCode;
+                                    });
+                                });
+
+                                return schedules.concat(response.data.Shows);
+                            });
                         });
+                    },
+                    $q.when([])).
+                    then(function (schedules) {
+                        vm.AllSchedules = schedules;
                     });
-                }, $q.when([])).then(function (schedules) {
-                    vm.AllSchedules = schedules;
-
-                    _.each(vm.Channels, function (channel) {
-                        var sched = _.find(vm.AllSchedules, function (sched) {
-                            return sched.ChannelCode == channel.Code;
-                        });
-                        if (!!sched) {
-                            channel.Number = sched.ChannelNumber;
-                        };
-                    });
-                });
 
                 return chain;
             }).catch(ErrorHandler.HttpNotify()).finally(function () {

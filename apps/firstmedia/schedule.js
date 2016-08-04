@@ -12,27 +12,39 @@ angular.module("MyApp").factory("Schedule", [
         return svc;
 
         function Refresh(ShowDate, Channels, FakeData) {
-            var channelsChunked = _.chunk(Channels, 20);
+            var channelsChunked = _(Channels).
+                map(function (ch) { return ch.Code; }).
+                chunk(20).
+                value();
 
-            var promise = _.reduce(channelsChunked, function (chain, chunk) {
-                var request = {};
-                request.ShowDate = ShowDate;
-                request.Channels = chunk;
-                request.FakeData = FakeData;
+            var promise = _.reduce(
+                channelsChunked,
+                function (chain, chunk) {
+                    var request = {};
+                    request.ShowDate = ShowDate;
+                    request.Channels = chunk;
+                    request.FakeData = FakeData;
 
-                return chain.then(function (schedules) {
-                    return API.Schedules(request).then(function (response) {
-                        return schedules.concat(response.data);
+                    return chain.then(function (schedules) {
+                        return API.Schedules(request).then(function (response) {
+                            _.each(response.data.Shows, function (show) {
+                                show.Channel = _.find(response.data.Channels, function (ch) {
+                                    return ch.Code == show.ChannelCode;
+                                });
+                            });
+                            return schedules.concat(response.data.Shows);
+                        });
+                    });
+                },
+                $q.when([])).
+                then(function (schedules) {
+                    svc.Schedules = schedules;
+
+                    var idx = 1;
+                    _.each(svc.Schedules, function (schedule) {
+                        schedule.ID = idx++;
                     });
                 });
-            }, $q.when([])).then(function (schedules) {
-                svc.Schedules = schedules;
-
-                var idx = 1;
-                _.each(svc.Schedules, function (schedule) {
-                    schedule.ID = idx++;
-                });
-            });
 
             return promise;
         };
