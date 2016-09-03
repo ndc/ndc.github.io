@@ -3,6 +3,7 @@ title: Setting Up RavenDB in Nancy
 date: 2013-06-24
 layout: blogdetail
 published: true
+redirect-from: "/article/setting-up-ravendb-in-nancy/"
 ---
 
 I've been dabbling with [Nancy](http://nancyfx.org/) and [RavenDB](http://ravendb.net/) and here is my implementation notes when trying to find the best way to initialize RavenDB's DocumentStore and DocumentSession in Nancy.

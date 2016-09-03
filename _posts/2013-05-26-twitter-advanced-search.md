@@ -3,6 +3,7 @@ title: Twitter Advanced Search
 date: 2013-05-26
 layout: blogdetail
 published: true
+redirect-from: "/article/twitter-advanced-search/"
 ---
 
 Have you ever tried [Twitter Advanced Search](https://twitter.com/search-advanced)?

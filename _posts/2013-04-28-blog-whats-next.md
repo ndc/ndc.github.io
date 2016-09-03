@@ -3,6 +3,7 @@ title: What's Next for the Website?
 date: 2013-04-28 22:30:00
 layout: blogdetail
 published: true
+redirect-from: "/article/blog-whats-next/"
 ---
 
 So, what's next for the website?

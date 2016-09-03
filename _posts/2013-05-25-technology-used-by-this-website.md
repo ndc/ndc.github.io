@@ -3,6 +3,7 @@ title: Technology Used by This Website
 date: 2013-05-25 00:00:00
 layout: blogdetail
 published: true
+redirect-from: "/article/technology-used-by-this-website/"
 ---
 
 Oh, the amount of stuff that I have to learn to produce this website!

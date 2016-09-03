@@ -3,6 +3,7 @@ title: Sitting in a Car, Listening to a Song
 date: 2014-08-20 21:51:00
 layout: blogdetail
 published: true
+redirect-from: "/article/sitting-in-a-car-listening-to-a-song/"
 ---
 
 You are sitting in a car travelling at 120 km/hour, listening to a song that lasts for 5 minutes. At the end of the song you would have moved TEN KILOMETERS from the start!

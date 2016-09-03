@@ -3,6 +3,7 @@ title: My First Domain
 date: 2013-04-29
 layout: blogdetail
 published: true
+redirect-from: "/article/my-first-domain/"
 ---
 
 Just bought a domain for the site from namecheap. Before that I found an article about [how a domain registrar can cheat its customers](http://www.domainwarning.com/).

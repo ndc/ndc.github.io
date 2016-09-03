@@ -3,6 +3,7 @@ title: Angular.js Annotation Surprise
 date: 2014-08-27 13:49:00
 layout: blogdetail
 published: true
+redirect-from: "/article/angularjs-annotation-surprise/"
 ---
 
 Pop quiz: what do you think the page below will look like when run?

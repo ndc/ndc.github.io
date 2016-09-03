@@ -3,6 +3,7 @@ title: Nancy from an MVC Developer Point of View, Revision 2
 date: 2013-06-27
 layout: blogdetail
 published: true
+redirect-from: "/article/nancy-from-mvc-dev/"
 ---
 
 I am currently learning [Nancy](https://github.com/NancyFx/Nancy) and this is my braindump. If you don't yet know what Nancy is, [Nancy Homepage](http://nancyfx.org/) provides a good explanation. I want to try it because it looks more compositional than ASP.NET MVC.

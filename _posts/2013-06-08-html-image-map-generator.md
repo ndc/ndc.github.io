@@ -3,6 +3,7 @@ title: HTML Image Map Generator
 date: 2013-06-08
 layout: blogdetail
 published: true
+redirect-from: "/article/html-image-map-generator/"
 ---
 
 In HTML, [image map](http://en.wikipedia.org/wiki/Image_map) is used to add 'hot spots' to an image. A hot spot can have a description and a URL, and when a user clicks it, the user's browser will go to the defined URL, just like a link.

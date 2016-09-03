@@ -3,6 +3,7 @@ title: The Many Ways to Call Linq GroupBy
 date: 2013-06-25
 layout: blogdetail
 published: true
+redirect-from: "/article/the-many-ways-to-call-linq-groupby/"
 ---
 
 I keep forgetting Linq's GroupBy syntaxes. Maybe if I write it down I will remember it better.
