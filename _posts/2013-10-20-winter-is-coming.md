@@ -3,7 +3,7 @@ title: Winter is Coming
 date: 2013-10-20
 layout: blogdetail
 published: true
-redirect-from: "/article/winter-is-coming/"
+redirect_from: "/article/winter-is-coming/"
 ---
 
 Lahir di negara tropis, sampai umur 38 hidup di negara tropis, dan November 2013 nanti mau berkunjung ke negara subtropis untuk pertama kalinya, dan di sana sedang musim dingin :)

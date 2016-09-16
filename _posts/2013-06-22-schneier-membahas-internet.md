@@ -3,7 +3,7 @@ title: Schneier Membahas Internet
 date: 2013-06-22-schneier-membahas-internet
 layout: blogdetail
 published: true
-redirect-from: "/article/schneier-membahas-internet/"
+redirect_from: "/article/schneier-membahas-internet/"
 ---
 
 Russ Roberts mengundang [Bruce Schneier](http://www.schneier.com/) untuk berbicara di [talk show-nya](http://www.econtalk.org/archives/2013/06/schneier_on_pow.html) mengenai perebutan kekuasaan di internet.

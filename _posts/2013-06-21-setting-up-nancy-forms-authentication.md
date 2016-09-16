@@ -3,7 +3,7 @@ title: Setting Up Nancy Forms Authentication
 date: 2013-06-21
 layout: blogdetail
 published: true
-redirect-from: "/article/setting-up-nancy-forms-authentication/"
+redirect_from: "/article/setting-up-nancy-forms-authentication/"
 ---
 
 This is my implementation notes when I was setting up [forms authentication](https://github.com/NancyFx/Nancy/wiki/Forms-Authentication) in a web app project that uses [Nancy](http://nancyfx.org/).
