@@ -3,7 +3,6 @@ title: Operator Precedence of ??
 date: 2013-08-19
 layout: blogdetail
 published: true
-redirect_from: "/article/operator-precedence-of-null-coalescing-operator/"
 ---
 
 This bit me today:

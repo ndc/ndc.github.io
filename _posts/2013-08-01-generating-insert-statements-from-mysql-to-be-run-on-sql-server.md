@@ -3,7 +3,6 @@ title: Generating Insert Statements from MYSQL to be Run on SQL Server
 date: 2013-08-01
 layout: blogdetail
 published: true
-redirect_from: "/article/generating-insert-statements-from-mysql-to-be-run-on-sql-server/"
 ---
 
 I need to copy data from a table in a MYSQL database to a table with the same structure in a SQL Server database. Looks like my best bet to do it is to use MYSQLDUMP to generate insert statements, then run those insert statements in SQL Server.

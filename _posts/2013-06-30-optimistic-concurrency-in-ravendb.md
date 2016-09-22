@@ -3,7 +3,6 @@ title: Optimistic Concurrency in RavenDB
 date: 2013-06-30
 layout: blogdetail
 published: true
-redirect_from: "/article/optimistic-concurrency-in-ravendb/"
 ---
 
 This post is my digest of [this article](http://ravendb.net/kb/16/using-optimistic-concurrency-in-real-world-scenarios).
