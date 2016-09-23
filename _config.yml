@@ -5,8 +5,11 @@ paginate: 5
 exclude: [excludethis]
 timezone: Asia/Jakarta
 
+gems:
+  - jekyll-paginate
+
 # variables
 title: NNDDCC
 tagline: Personal Website of Endy Tjahjono
-url: http://www.endycahyono.com
+url: https://www.endycahyono.com
 owner: Endy Tjahjono
