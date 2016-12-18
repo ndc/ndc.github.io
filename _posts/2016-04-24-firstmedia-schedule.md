@@ -3,7 +3,6 @@ title: FirstMedia Schedule
 date: 2016-05-06 00:00:00 +0700
 layout: blogdetail
 published: true
-redirect_from: "/article/firstmedia-schedule/"
 ---
 
 My cable and internet provider [FirstMedia](http://www.firstmedia.com/) offered me an upgrade for the internet connection from 10 Mbps to 18 Mbps, with bonus opening all TV channels for 6 months. I said yes.
