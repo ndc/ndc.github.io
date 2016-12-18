@@ -9,7 +9,7 @@ I have a diesel generator. The type is Maxtron MX 6500 D, capacity 5 KVA. Recent
 
 This is my personal note on how to change the oil so next time I'll do it myself. Perhaps other owners of MX 6500 D may find this useful too. Maybe.
 
-![diagram](http://i1144.photobucket.com/albums/o484/nnddcc/article/oilchange_zpsaurkyto4.jpg)
+<img src="http://i1144.photobucket.com/albums/o484/nnddcc/article/oilchange_zpsaurkyto4.jpg" alt="diagram" style="width: 740px;"/>
 
 First put a tray under the oil drain (under A).
 
@@ -19,20 +19,20 @@ Open the oil drain cap (see C). It needs wrench size 17 and 22 if I'm not mistak
 
 Let the oil drain.
 
-For cleaning the oil filter, open it with wrench and pliers. Wash the filter with carburetor cleaner spray, then put it back on.
+For cleaning the oil filter, open the lid (see D) with wrench and pliers. Wash the filter with carburetor cleaner spray, then put it back on.
 
 The type of oil used is SAE 40.
 
-Put funnel in the intake hole, pour a small amount of oil. Pour until the oil coming out of the drain is clean.
+Put funnel in the intake hole (B), pour a small amount of oil. Pour until the oil coming out of the drain is clean.
 
-Close drain.
+Close drain (C).
 
 Pour oil while regularly checking the oil level with the stick. If you put too much oil, you have to reopen the drain to let some oil out.
 
-Close intake cap.
+Close intake cap (B).
 
 Remove tray, dispose the oil waste.
 
 That's it for oil change.
 
-Other thing that needs to be maintained is battery. It uses 35 ampere battery. If you use lead acid battery, don't forget to check the water and refill as necessary.
+Other thing that needs to be maintained is the battery. It uses 35 ampere battery. If you use lead acid battery, don't forget to check the water and refill as necessary.
