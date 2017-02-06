@@ -1,5 +1,3 @@
-markdown: kramdown
-highlighter: rouge
 permalink: /article/:title
 paginate: 5
 exclude: [excludethis]
@@ -11,5 +9,5 @@ gems:
 # variables
 title: NNDDCC
 tagline: Personal Website of Endy Tjahjono
-url: https://www.endycahyono.com
+url: http://www.endycahyono.com
 owner: Endy Tjahjono
