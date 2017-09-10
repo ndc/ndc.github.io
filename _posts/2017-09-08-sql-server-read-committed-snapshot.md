@@ -1,8 +1,8 @@
 ---
 title: SQL Server's Read Committed Snapshot Isolation
-date: 2017-09-08 11:17:00 +0700
+date: 2017-09-10 18:16:00 +0700
 layout: blogdetail
-published: false
+published: true
 ---
 
 I got familiar with Oracle and PostgreSQL databases before I got familiar with SQL Server. When I started using SQL Server I wondered why a condition that would be fine in PostgreSQL would cause problem in SQL Server. Here is an example.
