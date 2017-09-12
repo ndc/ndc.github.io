@@ -63,12 +63,12 @@ angular.module("MyApp").controller("FavoriteEdit_Controller", [
 
             UserData.SaveToStorage();
 
-            $state.go("root");
+            $state.go("root." + UserData.SelectedView);
         };
 
         function Delete() {
             if (isNew) {
-                $state.go("root");
+                $state.go("root." + UserData.SelectedView);
                 return;
             };
 
@@ -87,7 +87,7 @@ angular.module("MyApp").controller("FavoriteEdit_Controller", [
 
             UserData.SaveToStorage();
 
-            $state.go("root");
+            $state.go("root." + UserData.SelectedView);
         };
 
         function SelectAll() {
