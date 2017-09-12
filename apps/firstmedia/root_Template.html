@@ -1,68 +1,10 @@
 <div class="container">
 
-    <form ng-submit="vm.Refresh()" class="form-inline">
-        <label>Channel Lists:</label>
-        <label class="radio-inline" ng-repeat="fav in vm.UserData.Favorites">
-            <input type="radio" ng-model="vm.UserData.SelectedFavorite"
-                ng-change="vm.ChangeFavorite()"
-                ng-value="vm.UserData.Favorites.indexOf(fav)">
-            {{fav.Code}}
-            <a ui-sref="favoriteEdit({favoriteid:vm.UserData.Favorites.indexOf(fav)})"
-                class="btn btn-default btn-xs" title="Edit">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </a>
-            &nbsp;
-        </label>
-        <a ui-sref="favoriteEdit({favoriteid:-1})" class="btn btn-default btn-xs" title="Create">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-        </a>
-        &nbsp;
-        <button ng-click="vm.Reset()" type="button" class="btn btn-danger btn-xs" title="Reset">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </button> &nbsp;
-        <div class="form-group">
-            <label for="showdate">Date:</label>
-            <input ng-model="vm.ShowDate" type="date" class="form-control" id="showdate" />
-        </div>
-        <button type="submit" class="btn btn-default">
-            Refresh
-        </button>
-    </form>
-
-    <div class="form-inline">
-        <div class="form-group">
-            <label>Channels:</label>
-            <span class="form-control-static"></span>
-            <span ng-repeat="channel in vm.UserData.Favorites[vm.UserData.SelectedFavorite].Channels" class="form-control-static">
-                {{channel.Name}}
-                &nbsp;
-            </span>
-        </div>
-    </div>
-
-    <p>&nbsp;</p>
-
-    <div class="form-inline">
-        <button ng-click="vm.SwitchView('grid')" type="button" class="btn btn-default">
-            Grid
-            <i ng-show="vm.UserData.SelectedView == 'grid'" class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button ng-click="vm.SwitchView('newspaper')" type="button" class="btn btn-default">
-            Newspaper
-            <i ng-show="vm.UserData.SelectedView == 'newspaper'" class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button ng-click="vm.SwitchView('masterDetail')" type="button" class="btn btn-default">
-            Master Detail
-            <i ng-show="vm.UserData.SelectedView == 'masterDetail'" class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button ng-click="vm.SwitchView('listByTime')" type="button" class="btn btn-default">
-            List by Time
-            <i ng-show="vm.UserData.SelectedView == 'listByTime'" class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button ng-click="vm.SwitchView('listByChannel')" type="button" class="btn btn-default">
-            List by Channel
-            <i ng-show="vm.UserData.SelectedView == 'listByChannel'" class="fa fa-check" aria-hidden="true"></i>
-        </button>
+    <div>
+        Layout &nbsp;
+        <a ui-sref="root.grid" class="btn btn-default">Grid <i ng-show="vm.UserData.SelectedView == 'grid'" class="fa fa-check" aria-hidden="true"></i></a>
+        <a ui-sref="root.newspaper" class="btn btn-default">Newspaper <i ng-show="vm.UserData.SelectedView == 'newspaper'" class="fa fa-check" aria-hidden="true"></i></a>
+        <a ui-sref="root.masterDetail" class="btn btn-default">Master Detail <i ng-show="vm.UserData.SelectedView == 'masterdetail'" class="fa fa-check" aria-hidden="true"></i></a>
     </div>
 
     <br />

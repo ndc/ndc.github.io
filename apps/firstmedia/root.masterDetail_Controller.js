@@ -1,24 +1,43 @@
 "use strict";
 
 angular.module("MyApp").controller("root.masterDetail_Controller", [
-    "$state", "$q", "API", "BusyIndicatorHandler", "ErrorHandler", "FocusHelper",
-    function ($state, $q, API, BusyIndicatorHandler, ErrorHandler, FocusHelper) {
+    "$state", "$q", "API", "UserData", "BusyIndicatorHandler", "ErrorHandler", "FocusHelper",
+    function ($state, $q, API, UserData, BusyIndicatorHandler, ErrorHandler, FocusHelper) {
 
         var vm = this;
 
-        vm.ShowDate = !!$state.params.ShowDate ?
-            moment($state.params.ShowDate).toDate() :
-            moment({ hour: 0 }).toDate();
+        vm.ShowDate = moment({ hour: 0 }).toDate();
         vm.Channels = null;
         vm.Channel = null;
         vm.AllSchedules = null;
         vm.Schedules = null;
 
         vm.ChangeChannel = ChangeChannel;
+        vm.Refresh = Refresh;
 
         Initialize();
 
         function Initialize() {
+            UserData.SelectedView = "masterdetail";
+            UserData.SaveToStorage();
+            Refresh();
+        };
+
+        function ChangeChannel() {
+            var currentTime = moment();
+
+            vm.Schedules = _(vm.AllSchedules).
+                filter(function (show) {
+                    var metCondition = show.ChannelCode == vm.Channel.Code &&
+                        moment(show.Until) > currentTime;
+                    return metCondition;
+                }).
+                value();
+
+            FocusHelper.scrollIntoId("topSchedule");
+        };
+
+        function Refresh() {
             BusyIndicatorHandler.show();
 
             API.Channels({ FakeData: false }).then(function (response) {
@@ -58,21 +77,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });
-        };
-
-        function ChangeChannel() {
-            var currentTime = moment();
-
-            vm.Schedules = _(vm.AllSchedules).
-                filter(function (show) {
-                    var metCondition = show.ChannelCode == vm.Channel.Code &&
-                        moment(show.Until) > currentTime;
-                    return metCondition;
-                }).
-                value();
-
-            FocusHelper.scrollIntoId("topSchedule");
-        };
+        }
 
     }
 ]);

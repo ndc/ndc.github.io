@@ -19,9 +19,13 @@ angular.module("MyApp").config([
     "$stateProvider", "$urlRouterProvider",
     function ($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise("/r");
+        $urlRouterProvider.otherwise(function ($injector, $location) {
+            var UserData = $injector.get("UserData");
+            return "/r/" + UserData.SelectedView;
+        });
 
         $stateProvider.state("root", {
+            abstract: true,
             url: "/r",
             templateUrl: "root_Template.html",
             controller: "root_Controller as vm"
@@ -64,7 +68,7 @@ angular.module("MyApp").config([
         });
 
         $stateProvider.state("root.masterDetail", {
-            url: "/masterdetail/{ShowDate}",
+            url: "/masterdetail",
             templateUrl: "root.masterDetail_Template.html",
             controller: "root.masterDetail_Controller as vm"
         });

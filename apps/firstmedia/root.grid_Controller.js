@@ -1,10 +1,12 @@
 "use strict";
 
 angular.module("MyApp").controller("root.grid_Controller", [
-    "$state", "UserData", "Schedule", "$uibModal",
-    function ($state, UserData, Schedule, $uibModal) {
+    "$state", "UserData", "Schedule", "$uibModal", "ErrorHandler", "BusyIndicatorHandler",
+    function ($state, UserData, Schedule, $uibModal, ErrorHandler, BusyIndicatorHandler) {
 
         var vm = this;
+
+        vm.ShowDate = moment({ hour: 0 }).toDate();
 
         vm.UserData = UserData;
         vm.Schedules = null;
@@ -16,15 +18,46 @@ angular.module("MyApp").controller("root.grid_Controller", [
         vm.ChangeFilterPast = ChangeFilterPast;
         vm.ShowDetail = ShowDetail;
 
+        vm.ChangeFavorite = ChangeFavorite;
+        vm.Reset = Reset;
+        vm.Refresh = Refresh;
+
         Initialize();
 
         function Initialize() {
-            populateSchedules();
+            var viewName = "";
+            switch ($state.current.name) {
+                case "root.grid":
+                    viewName = "grid";
+                    break;
+                case "root.newspaper":
+                    viewName = "newspaper";
+                    break;
+                default:
+                    break;
+            }
+            UserData.SelectedView = viewName;
+            UserData.SaveToStorage();
+            Refresh();
         };
 
         function ChangeFilterPast() {
             UserData.SaveToStorage();
             populateSchedules();
+        };
+
+        function Refresh() {
+            var ShowDate = !!vm.ShowDate ? moment(vm.ShowDate).format("YYYY-MM-DD") : null;
+            var Channels = UserData.Favorites[UserData.SelectedFavorite].Channels;
+            var FakeData = false;
+
+            BusyIndicatorHandler.show();
+
+            return Schedule.Refresh(ShowDate, Channels, FakeData).then(function (response) {
+                populateSchedules();
+            }).catch(ErrorHandler.HttpNotify()).finally(function () {
+                BusyIndicatorHandler.hide();
+            });
         };
 
         function populateSchedules() {
@@ -101,6 +134,15 @@ angular.module("MyApp").controller("root.grid_Controller", [
                 });
 
             return modalPromise;
+        };
+
+        function ChangeFavorite() {
+            UserData.SaveToStorage();
+        };
+
+        function Reset() {
+            UserData.Reset();
+            UserData.SaveToStorage();
         };
 
     }
