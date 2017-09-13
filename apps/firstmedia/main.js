@@ -43,18 +43,6 @@ angular.module("MyApp").config([
             controller: "toolBox_Controller as vm"
         });
 
-        $stateProvider.state("root.listByTime", {
-            url: "/listbytime",
-            templateUrl: "root.listByTime_Template.html",
-            controller: "root.listByTime_Controller as vm"
-        });
-
-        $stateProvider.state("root.listByChannel", {
-            url: "/listbychannel",
-            templateUrl: "root.listByChannel_Template.html",
-            controller: "root.listByTime_Controller as vm"
-        });
-
         $stateProvider.state("root.grid", {
             url: "/grid",
             templateUrl: "root.grid_Template.html",
