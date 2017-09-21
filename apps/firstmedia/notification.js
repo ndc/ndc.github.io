@@ -19,6 +19,7 @@ angular.module("Notification").factory("NotificationHandler", [
         };
 
         function notify(type, message) {
+            // success info warning danger
             var msg = {
                 type: type,
                 msg: message,

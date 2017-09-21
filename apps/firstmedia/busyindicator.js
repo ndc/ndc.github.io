@@ -1,13 +1,26 @@
 "use strict";
 
-angular.module("BusyIndicator", []);
+angular.module("BusyIndicator", ["Notification"]);
 
 angular.module("BusyIndicator").factory("BusyIndicatorHandler", [
-    function () {
+    "NotificationHandler", "$timeout",
+    function (NotificationHandler, $timeout) {
         var handler = {};
         handler.visible = false;
-        handler.show = function () { handler.visible = true; };
-        handler.hide = function () { handler.visible = false; };
+        handler.timer = null;
+        handler.show = function () {
+            handler.visible = true;
+            handler.timer = $timeout(function () {
+                NotificationHandler.notify("info", "Still in progress, please wait.");
+            }, 5000);
+        };
+        handler.hide = function () {
+            handler.visible = false;
+            var cancelResult = $timeout.cancel(handler.timer);
+            if (!cancelResult) {
+                NotificationHandler.notify("success", "Done.");
+            }
+        };
         return handler;
     }
 ]);
