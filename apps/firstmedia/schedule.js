@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").factory("Schedule", [
-    "API", "$q",
-    function (API, $q) {
+    "UserData", "API", "$q",
+    function (UserData, API, $q) {
         var svc = {};
         svc.Schedules = [];
 
@@ -13,7 +13,14 @@ angular.module("MyApp").factory("Schedule", [
 
         function Refresh(ShowDate, Channels, FakeData) {
             var channelsChunked = _(Channels).
-                map(function (ch) { return ch.Code; }).
+                map(function (ch) {
+                    switch (UserData.UseAPIVersion) {
+                        case 3:
+                            return ch.Number;
+                        default:
+                            return ch.Code;
+                    }
+                }).
                 chunk(20).
                 value();
 

@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("MyApp").factory("API", [
-    "$http",
-    function ($http) {
+    "UserData", "$http",
+    function (UserData, $http) {
         var endpoints = {};
 
         endpoints.Schedules = Schedules;
@@ -15,18 +15,36 @@ angular.module("MyApp").factory("API", [
         return endpoints;
 
         function Schedules(params) {
+            var url = "";
+            switch (UserData.UseAPIVersion) {
+                case 3:
+                    url = rootUrl + "/firstmedia/v3/schedule";
+                    break;
+                default:
+                    url = rootUrl + "/firstmedia/schedule";
+                    break;
+            }
             var cmd = $http({
                 method: "POST",
-                url: rootUrl + "/firstmedia/schedule",
+                url: url,
                 data: params
             });
             return cmd;
         };
 
         function Channels(params) {
+            var url = ""
+            switch (UserData.UseAPIVersion) {
+                case 3:
+                    url = rootUrl + "/firstmedia/v3/channel";
+                    break;
+                default:
+                    url = rootUrl + "/firstmedia/channel";
+                    break;
+            }
             var cmd = $http({
                 method: "GET",
-                url: rootUrl + "/firstmedia/channel",
+                url: url,
                 params: params
             });
             return cmd;

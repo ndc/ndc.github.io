@@ -22,6 +22,7 @@ angular.module("MyApp").factory("UserData", [
                 userdata.FilterPast = stor.FilterPast;
                 userdata.SelectedFavorite = stor.SelectedFavorite;
                 userdata.SelectedView = stor.SelectedView;
+                userdata.UseAPIVersion = !!stor.UseAPIVersion ? stor.UseAPIVersion : 2;
             } catch (exc) {
                 Reset();
                 SaveToStorage();
@@ -56,6 +57,7 @@ angular.module("MyApp").factory("UserData", [
             userdata.FilterPast = true;
             userdata.SelectedFavorite = 0;
             userdata.SelectedView = "newspaper";
+            userdata.UseAPIVersion = 2;
         };
     }
 ]);
