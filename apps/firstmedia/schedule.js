@@ -13,14 +13,7 @@ angular.module("MyApp").factory("Schedule", [
 
         function Refresh(ShowDate, Channels, FakeData) {
             var channelsChunked = _(Channels).
-                map(function (ch) {
-                    switch (UserData.UseAPIVersion) {
-                        case 3:
-                            return ch.Number;
-                        default:
-                            return ch.Code;
-                    }
-                }).
+                map(function (ch) { return ch.Code; }).
                 chunk(20).
                 value();
 

@@ -44,14 +44,7 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
                 vm.Channels = _.orderBy(response.data, ["Name", "Code"]);
 
                 var channelChunked = _(vm.Channels).
-                    map(function (ch) {
-                        switch (UserData.UseAPIVersion) {
-                            case 3:
-                                return ch.Number;
-                            default:
-                                return ch.Code;
-                        }
-                    }).
+                    map(function (ch) { return ch.Code; }).
                     chunk(20).
                     value();
 
