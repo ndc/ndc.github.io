@@ -10,16 +10,18 @@ angular.module("BusyIndicator").factory("BusyIndicatorHandler", [
         handler.timer = null;
         handler.show = function () {
             handler.visible = true;
-            handler.timer = $timeout(function () {
-                NotificationHandler.notify("info", "Still in progress, please wait.");
-            }, 5000);
+            if (handler.timer == null || handler.timer.$$state.status != 0) {
+                handler.timer = $timeout(function () {
+                    NotificationHandler.notify("info", "Still in progress, please wait.");
+                }, 5000);
+            }
         };
         handler.hide = function () {
             handler.visible = false;
-            var cancelResult = $timeout.cancel(handler.timer);
-            if (!cancelResult) {
+            if (handler.timer.$$state.status == 1) {
                 NotificationHandler.notify("success", "Done.");
             }
+            var cancelResult = $timeout.cancel(handler.timer);
         };
         return handler;
     }
