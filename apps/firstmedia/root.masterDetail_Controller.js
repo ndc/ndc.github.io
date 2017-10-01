@@ -6,77 +6,94 @@ angular.module("MyApp").controller("root.masterDetail_Controller", [
 
         var vm = this;
 
+        vm.UserData = UserData;
+
         vm.ShowDate = moment({ hour: 0 }).toDate();
         vm.Channels = null;
         vm.Channel = null;
-        vm.AllSchedules = null;
+        vm.AllSchedules = [];
         vm.Schedules = null;
 
         vm.ChangeChannel = ChangeChannel;
-        vm.Refresh = Refresh;
+        vm.ChangeFilterPast = ChangeFilterPast;
 
         Initialize();
 
         function Initialize() {
             UserData.SelectedView = "masterdetail";
             UserData.SaveToStorage();
-            Refresh();
-        };
 
-        function ChangeChannel() {
-            var currentTime = moment();
-
-            vm.Schedules = _(vm.AllSchedules).
-                filter(function (show) {
-                    var metCondition = show.ChannelCode == vm.Channel.Code &&
-                        moment(show.Until) > currentTime;
-                    return metCondition;
-                }).
-                value();
-
-            FocusHelper.scrollIntoId("topSchedule");
-        };
-
-        function Refresh() {
             BusyIndicatorHandler.show();
 
             API.Channels({ FakeData: false }).then(function (response) {
                 vm.Channels = _.orderBy(response.data, ["Name", "Code"]);
 
-                var channelChunked = _(vm.Channels).
-                    map(function (ch) { return ch.Code; }).
-                    chunk(20).
-                    value();
-
-                var chain = _.reduce(
-                    channelChunked,
-                    function (mainChain, channelBatch) {
-                        var request = {};
-                        request.ShowDate = moment(vm.ShowDate).format("YYYY-MM-DD");
-                        request.Channels = channelBatch;
-                        request.FakeData = false;
-
-                        return mainChain.then(function (schedules) {
-                            return API.Schedules(request).then(function (response) {
-                                _.each(response.data.Shows, function (show) {
-                                    show.Channel = _.find(response.data.Channels, function (ch) {
-                                        return ch.Code == show.ChannelCode;
-                                    });
-                                });
-
-                                return schedules.concat(response.data.Shows);
-                            });
-                        });
-                    },
-                    $q.when([])).
-                    then(function (schedules) {
-                        vm.AllSchedules = schedules;
-                    });
-
-                return chain;
+                if (vm.Channels.length > 0) {
+                    vm.Channel = vm.Channels[0];
+                    ChangeChannel();
+                }
             }).catch(ErrorHandler.HttpNotify()).finally(function () {
                 BusyIndicatorHandler.hide();
             });
+        };
+
+        function ChangeChannel() {
+            vm.Schedules = _(vm.AllSchedules)
+                .filter(function (show) { return show.ChannelCode == vm.Channel.Code; })
+                .value();
+
+            if (vm.Schedules.length < 1) {
+                getScheduleFromServer(vm.ShowDate, vm.Channel.Code).then(function (shows) {
+                    vm.AllSchedules = vm.AllSchedules.concat(shows);
+                    vm.Schedules = filterPastShows(_(vm.AllSchedules)
+                        .filter(function (show) { return show.ChannelCode == vm.Channel.Code; })
+                        .value(), UserData.FilterPast);
+                    FocusHelper.scrollIntoId("topSchedule");
+                });
+            } else {
+                vm.Schedules = filterPastShows(vm.Schedules, UserData.FilterPast);
+                FocusHelper.scrollIntoId("topSchedule");
+            }
+        };
+
+        function ChangeFilterPast() {
+            UserData.SaveToStorage();
+            ChangeChannel();
+        };
+
+        function getScheduleFromServer(showdate, channel) {
+            var request = {};
+            request.ShowDate = moment(showdate).format("YYYY-MM-DD");
+            request.Channels = [channel];
+            request.FakeData = false;
+
+            BusyIndicatorHandler.show();
+
+            return API.Schedules(request).then(function (response) {
+                _.each(response.data.Shows, function (show) {
+                    show.Channel = _.find(response.data.Channels, function (ch) {
+                        return ch.Code == show.ChannelCode;
+                    });
+                });
+
+                return response.data.Shows;
+            }).catch(ErrorHandler.HttpNotify()).finally(function () {
+                BusyIndicatorHandler.hide();
+            });
+        }
+
+        function filterPastShows(shows, filterPast) {
+            var currentTime = moment();
+
+            var filtered = _(shows)
+                .filter(function (show) {
+                    var metCondition = filterPast && moment(show.Until) > currentTime
+                        || !filterPast;
+                    return metCondition;
+                })
+                .value();
+
+            return filtered;
         }
 
     }
