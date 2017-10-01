@@ -27,7 +27,8 @@
         <div ng-repeat="channel in vm.Channels" class="checkbox">
             <label>
                 <input ng-model="channel[1]" type="checkbox">
-                {{channel[0].Name}} ({{channel[0].Code}})
+                <img ng-src="{{channel[0].LogoURL}}" class="channel-logo" />
+                {{channel[0].Name}} / {{channel[0].Code}} ({{channel[0].Number}})
             </label>
         </div>
 
@@ -46,3 +47,9 @@
     </form>
 
 </div>
+<style>
+    .channel-logo {
+        width: 100px;
+        height: 40px;
+    }
+</style>
