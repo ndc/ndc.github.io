@@ -38,26 +38,22 @@ angular.module("MyApp").factory("UserData", [
                 {
                     Code: "favorite1",
                     Channels: [
-                        { Code: "LYS000000371", Number: 371, Name: "ANTV", LogoURL: "http://202.73.98.253/pics/EPG/antv.png" },
-                        { Code: "LYS000000301", Number: 301, Name: "Berita Satu HD", LogoURL: "http://202.73.98.253/pics/EPG/beritasatu.png" },
-                        { Code: "LYS000001267", Number: 372, Name: "Indosiar", LogoURL: "http://202.73.98.253/pics/EPG/indosiar.png" },
-                        { Code: "LYS00000410", Number: 410, Name: "KOMPAS TV", LogoURL: "http://202.73.98.253/pics/EPG/kompas.png" },
-                        { Code: "LYS000000395", Number: 395, Name: "SCTV", LogoURL: "http://202.73.98.253/pics/EPG/sctv.png" },
-                        { Code: "LYS000000399", Number: 399, Name: "TVRI Nasional", LogoURL: "http://202.73.98.253/pics/EPG/tvri.png" }
+                        { Code: "berita-satu-hd", Number: 1, Name: "BERITA SATU HD", LogoURL: "http://www.firstmedia.com/files/packages/BeritasatuCh1.png" },
+                        { Code: "kompas-tv", Number: 15, Name: "KOMPAS TV", LogoURL: "http://www.firstmedia.com/files/packages/kompas-new.png" }
                     ]
                 },
                 {
                     Code: "favorite2",
                     Channels: [
-                        { Code: "LYS000000108", Name: "Disney Ch", Number: 108, LogoURL: "http://202.73.98.253/pics/EPG/disney.png" },
-                        { Code: "LYS000000259", Name: "Warner TV", Number: 259, LogoURL: "http://202.73.98.253/pics/EPG/warnertv.png" }
+                        { Code: "disney-hd", Name: "DISNEY HD", Number: 373, LogoURL: "http://www.firstmedia.com/files/packages/Disney+logo+baru.jpg" },
+                        { Code: "fox-hd", Name: "FOX HD", Number: 328, LogoURL: "http://www.firstmedia.com/files/packages/FOX Channel Logo_Mono Orange.png" }
                     ]
                 }
             ];
             userdata.FilterPast = true;
             userdata.SelectedFavorite = 0;
             userdata.SelectedView = "newspaper";
-            userdata.UseAPIVersion = 2;
+            userdata.UseAPIVersion = 3;
         };
     }
 ]);
