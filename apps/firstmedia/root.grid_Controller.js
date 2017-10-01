@@ -138,6 +138,7 @@ angular.module("MyApp").controller("root.grid_Controller", [
 
         function ChangeFavorite() {
             UserData.SaveToStorage();
+            Refresh();
         };
 
         function Reset() {
