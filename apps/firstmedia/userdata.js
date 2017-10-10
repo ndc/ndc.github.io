@@ -52,7 +52,7 @@ angular.module("MyApp").factory("UserData", [
             ];
             userdata.FilterPast = true;
             userdata.SelectedFavorite = 0;
-            userdata.SelectedView = "newspaper";
+            userdata.SelectedView = "masterdetail";
             userdata.UseAPIVersion = 3;
         };
     }
