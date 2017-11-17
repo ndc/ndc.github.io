@@ -152,6 +152,12 @@ Now modify `app.component.html`, add:
 <a uiSref="about" uiSrefActive="active">About</a>
 ```
 
+`uiSref` is a directive to generate link to a certain state.
+
+`uiSrefActive` is a directive to add specified class to the tag if it detects the specified state is active.
+
 Now you can switch back and forth between the two states by clicking the `Hello` and `About` links.
 
 And that's it for the Hello World Tutorial!
+
+[Next Step: Adding Route Resolver]({{site.baseurl}}{% post_url 2017-11-17-adding-route-resolve-to-ui-router-hello-world %})
