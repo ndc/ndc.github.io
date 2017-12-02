@@ -11,22 +11,6 @@ changefreq: daily
 <p>
 Last update {{post.date | date_to_string}}.
 </p>
-<div>
-<div style="float:left">
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{site.url}}{{post.url}}" data-text="{{post.title}}" data-via="endy_tj">Tweet</a>
-</div>
-<div style="float:left">
-<span class="g-plusone" data-size="medium" data-href="{{site.url}}{{post.url}}"></span>
-</div>
-<div style="float:left">
-<span class="fb-like" data-href="{{site.url}}{{post.url}}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="arial"></span>
-</div>
-<div style="clear:both">
-</div>
-</div>
-
-
-{{post.content}}
 
 <p><a href="{{post.url}}#disqus_thread">Comments</a></p>
 
@@ -49,7 +33,4 @@ Last update {{post.date | date_to_string}}.
 </ul>
 </div>
 
-{% include twitter-button-generator.html %}
-{% include googleplusone.html %}
-{% include facebooklike.html %}
 {% include disquscount.html %}
