@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+    <title>manipulate json</title>
+</head>
+
+<body>
+
+    <div id="result">
+    </div>
+
+    <script>
+        function loadJson(callback) {
+            var caller = new XMLHttpRequest();
+            caller.overrideMimeType("application/json");
+            caller.onreadystatechange = function () {
+                if (caller.readyState == 4 && caller.status == "200") {
+                    callback(caller.responseText);
+                }
+            }
+            caller.open("GET", "itemsSource.json", true);
+            caller.send(null);
+        }
+
+        function findDuplicate(data) {
+            var grouped = _(data)
+                .groupBy(function (d) { return d.Code })
+                .toPairs()
+                .filter(function (p) { return p[1].length > 1 })
+                .map(function (p) { return p[1] })
+                .value();
+            return grouped;
+        }
+
+        function findUnknownComponent(data) {
+            var unknown = _(data)
+                .filter(i => i.Components.length > 0)
+                .flatMap(i => i.Components.map(c => [i.Code, c]))
+                .filter(o => !data.find(c => c.Code == o[1]))
+                .value();
+            return unknown;
+        }
+
+        // loadJson(function (str) {
+        //     var j = JSON.parse(str);
+        //     var grouped = findDuplicate(j);
+        //     var plain = JSON.stringify(grouped);
+        //     document.getElementById("result").innerText = plain;
+        // });
+
+        // loadJson(raw => {
+        //     var data = JSON.parse(raw);
+        //     document.getElementById("result").innerText = JSON.stringify(findUnknownComponent(data));
+        // });
+
+        loadJson(function (raw) {
+            var data = JSON.parse(raw);
+            data.forEach(item => {
+                var usedIn = data
+                    .filter(function (parent) { return parent.Components.includes(item.Code); })
+                    .map(function (parent) {
+                        return {
+                            Code: parent.Code,
+                            Name: parent.Name
+                        };
+                    });
+                item.UsedIn = usedIn;
+                item.Components = item.Components.map(function (code) {
+                    var component = data.find(function (d) { return d.Code == code; });
+                    return {
+                        Code: component.Code,
+                        Name: component.Name,
+                        Price: component.Price
+                    };
+                });
+            });
+            var stringified = JSON.stringify(data);
+            document.getElementById("result").innerText = stringified;
+        });
+    </script>
+</body>
+
+</html>
