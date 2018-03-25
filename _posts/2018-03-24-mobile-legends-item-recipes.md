@@ -15,6 +15,7 @@ Properties:
 <li>{{prop}}</li>
 {% endfor %}
 </ul>
+<br />
 
 <div class="row">
 
