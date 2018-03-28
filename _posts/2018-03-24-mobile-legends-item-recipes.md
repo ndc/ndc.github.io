@@ -5,8 +5,23 @@ layout: blogdetail
 published: true
 ---
 
+As of March 2018 Mobile Legends [official website](https://www.mobilelegends.com/) doesn't have enough documentation about items. The only available item documentation in that website is the recommended items for each hero. There is no descriptions about the items themselves, not even item names.
+
+The only official documentation about items is in the game itself. Even then, you need to *play* the game in order to see the full documentation. In the lobby there is no documentation about item recipes nor tier 1 and 2 items.
+
+A lot of fan sites took the initiative to document items, for example [this mobilelegendsbangbang website](http://mobilelegendsbangbang.com/items/) and [this gcube website](https://mobilelegends.gcube.id/items/).
+
+This is another attempt to document the items. The differences with the other item documentation sites are: the entire item descriptions are in one page, nothing is folded / hidden so I can search with CTRL+F, there are links to quickly jump between related items, and this is a way for me to practice generating a page with JSON in Jekyll :)
+
 {% for item in site.data.mobilelegends.items %}
 <hr />
+<div class="row">
+
+<div class="col-md-2 col-md-push-10">
+<h3><img src="{{item.Image}}" class="img-responsive" /></h3>
+</div>
+
+<div class="col-md-10 col-md-pull-2">
 <h3 id="{{item.Code}}">{{item.Name}}</h3>
 <p>Price: {{item.Price}}</p>
 Properties:
@@ -15,7 +30,9 @@ Properties:
 <li>{{prop}}</li>
 {% endfor %}
 </ul>
-<br />
+</div>
+
+</div>
 
 <div class="row">
 

@@ -6,6 +6,7 @@
             "+15 Physical Attack"
         ],
         "Components": [],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 250
     },
     {
@@ -15,6 +16,7 @@
             "+10% Attack Speed"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1002.png",
         "Price": 280
     },
     {
@@ -24,6 +26,7 @@
             "+8% Critical Chance"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1003.png",
         "Price": 320
     },
     {
@@ -34,6 +37,7 @@
             "+8% Lifesteal"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1004.png",
         "Price": 400
     },
     {
@@ -44,6 +48,7 @@
             "+5% Cooldown Reduction"
         ],
         "Components": [],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 450
     },
     {
@@ -57,6 +62,7 @@
             "DD",
             "DAS"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 600
     },
     {
@@ -69,6 +75,7 @@
             "DD",
             "DD"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2001.png",
         "Price": 910
     },
     {
@@ -83,6 +90,7 @@
             "DD",
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2002.png",
         "Price": 790
     },
     {
@@ -96,6 +104,7 @@
             "DAS",
             "J"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 900
     },
     {
@@ -108,6 +117,7 @@
         "Components": [
             "DD"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2004.png",
         "Price": 980
     },
     {
@@ -122,6 +132,7 @@
             "DD",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2005.png",
         "Price": 1300
     },
     {
@@ -138,6 +149,7 @@
             "DAS",
             "VM"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2006.png",
         "Price": 2180
     },
     {
@@ -153,6 +165,7 @@
             "DD",
             "RS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2007.png",
         "Price": 1950
     },
     {
@@ -169,6 +182,7 @@
             "OT",
             "RS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2008.png",
         "Price": 2250
     },
     {
@@ -182,6 +196,7 @@
         "Components": [
             "LS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3001.png",
         "Price": 2060
     },
     {
@@ -196,6 +211,7 @@
             "LS",
             "VM"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3002.png",
         "Price": 1810
     },
     {
@@ -212,6 +228,7 @@
             "J",
             "J"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3003.png",
         "Price": 2200
     },
     {
@@ -232,6 +249,7 @@
             "VM",
             "AZB"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3004.png",
         "Price": 2170
     },
     {
@@ -248,6 +266,7 @@
             "ROM",
             "J"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3005.png",
         "Price": 1920
     },
     {
@@ -263,6 +282,7 @@
             "ROM",
             "DAS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3006.png",
         "Price": 2120
     },
     {
@@ -278,6 +298,7 @@
             "DD",
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3007.png",
         "Price": 1950
     },
     {
@@ -293,6 +314,7 @@
             "LS",
             "DAS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3008.png",
         "Price": 3010
     },
     {
@@ -308,6 +330,7 @@
             "IHB",
             "DD"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3009.png",
         "Price": 2010
     },
     {
@@ -323,6 +346,7 @@
             "IHB",
             "IHB"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3010.png",
         "Price": 1970
     },
     {
@@ -338,6 +362,7 @@
             "MB",
             "DD"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3012.png",
         "Price": 2270
     },
     {
@@ -347,6 +372,7 @@
             "+15 Magic Power"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1101.png",
         "Price": 300
     },
     {
@@ -356,6 +382,7 @@
             "+280 Mana"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1102.png",
         "Price": 220
     },
     {
@@ -365,6 +392,7 @@
             "+10 Mana Regen"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1103.png",
         "Price": 120
     },
     {
@@ -375,6 +403,7 @@
             "+5% Cooldown Reduction"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1104.png",
         "Price": 450
     },
     {
@@ -389,6 +418,7 @@
             "MCX",
             "VC"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 500
     },
     {
@@ -400,6 +430,7 @@
         "Components": [
             "MCX"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2101.png",
         "Price": 520
     },
     {
@@ -414,6 +445,7 @@
             "MCX",
             "BOS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2102.png",
         "Price": 650
     },
     {
@@ -428,6 +460,7 @@
             "PC",
             "MCX"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2103.png",
         "Price": 480
     },
     {
@@ -441,6 +474,7 @@
         "Components": [
             "MCX"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2104.png",
         "Price": 720
     },
     {
@@ -455,6 +489,7 @@
             "PC",
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2105.png",
         "Price": 700
     },
     {
@@ -471,6 +506,7 @@
             "BOS",
             "TOE"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2106.png",
         "Price": 1570
     },
     {
@@ -485,6 +521,7 @@
             "LJ",
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2107.png",
         "Price": 1610
     },
     {
@@ -501,6 +538,7 @@
             "DAS",
             "DAS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2108.png",
         "Price": 1930
     },
     {
@@ -516,6 +554,7 @@
             "MRC",
             "MCX"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2109.png",
         "Price": 2060
     },
     {
@@ -532,6 +571,7 @@
             "BOS",
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2110.png",
         "Price": 2060
     },
     {
@@ -545,6 +585,7 @@
         "Components": [
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3101.png",
         "Price": 1970
     },
     {
@@ -559,6 +600,7 @@
             "MW",
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3102.png",
         "Price": 2180
     },
     {
@@ -574,6 +616,7 @@
             "MW",
             "MC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3103.png",
         "Price": 2020
     },
     {
@@ -589,6 +632,7 @@
             "MW",
             "MN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3104.png",
         "Price": 1940
     },
     {
@@ -604,6 +648,7 @@
             "EV",
             "MCX"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3105.png",
         "Price": 2120
     },
     {
@@ -619,6 +664,7 @@
             "AZB",
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3106.png",
         "Price": 1950
     },
     {
@@ -635,6 +681,7 @@
             "MW",
             "EG"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3107.png",
         "Price": 1950
     },
     {
@@ -649,6 +696,7 @@
             "MW",
             "MW"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3108.png",
         "Price": 2850
     },
     {
@@ -664,6 +712,7 @@
             "MW",
             "BOS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3109.png",
         "Price": 2050
     },
     {
@@ -679,6 +728,7 @@
             "MN",
             "MN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3110.png",
         "Price": 2150
     },
     {
@@ -688,6 +738,7 @@
             "+230 HP"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1201.png",
         "Price": 300
     },
     {
@@ -697,6 +748,7 @@
             "+18 armor"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1202.png",
         "Price": 220
     },
     {
@@ -706,6 +758,7 @@
             "+18 Magic Resist"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1203.png",
         "Price": 220
     },
     {
@@ -715,6 +768,7 @@
             "+20 HP regen"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1204.png",
         "Price": 140
     },
     {
@@ -725,6 +779,7 @@
             "+5% Cooldown Reduction"
         ],
         "Components": [],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 450
     },
     {
@@ -736,6 +791,7 @@
         "Components": [
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2201.png",
         "Price": 900
     },
     {
@@ -748,6 +804,7 @@
         "Components": [
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2202.png",
         "Price": 870
     },
     {
@@ -761,6 +818,7 @@
             "VC",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2203.png",
         "Price": 1020
     },
     {
@@ -775,6 +833,7 @@
             "LJ",
             "PC"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 880
     },
     {
@@ -788,6 +847,7 @@
             "LJ",
             "LJ"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2205.png",
         "Price": 730
     },
     {
@@ -804,6 +864,7 @@
             "LJ",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2206.png",
         "Price": 1970
     },
     {
@@ -818,6 +879,7 @@
             "LJ",
             "LJ"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2207.png",
         "Price": 1660
     },
     {
@@ -833,6 +895,7 @@
             "ARB",
             "IHB"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2208.png",
         "Price": 2250
     },
     {
@@ -851,6 +914,7 @@
             "ARB",
             "LJ"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2209.png",
         "Price": 2290
     },
     {
@@ -865,6 +929,7 @@
             "ME",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3201.png",
         "Price": 1830
     },
     {
@@ -878,6 +943,7 @@
             "ARB",
             "ARB"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3202.png",
         "Price": 2380
     },
     {
@@ -893,6 +959,7 @@
             "ARB",
             "DNA"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3203.png",
         "Price": 2170
     },
     {
@@ -909,6 +976,7 @@
             "SR",
             "HN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3204.png",
         "Price": 2110
     },
     {
@@ -924,6 +992,7 @@
             "SR",
             "ARB"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3205.png",
         "Price": 2050
     },
     {
@@ -940,6 +1009,7 @@
             "BIS",
             "DNA"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3206.png",
         "Price": 2110
     },
     {
@@ -954,6 +1024,7 @@
             "ARB",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3207.png",
         "Price": 2120
     },
     {
@@ -968,6 +1039,7 @@
             "ARB",
             "LJ"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3208.png",
         "Price": 2120
     },
     {
@@ -984,6 +1056,7 @@
             "LJ",
             "HN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3209.png",
         "Price": 2260
     },
     {
@@ -1000,6 +1073,7 @@
             "ARB",
             "HN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3211.png",
         "Price": 1900
     },
     {
@@ -1009,6 +1083,7 @@
             "Unique +20 Movement Speed"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1301.png",
         "Price": 250
     },
     {
@@ -1023,6 +1098,7 @@
             "B",
             "LJ"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2301.png",
         "Price": 690
     },
     {
@@ -1037,6 +1113,7 @@
             "B",
             "MRC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2302.png",
         "Price": 890
     },
     {
@@ -1049,6 +1126,7 @@
         "Components": [
             "B"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2303.png",
         "Price": 710
     },
     {
@@ -1061,6 +1139,7 @@
         "Components": [
             "B"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2304.png",
         "Price": 740
     },
     {
@@ -1074,6 +1153,7 @@
             "B",
             "DAS"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2305.png",
         "Price": 710
     },
     {
@@ -1085,6 +1165,7 @@
         "Components": [
             "B"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2306.png",
         "Price": 630
     },
     {
@@ -1099,6 +1180,7 @@
             "B",
             "VC"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2307.png",
         "Price": 700
     },
     {
@@ -1115,6 +1197,7 @@
             "MN",
             "HN"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E2308.png",
         "Price": 720
     },
     {
@@ -1125,6 +1208,7 @@
             "Unique Passive Greed: Get Extra 15% exp when jungling"
         ],
         "Components": [],
+        "Image": "http://img-cdn.mobilelegends.com/E1401.png",
         "Price": 280
     },
     {
@@ -1139,6 +1223,7 @@
         "Components": [
             "HK"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 760
     },
     {
@@ -1153,6 +1238,7 @@
         "Components": [
             "HK"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3402.png",
         "Price": 770
     },
     {
@@ -1167,6 +1253,7 @@
         "Components": [
             "HK"
         ],
+        "Image": "http://img-cdn.mobilelegends.com/E3403.png",
         "Price": 750
     },
     {
@@ -1185,6 +1272,7 @@
             "MCX",
             "MN"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 1505
     },
     {
@@ -1203,6 +1291,7 @@
             "LJ",
             "MRC"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 1605
     },
     {
@@ -1221,6 +1310,7 @@
             "DD",
             "DD"
         ],
+        "Image": "http://www.endycahyono.com/images/checker.png",
         "Price": 1550
     }
 ]
