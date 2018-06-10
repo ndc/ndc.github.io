@@ -59,9 +59,10 @@
 
         loadJson(function (raw) {
             var data = JSON.parse(raw);
+            data.forEach(item => item.ComponentCodes = item.Components);
             data.forEach(item => {
                 var usedIn = data
-                    .filter(function (parent) { return parent.Components.includes(item.Code); })
+                    .filter(function (parent) { return parent.ComponentCodes.includes(item.Code); })
                     .map(function (parent) {
                         return {
                             Code: parent.Code,
@@ -69,7 +70,7 @@
                         };
                     });
                 item.UsedIn = usedIn;
-                item.Components = item.Components.map(function (code) {
+                item.Components = item.ComponentCodes.map(function (code) {
                     var component = data.find(function (d) { return d.Code == code; });
                     return {
                         Code: component.Code,
