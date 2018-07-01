@@ -58,3 +58,58 @@ Used in:
 
 </div>
 {% endfor %}
+
+<hr />
+
+### Glossary
+
+hero
+
+enemy
+
+HP
+
+HP regen
+
+current / max HP
+
+lifesteal
+
+armor
+
+physical damage
+
+physical attack
+
+physical penetration
+
+armor
+
+mana
+
+mana regen
+
+current / max mana
+
+spell vamp
+
+magic resist
+
+magic damage
+
+magic power
+
+magical penetration
+
+magic resist
+
+cooldown reduction
+
+attack speed
+
+movement speed
+
+critical chance
+
+critical damage
+
