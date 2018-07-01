@@ -112,7 +112,7 @@
         "Name": "Fury Hammer",
         "Properties": [
             "+35 Physical Attack",
-            "Unique +12 Physical Pen"
+            "Unique +12 Physical Penetration"
         ],
         "Components": [
             "DD"
@@ -126,7 +126,7 @@
         "Properties": [
             "+40 Physical Attack",
             "+24 Magic Resist",
-            "Unique Passive Lifeline: Gains a shield that can absorb 280~700 damage (increase with level) when HP is below 30%. Cooldown 30s."
+            "Unique Passive Lifeline: Gains a shield that can absorb 280~700 damage (increase with level) when HP is below 30%. Lasts 3s. Cooldown 40."
         ],
         "Components": [
             "DD",
@@ -141,8 +141,8 @@
         "Properties": [
             "+35 Physical Attack",
             "+25% Attack Speed",
-            "Unique Passive Devour: Basic attacks will deal 10% of the target's current HP as additional physical damage (up to 60 against monsters).",
-            "Unique Passive Devour: Each basic attack grants 4% health stealing for 4s, up to 3 times."
+            "Unique Passive Devour: Basic attack deals 10% of target's current HP as additional physical damage (up to 60 against monsters).",
+            "Unique Passive Devour: Basic attack grants 4% lifesteal for 3s. Stacks 5 times."
         ],
         "Components": [
             "RS",
@@ -156,9 +156,9 @@
         "Code": "DB",
         "Name": "Deadly Blade",
         "Properties": [
-            "+60 Physical Attack",
-            "+15% Attack Speed",
-            "Unique Passive Life Drain: Basic attack reduces HP regen effect by 50% for 3s"
+            "+65 Physical Attack",
+            "+20% Attack Speed",
+            "Unique Passive Life Drain: Basic attack reduces HP regen by 50% for 3s."
         ],
         "Components": [
             "DD",
@@ -166,32 +166,66 @@
             "RS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2007.png",
-        "Price": 1950
+        "Price": 2050
     },
     {
         "Code": "CS",
         "Name": "Corrosion Scythe",
         "Properties": [
             "+50 Physical Attack",
-            "+400 HP",
-            "+15% Attack Speed",
-            "Unique Passive Corrosion: Basic attacks lower the target's attack speed by 10% and have a 50% chance to reduce the target's movement speed by 35%",
-            "Unique Passive Impulse: Dealing damage with basic attacks increase your physical attack by 2%, up to a maximum of 6%. Lasts for 3s."
+            "+5% Movement Speed",
+            "+25% Attack Speed",
+            "Unique Passive Corrosion: Basic attack has 50% chance of slowing the enemy by 40%. Long ranged basic attack only slows enemies by 20%.",
+            "Unique Passive Impulse: Damaging enemies with basic attack increases hero's attack speed by 8%. Lasts 3s. Stacks 5 times."
         ],
         "Components": [
-            "OT",
+            "RS",
             "RS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2008.png",
         "Price": 2250
     },
     {
+        "Code": "GS",
+        "Name": "Golden Staff",
+        "Properties": [
+            "+65 Physical Attack",
+            "+30% Attack Speed",
+            "Unique Passive Swift: Every 1% of critical chance will add 1% attack speed.",
+            "Unique Passive Endless Strike: Basic attack adds a stack of Endless Strike. After accumulating 2 stacks of Endless Strike, the effect of the next basic attack is triggered 3 times."
+        ],
+        "Components": [
+            "RS",
+            "DAS",
+            "DAS"
+        ],
+        "Image": "https://img.mobilelegends.com/group1/M00/00/38/Cq2Ixls2PMqAFGv2AACdQmmUhsM2588914",
+        "Price": 2300
+    },
+    {
+        "Code": "WN",
+        "Name": "Wind of Nature",
+        "Properties": [
+            "+10 Physical Attack",
+            "+25% Attack Speed",
+            "+15% Lifesteal",
+            "Unique Active Wind Chant: Become immune to all physical attack. Lasts 2s. Cooldown 80s. Duration is reduced by half when not using a marksman."
+        ],
+        "Components": [
+            "DAS",
+            "DAS",
+            "VM"
+        ],
+        "Image": "https://img.mobilelegends.com/group1/M00/00/38/Cq2Ixls2PNOAIcF6AACdQqnidXs2368745",
+        "Price": 2060
+    },
+    {
         "Code": "MR",
         "Name": "Malefic Roar",
         "Properties": [
             "+60 Physical Attack",
-            "Unique +40% Physical Pen",
-            "Unique Passive Armor Buster: Basic attack will ignore 20% of a defense turret's defensive armor."
+            "Unique +40% Physical Penetration",
+            "Unique Passive Armor Buster: Basic attack ignores 20% of a turret's armor."
         ],
         "Components": [
             "LS"
@@ -205,7 +239,7 @@
         "Properties": [
             "+70 Physical Attack",
             "Unique +20% Lifesteal",
-            "Unique Passive Insanity: When HP drops below 40%, the hero will receive an extra 10% physical lifesteal"
+            "Unique Passive Insanity: When HP drops below 40%, the hero will receive an extra 10% lifesteal."
         ],
         "Components": [
             "LS",
@@ -220,8 +254,8 @@
         "Properties": [
             "+65 Physical Attack",
             "+25% Critical Chance",
-            "Unique +40% Crit Damage",
-            "Unique Passive Doom: Crit strikes will increase one's physical attack 5%, lasting 2s"
+            "Unique +40% Critical Damage",
+            "Unique Passive Doom: Critical hit increases hero's physical attack 5%. Lasts 2s."
         ],
         "Components": [
             "LS",
@@ -236,13 +270,13 @@
         "Name": "Endless Battle",
         "Properties": [
             "+65 Physical Attack",
-            "+25 Magic Power",
+            "+25 Mana Regen",
             "+250 HP",
-            "+300 Mana",
+            "+10% Cooldown Reduction",
             "+5% Movement Speed",
             "+15% Lifesteal",
-            "Unique Passive Divine Justice: After using an ability, the next basic attack will deal additional 70% of physical attack as true damage, 1.5s cooldown.",
-            "Unique Passive Chase Fate: When Divine Justice's effect is triggered, it will increase the hero's movement speed by 15%"
+            "Unique Passive Divine Justice: After using a skill, the next basic attack deals additional 85% of physical attack as true damage. Cooldown 1.5s.",
+            "Unique Passive Chase Fate: When Divine Justice's effect is triggered, it will increase the hero's movement speed by 15%."
         ],
         "Components": [
             "OT",
@@ -250,21 +284,21 @@
             "AZB"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3004.png",
-        "Price": 2170
+        "Price": 2470
     },
     {
         "Code": "W",
         "Name": "WindTalker",
         "Properties": [
-            "+25% Attack Speed",
+            "+40% Attack Speed",
             "+20 Movement Speed",
-            "+20% Critical Chance",
-            "Unique Passive Typhoon: After every 4 basic attacks, the next basic attack will deal 125 magic damage to 3 enemies",
-            "Unique Passive Activate: Each time Typhoon is cast, one's movement speed will be increased bt 5% for a short time"
+            "+10% Critical Chance",
+            "Unique Passive Typhoon: Every 3.5s basic attacks hit 3 enemy units and deal 100 point of magic damage. This effect's cooldown drops as your critical chance rises, while damage rises as attack speed rises.",
+            "Unique Passive Activate: Each time Typhoon is cast, hero's movement speed increases by 5% for a short time."
         ],
         "Components": [
             "ROM",
-            "J"
+            "DAS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3005.png",
         "Price": 1920
@@ -274,13 +308,13 @@
         "Name": "Scarlet Phantom",
         "Properties": [
             "+30 Physical Attack",
-            "+40% Attack Speed",
-            "+10% Critical Chance",
-            "Unique Passive Frenzy: Crit strikes will increase the hero's attack speed 25% and crit strike rate 5% lasting 2s."
+            "+20% Attack Speed",
+            "+25% Critical Chance",
+            "Unique Passive Frenzy: Critical hit increases the hero's attack speed by 30% and critical chance by 5% for 2s."
         ],
         "Components": [
             "ROM",
-            "DAS"
+            "J"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3006.png",
         "Price": 2120
@@ -291,7 +325,7 @@
         "Properties": [
             "+75 Physical Attack",
             "+300 HP",
-            "Unique Passive Steamroll: Skills will lower the target's physical defence by 25 points (applied before damage), Lasts for 3s"
+            "Unique Passive Steamroll: Skill lowers the target's armor by 25 points (applied before damage). Lasts 3s."
         ],
         "Components": [
             "FH",
@@ -306,13 +340,12 @@
         "Name": "Blade of Despair",
         "Properties": [
             "+170 Physical Attack",
-            "+10% Attack Speed",
-            "Unique Passive Despair: Deals an extra 10% damage to an enemy in an abnormal state (stunned, knocked, airborne, transformed, disabled)."
+            "+5% Movement Speed",
+            "Unique Passive Despair: Attacking enemy that has HP below 50% raises hero's physical attack by 30% (takes effect before damage is dealt). Lasts 2s."
         ],
         "Components": [
             "LS",
-            "LS",
-            "DAS"
+            "LS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3008.png",
         "Price": 3010
@@ -323,7 +356,7 @@
         "Properties": [
             "+100 Physical Attack",
             "+10% Cooldown Reduction",
-            "Unique Passive Hunt: Attacks enemy 5 times in a row and improves the hero's movement speed by 30% for 2s, cooldown 15s."
+            "Unique Passive Hunt: Attacking enemy 5 times in a row improves the hero's movement speed by 30% for 2s. Cooldown 15s."
         ],
         "Components": [
             "LS",
@@ -339,7 +372,7 @@
         "Properties": [
             "+70 Physical Attack",
             "+10% Cooldown Reduction",
-            "Unique Passive BloodThirsty: When skills cause damage, heals 20% of damage as HP for the hero (spell vamp)."
+            "Unique: When skill causes damage, heals 20% of damage as HP for the hero (spell vamp)."
         ],
         "Components": [
             "DD",
@@ -356,7 +389,7 @@
             "+60 Physical Attack",
             "+30 Magic Resist",
             "+5% Lifesteal",
-            "Unique Passive Lifeline: Gains a shield that can absorb 510~1350 damage (increase with level) when HP is below 30%, with 30s CD"
+            "Unique Passive Lifeline: Gains a shield that can absorb 510~1350 damage (increase with level) when HP is below 30%. Lasts 3s. Cooldown 40s."
         ],
         "Components": [
             "MB",
@@ -411,14 +444,24 @@
         "Name": "Mystic Container",
         "Properties": [
             "+15 Magic Power",
-            "+300 HP",
-            "+12% Spell Vamp"
+            "+10% Spell Vamp"
         ],
         "Components": [
-            "MCX",
-            "VC"
+            "MCX"
         ],
         "Image": "http://mobilelegendsbangbang.com/wp-content/uploads/2018/03/mystic-container.png",
+        "Price": 500
+    },
+    {
+        "Code": "SW",
+        "Name": "Spirit Wheel",
+        "Properties": [
+            "+10 Magic Power",
+            "Unique Passive Soul Steal: Eliminating hero grants 5 Soul Stacks. Assisting grants 3 stacks. Stack of 15 converts into 25 points of magic power. Lose all stacks on death (already converted stacks are unaffected). Max 50 magic power."
+        ],
+        "Components": [
+        ],
+        "Image": "https://img.mobilelegends.com/group1/M00/00/35/Cq2Ixls00IGAH_6gAABRyR7KDNc6318973",
         "Price": 500
     },
     {
@@ -431,7 +474,7 @@
             "MCX"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2101.png",
-        "Price": 520
+        "Price": 820
     },
     {
         "Code": "TOE",
@@ -446,36 +489,35 @@
             "BOS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2102.png",
-        "Price": 650
+        "Price": 950
     },
     {
         "Code": "AZB",
         "Name": "Azure Blade",
         "Properties": [
-            "+25 Magic Power",
-            "+300 Mana",
-            "Unique Passive Judgement: After using a skill, the next basic attack deals 50 extra true damage with a cooldown of 1.5s."
+            "+25 Mana Regen",
+            "+5% Cooldown Reduction",
+            "Unique Passive Judgement: After using a skill, the next basic attack deals 50 extra true damage. Cooldown 1.5s."
         ],
         "Components": [
-            "PC",
-            "MCX"
+            "MN",
+            "MN"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2103.png",
-        "Price": 480
+        "Price": 600
     },
     {
         "Code": "EV",
         "Name": "Exotic Veil",
         "Properties": [
             "+30 Magic Power",
-            "+5% movement speed",
-            "Unique +15 Magic Pen"
+            "+5% movement speed"
         ],
         "Components": [
             "MCX"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2104.png",
-        "Price": 720
+        "Price": 600
     },
     {
         "Code": "EG",
@@ -499,7 +541,7 @@
             "+50 Magic Power",
             "+250 HP",
             "+20% Cooldown Reduction",
-            "Unique Passive Mana Spring: Regen 10% total of one's max Mana every 10s"
+            "Unique Passive Mana Spring: Regen 10% total of hero's max Mana every 10s."
         ],
         "Components": [
             "MN",
@@ -507,22 +549,23 @@
             "TOE"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2106.png",
-        "Price": 1570
+        "Price": 1870
     },
     {
         "Code": "WT",
         "Name": "Winter Truncheon",
         "Properties": [
             "+60 Magic Power",
-            "+50 Armor",
-            "Unique Passive Frozen: When own hero's HP drops below 30%, being hit by basic attack will lower target's movement speed by 80% and deal 50% of magic power as magic damage to the target. This effect has a 5s cooldown."
+            "+25 Armor",
+            "400 HP",
+            "Unique Active Frozen: Hero can't move or perform any action but is immune to any damage and effects. Lasts 2s. Cooldown 100s."
         ],
         "Components": [
             "LJ",
             "MW"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2107.png",
-        "Price": 1610
+        "Price": 1910
     },
     {
         "Code": "FOH",
@@ -530,40 +573,38 @@
         "Properties": [
             "+65 Magic Power",
             "+30% Attack Speed",
-            "Unique Passive Affliction: Basic attacks will deal 40% of the hero's AP as additional magic damage.",
-            "Unique Passive Derive: Increases Spell Vamp effect by additional 8%"
+            "+5% Movement Speed",
+            "Unique Passive Affliction: Basic attack deals 40% of the hero's magic power as additional magic damage."
         ],
         "Components": [
             "MW",
             "DAS",
             "DAS"
         ],
-        "Image": "http://img-cdn.mobilelegends.com/E2108.png",
-        "Price": 1930
+        "Image": "https://img.mobilelegends.com/group1/M00/00/35/Cq2Ixls0geuAN6yPAAB3KO6Pp983684184",
+        "Price": 2230
     },
     {
-        "Code": "DIT",
-        "Name": "Disaster Truncheon",
+        "Code": "SOS",
+        "Name": "Soul Scroll",
         "Properties": [
-            "+60 Magic Power",
-            "+50 Magic Resist",
-            "Unique Passive The Dead: When skills cause damage to target, will reduce 25 pts of magic resistance for the target, lasting 5s."
+            "+10 Magic Power",
+            "Unique +15 Magical Penetration",
+            "Unique Passive Soul Steal: Eliminating hero grants 5 Soul Stacks. Assisting grants 3 stacks. Stack of 15 converts into 25 points of magic power. Lose all stacks on death (already converted stacks are unaffected). Max 100 magic power."
         ],
         "Components": [
-            "MW",
-            "MRC",
-            "MCX"
+            "SW"
         ],
-        "Image": "http://img-cdn.mobilelegends.com/E2109.png",
-        "Price": 2060
+        "Image": "https://img.mobilelegends.com/group1/M00/00/38/Cq2Ixls2POOAZpo7AACdQu2pPO04763564",
+        "Price": 1300
     },
     {
         "Code": "NOD",
         "Name": "Necklace of Durance",
         "Properties": [
-            "+65 Magic Power",
-            "+300 HP",
-            "+5% Cooldown Reduction",
+            "+70 Magic Power",
+            "+10% Cooldown Reduction",
+            "+10% Spell Vamp",
             "Unique Passive Life Drain: Skill dealing damage to the target reduces the regen effect by 50% for 3s."
         ],
         "Components": [
@@ -572,15 +613,15 @@
             "MW"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2110.png",
-        "Price": 2060
+        "Price": 2110
     },
     {
         "Code": "DT",
         "Name": "Devil Tears",
         "Properties": [
             "+65 Magic Power",
-            "Unique 40% Magical Pen",
-            "Unique Passive Spellbreaker: When HP is higher than 70%, the unique bonus effect is increased by 30%"
+            "Unique 40% Magical Penetration",
+            "Unique Passive Spellbreaker: When HP is higher than 70%, the unique bonus effect is increased by 30%."
         ],
         "Components": [
             "MW"
@@ -594,7 +635,7 @@
         "Properties": [
             "+90 Magic Power",
             "Unique +25% Magic Power",
-            "Unique Passive Exterminate: After a skill hits a target, magic attack will immediately increase 15%. The next skill damage will terminate this effect. This effect can last up to 3s with a built in cooldown time of 10s"
+            "Unique Passive Exterminate: After a skill hits a target, magic power will immediately increase 15%. The next skill damage will terminate this effect. Lasts 3s. Cooldown 10s."
         ],
         "Components": [
             "MW",
@@ -609,12 +650,13 @@
         "Properties": [
             "+70 Magic Power",
             "+700 HP",
-            "Unique +30% SpellVamp",
-            "Unique Passive Recharge: Regen 10% of one's HP after killing a hero."
+            "Unique +25% Spell Vamp",
+            "Unique Passive Recharge: Regen 10% of hero's HP after killing an enemy."
         ],
         "Components": [
             "MW",
-            "MC"
+            "MC",
+            "VC"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3103.png",
         "Price": 2020
@@ -624,29 +666,31 @@
         "Name": "Ice Queen Wand",
         "Properties": [
             "+75 Magic Power",
-            "+15 Mana Regen",
+            "+10% Spell Vamp",
+            "+150 Mana",
             "+7% Movement Speed",
-            "Unique Passive Ice Bound: Skills that damage an enemy hero will carry a 15% slow down effect. This effect lasts 3s and can stack up to 2 times."
+            "Unique Passive Ice Bound: Skills that damage an enemy hero will carry a 15% slow down effect. Lasts 3s. Stacks 2 times."
         ],
         "Components": [
             "MW",
-            "MN"
+            "MC"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3104.png",
-        "Price": 1940
+        "Price": 2240
     },
     {
         "Code": "GW",
         "Name": "Glowing Wand",
         "Properties": [
             "+75 Magic Power",
+            "+400 HP",
             "+5% Movement Speed",
-            "+15 Magical Pen",
-            "Unique Passive Scorch: Burns the target for 3s when the skills hit, deaing 2% / 2.5% / 3% of the target's current HP as magic damage, at least 10 pts"
+            "Unique Passive Scorch: Burns the target for 3s when the skills hit, deaing 2% / 3% / 4% of the target's current HP as magic damage (10 damage minimum)."
         ],
         "Components": [
             "EV",
-            "MCX"
+            "MCX",
+            "VC"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3105.png",
         "Price": 2120
@@ -656,9 +700,10 @@
         "Name": "Calamity Reaper",
         "Properties": [
             "+70 Magic Power",
-            "+400 Mana",
+            "+100 Mana",
+            "+30 Mana Regen",
             "+10% Cooldown Reduction",
-            "Unique Passive Calamity: After using a skill, the next basic attack deals extra true damage equal to 120% magic attack with a cooldown of 1.5s."
+            "Unique Passive Calamity: After using a skill, the next basic attack deals extra true damage equal to 120% magic power. Cooldown 1.5s. Briefly raises movement speed by 10%."
         ],
         "Components": [
             "AZB",
@@ -674,8 +719,8 @@
             "+60 Magic Power",
             "+615 HP",
             "+600 Mana",
-            "Unique Passive Time: Adds 30 HP and 5 Magic attack every 30s. Up to 10 times",
-            "Unique Passive Reincarnate. If Time is fully stacked, then the hero will receive 5% magic attack and 300 mana"
+            "Unique Passive Time: Adds 30 HP and 5 magic power every 30s. Stacks 10 times.",
+            "Unique Passive Reincarnate. If Time is fully stacked, then the hero will receive 5% magic power and 300 mana"
         ],
         "Components": [
             "MW",
@@ -689,24 +734,23 @@
         "Name": "Blood Wings",
         "Properties": [
             "+150 Magic Power",
-            "+150 HP",
-            "Unique Passive Nirvana: Adds 2 HP for every 1 pt of magic power added."
+            "+500 HP",
+            "Unique Passive Nirvana: Adds 1.5 HP for every 1 point of magic power added."
         ],
         "Components": [
             "MW",
             "MW"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3108.png",
-        "Price": 2850
+        "Price": 3000
     },
     {
         "Code": "FT",
         "Name": "Fleeting Time",
         "Properties": [
             "+70 Magic Power",
-            "+15 Mana Regen",
-            "+10% Cooldown Reduction",
-            "Unique Passive Timestream: After killing an enemy hero, immediately reduces 20% of current reuse time for all abilites"
+            "+15% Cooldown Reduction",
+            "Unique Passive Timestream: After elimination or assist, the cooldown of the hero's ultimate is immediately reduced by 35%."
         ],
         "Components": [
             "MW",
@@ -720,16 +764,17 @@
         "Name": "Lightning Truncheon",
         "Properties": [
             "+75 Magic Power",
-            "+30 Mana Regen",
-            "Unique Passive Resonate: Every 6s, your next damaging magical ability will proc, maximum of 3 enemies will be hurt by 150% magic power damage."
+            "+300 Mana",
+            "+10% Cooldown Reduction",
+            "Unique Passive Resonate: Every 6s, your next magical skill deals bonus magic damage to 3 enemies. Damage scales with hero's max mana."
         ],
         "Components": [
             "MW",
-            "MN",
-            "MN"
+            "PC",
+            "BOS"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3110.png",
-        "Price": 2150
+        "Price": 2250
     },
     {
         "Code": "VC",
@@ -799,7 +844,7 @@
         "Name": "Molten Essence",
         "Properties": [
             "+540 HP",
-            "Unique Passive Burning Soul: deals 1% of one's Max HP as magic damage per second to nearby enemies, and deals extra 50% damage to minions."
+            "Unique Passive Burning Soul: Nearby enemy targets take 1% of their max HP as magic damage each second. Deals extra 50% damage to minions."
         ],
         "Components": [
             "VC"
@@ -841,7 +886,7 @@
         "Name": "Dreadnaught Armor",
         "Properties": [
             "+40 Armor",
-            "Unique Passive Deter: When an enemy hero attacks, this ability will reduce his/her attack power by 4%. This effect lasts 2s and can stack up to 3 times."
+            "Unique Passive Deter: When an enemy hero attacks, this ability will reduce his/her attack power by 4%. Lasts 2s. Stacks 3 times."
         ],
         "Components": [
             "LJ",
@@ -855,9 +900,10 @@
         "Name": "Courage Bulwark",
         "Properties": [
             "+770 HP",
-            "+45 HP Regen",
-            "Unique Passive Bravery: Increases 10% of attack power and defense for nearby allies.",
-            "Unique Passive Heavy Armor: Nearby soldiers can take more defense turret damage."
+            "+10% Cooldown Reduction",
+            "Unique Passive Bravery: Increases 10% attack power and defense for nearby allies.",
+            "Unique Passive Heavy Armor: Nearby soldiers can take more turret damage.",
+            "Unique Active Encourage: Raise the movement speed of hero and nearby allies by 30%. Raises physical attack and magic power by 20%. Lasts 3s. Cooldown 40s."
         ],
         "Components": [
             "VC",
@@ -872,7 +918,7 @@
         "Name": "Blade Armor",
         "Properties": [
             "+90 Armor",
-            "Unique Passive Counterstrike: Deals 25% of opponent's physical attack as physical damage to an attacker when a basic attack is received."
+            "Unique Passive Counterstrike: When receiving basic attack, deals 25% of enemy's physical attack as physical damage to the attacker."
         ],
         "Components": [
             "LJ",
@@ -889,7 +935,7 @@
             "+15 Physical Attack",
             "+1000 HP",
             "+10% Cooldown Reduction",
-            "Unique Passive Demonize: Increases physical and magic defense 40% and physical lifesteal by 15% when HP drops below 40%."
+            "Unique Passive Demonize: Reduces damage taken by 50% when health is less than 40% and increases your lifesteal by 30%. Lasts 5s. Cooldown 50s."
         ],
         "Components": [
             "ARB",
@@ -902,12 +948,11 @@
         "Code": "THB",
         "Name": "Thunder Belt",
         "Properties": [
-            "+25 Magic Power",
             "+800 HP",
-            "+400 Mana",
+            "+30 Mana Regen",
+            "+10% Cooldown Reduction",
             "+40 Armor",
-            "+15 HP Regen",
-            "Unique Passive Thunderbolt: After you use a skill, the next basic attack will carry an extra 40% of physical attacks as true damage, and slow the target and surrounding enemy units, lasts 1.5s. Effect can only be used once every 1.5sconds."
+            "Unique Passive Thunderbolt: After a hero uses a skill, the next basic attack deals bonus damage that equals 2% of the hero's total HP. The enemy target and surrounding units are slowed for 1.5s. Cooldown 1.5s."
         ],
         "Components": [
             "AZB",
@@ -923,7 +968,7 @@
         "Properties": [
             "+920 HP",
             "+50 Magic Resist",
-            "Unique Passive Burning Soul: Deals 1.5% of one's max HP as magic damage per second to nearby enemies, and deals extra 50% damage to minions."
+            "Unique Passive Burning Soul: Neearby enemy targets take 1.5% o their max HP as magic damage each second. Deals extra 50% damage to minions."
         ],
         "Components": [
             "ME",
@@ -933,18 +978,20 @@
         "Price": 1830
     },
     {
-        "Code": "BTK",
-        "Name": "Bloodthirsty King",
+        "Code": "SGH",
+        "Name": "Sky Guardian Helmet",
         "Properties": [
             "+1550 HP",
-            "Unique Passive Bloodthirst: A kill or assist regens 20% of hero's HP within 5s. 10s cooldown."
+            "+100 HP Regen",
+            "Unique Passive Recovery: Regenerates 1.5% of hero's total HP. Eliminating enemy hero raises regeneration rate by 0.4% while assist only raises the rate by 0.2% (includes elimination and assist prior to purchase) up to 3.5%. This effect deactivates when the hero takes damage and reactivates 5s after the last time taking damage."
         ],
         "Components": [
             "ARB",
-            "ARB"
+            "ARB",
+            "HN"
         ],
-        "Image": "http://img-cdn.mobilelegends.com/E3202.png",
-        "Price": 2380
+        "Image": "https://img.mobilelegends.com/group1/M00/00/34/Cq2IxlsxsiOAUN-nAABcbTQa5Jo443.png",
+        "Price": 2400
     },
     {
         "Code": "DA",
@@ -953,7 +1000,7 @@
             "+920 HP",
             "+54 Armor",
             "+30 HP Regen",
-            "Unique Passive Deter: When an enemy hero attacks, this ability will reduce his/her attack power by 6%. This effect lasts 2s and can stack up to 3 times."
+            "Unique Passive Deter: When an enemy hero attacks, this ability will reduce his/her attack power by 6%. Lasts 2s. Stacks 3 times."
         ],
         "Components": [
             "ARB",
@@ -968,13 +1015,12 @@
         "Properties": [
             "+850 HP",
             "+36 Magic Resist",
-            "+35 HP Regen",
             "+10% Cooldown Reduction",
-            "Unique Passive Scream: Within 4s after being attacked, the hero will regen 8% HP. This effect has a 6s cooldown time."
+            "Unique Passive Bless: Raises shield absorption and HP regeneration effect by 25%."
         ],
         "Components": [
             "SR",
-            "HN"
+            "HR"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E3204.png",
         "Price": 2110
@@ -986,7 +1032,7 @@
             "+900 HP",
             "+56 Magic Resist",
             "+20 HP Regen",
-            "Unique Passive Shield: Get a damage-absorbing shield every 30s, Shield absorption amount grows as the match goes on, maxing out at 1150."
+            "Unique Passive Shield: Get a damage-absorbing shield every 30s. Shield absorption amount grows as the match goes on, maxing out at 1150."
         ],
         "Components": [
             "SR",
@@ -1001,7 +1047,7 @@
         "Properties": [
             "+500 Mana",
             "+70 Armor",
-            "+5% Crit Reduction",
+            "+5% Critical Chance",
             "Unique +15% Cooldown Reduction",
             "Unique Passive Arctic Cold: Lowers movement speed 5% and lowers attack speed 30% for nearby enemy heroes."
         ],
@@ -1009,7 +1055,7 @@
             "BIS",
             "DNA"
         ],
-        "Image": "http://img-cdn.mobilelegends.com/E3206.png",
+        "Image": "https://img.mobilelegends.com/group1/M00/00/34/Cq2Ixlsx4X-AAbOqAABPF_7yyB4058.png",
         "Price": 2110
     },
     {
@@ -1018,7 +1064,7 @@
         "Properties": [
             "+800 HP",
             "+40 Magic Resist",
-            "Unique Passive Immortal: Resurrect 2s after dying and get 15% HP and a shield that can absorb 300~1000 pts of damage. Shield lasts for 3s. Cooldown for this effect is 180s."
+            "Unique Passive Immortal: Resurrect 2s upon death and get 15% HP and a shield that can absorb 300~1000 damage. Lasts 3s. Cooldown 180s."
         ],
         "Components": [
             "ARB",
@@ -1033,7 +1079,7 @@
         "Properties": [
             "+770 HP",
             "+45 Armor",
-            "Unique Passive Brute Force: Attacking an enemy will increase one's capabilites, increasing movement speed by 2% and physical attack by 3%. This effect last 4s and can stack up to 4 times."
+            "Unique Passive Brute Force: Casting a skill increases hero's movement speed by 3% and physical attack by 4%. Lasts 4s. Stacks 5 times."
         ],
         "Components": [
             "ARB",
@@ -1043,38 +1089,21 @@
         "Price": 2120
     },
     {
-        "Code": "HOS",
-        "Name": "Heart of Steel",
+        "Code": "TA",
+        "Name": "Twilight Armor",
         "Properties": [
-            "+880 HP",
-            "+30 Armor",
-            "+35 HP Regen",
-            "Unique +20% Crit Chance Reduction"
+            "+1200 HP",
+            "+400 Mana",
+            "+50 HP Regen",
+            "Unique Passive Defiance: After hero takes 900 physical damage or more, next attack received will not be more than 900. Lasts for 5s. Cooldown 5s."
         ],
         "Components": [
             "ARB",
-            "LJ",
+            "PC",
             "HN"
         ],
-        "Image": "http://img-cdn.mobilelegends.com/E3209.png",
+        "Image": "https://img.mobilelegends.com/group1/M00/00/34/Cq2Ixlsx-5CAGpGkAABnleBtqqw451.png",
         "Price": 2260
-    },
-    {
-        "Code": "G",
-        "Name": "Ancient Ghostatue",
-        "Properties": [
-            "+920 HP",
-            "+70 HP Regen",
-            "+5% Cooldown Reduction",
-            "Unique Passive Runner: On leaving combat movement speed will increase by 60"
-        ],
-        "Components": [
-            "HR",
-            "ARB",
-            "HN"
-        ],
-        "Image": "http://img-cdn.mobilelegends.com/E3211.png",
-        "Price": 1900
     },
     {
         "Code": "B",
@@ -1092,7 +1121,7 @@
         "Properties": [
             "+22 Armor",
             "Unique +40 Movement Speed",
-            "Unique Passive Valor: Physical defense will go up by 5 with each basic attack received, for an increase of up to 25 points, lasting 3s."
+            "Unique Passive Valor: When hit by basic attack, armor increases by 5, up to 25 points. Lasts 3s."
         ],
         "Components": [
             "B",
@@ -1107,7 +1136,7 @@
         "Properties": [
             "+22 Magic Resist",
             "Unique +40 Movement Speed",
-            "Unique Passive Fortitude: Reduces time controlled 25%"
+            "Unique Passive Fortitude: Reduces time controlled by 25%."
         ],
         "Components": [
             "B",
@@ -1133,7 +1162,7 @@
         "Code": "AB",
         "Name": "Arcane Boots",
         "Properties": [
-            "+15 Magic Pen",
+            "+15 Magical Penetration",
             "Unique +40 Movement Speed"
         ],
         "Components": [
@@ -1160,13 +1189,14 @@
         "Code": "RB",
         "Name": "Rapid Boots",
         "Properties": [
-            "Unique +50 Movement Speed"
+            "Unique +100 Movement Speed",
+            "Unique Passive Side Effect: Dealing or taking damage slows hero's movement speed by 55 points. Lasts 5s."
         ],
         "Components": [
             "B"
         ],
         "Image": "http://img-cdn.mobilelegends.com/E2306.png",
-        "Price": 630
+        "Price": 750
     },
     {
         "Code": "WIB",
@@ -1174,7 +1204,7 @@
         "Properties": [
             "+300 HP",
             "Unique +40 Movement Speed",
-            "Unique Passive Plunder: 80 gold will be awaded for assists."
+            "Unique Passive Plunder: 80 gold will be awarded for assists."
         ],
         "Components": [
             "B",
@@ -1184,13 +1214,12 @@
         "Price": 700
     },
     {
-        "Code": "BOT",
-        "Name": "Boots of Tranquility",
+        "Code": "DS",
+        "Name": "Demon Shoes",
         "Properties": [
-            "+20 HP Regen",
-            "+20 Mana Regen",
+            "+30 Mana Regen",
             "Unique +40 Movement Speed",
-            "Unique Passive Bless: HP regen effect increased by 10%"
+            "Unique Passive Mysticism: Eliminations and assists regenerates hero's mana by 10%, eliminating minions regenerates 4% of hero's mana."
         ],
         "Components": [
             "B",
@@ -1216,7 +1245,7 @@
         "Name": "Curse Sword",
         "Properties": [
             "Unique 30% Damage to Monsters",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
             "Unique passive Gorge: Increases damage by 0.5% on killing a jungle monster, stacking up to 2 times.",
             "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed 70% (The effect will decay within 3s) and reduces target's Magic Resistance. Buying other advanced jungle gear will disable this effect."
         ],
@@ -1231,9 +1260,9 @@
         "Name": "Pillager Axe",
         "Properties": [
             "Unique 30% Damage to Monsters,",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
-            "Unique passive Gorge: Slaying jungle monster increases one's physical and magical defense by 3 up to 10 times.",
-            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and within a short period of time receive a shield that scales off maximum health. Buying other advance jungle gear will disable this effect."
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
+            "Unique passive Gorge: Slaying jungle monster increases hero's armor and magic resist by 3 up to 10 times.",
+            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and within a short period of time receive a shield that scales off max health. Buying other advance jungle gear will disable this effect."
         ],
         "Components": [
             "HK"
@@ -1246,9 +1275,9 @@
         "Name": "Nimble Blade",
         "Properties": [
             "Unique 30% Damage to Monsters,",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
             "Unique passive Gorge: Slaying Jungle monster increases your physical attack by 4. Stacks up to 10 times.",
-            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and reduces target's Magic Resistance. Buying other advance jungle gear will disable this effect."
+            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and dealing small amount of true damage. Buying other advance jungle gear will disable this effect."
         ],
         "Components": [
             "HK"
@@ -1263,9 +1292,9 @@
             "+30 Magic Power",
             "+25 Mana Regen",
             "Unique 30% Damage to Monsters",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
             "Unique passive Gorge: Increases damage by 0.5% on killing a jungle monster, stacking up to 2 times.",
-            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed 70% (The effect will decay within 3s) and reduces target's Magic Resistance. Buying other advanced jungle gear will disable this effect."
+            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed 70% (decays over 3s) and reduces target's Magic Resistance. Buying other advanced jungle gear will disable this effect."
         ],
         "Components": [
             "CUS",
@@ -1282,9 +1311,9 @@
             "+20 Armor",
             "+20 Magic Resist",
             "Unique 30% Damage to Monsters",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
-            "Unique passive Gorge: Slaying jungle monster increases one's physical and magical defense by 3 up to 10 times.",
-            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and within a short period of time receive a shield that scales off maximum health. Buying other advance jungle gear will disable this effect."
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
+            "Unique passive Gorge: Slaying jungle monster increases hero's armor and magic resist by 3 up to 10 times.",
+            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed 70% (decays over 3s) and for short period of time grants a shield based on max HP. Buying other advance jungle gear will disable this effect."
         ],
         "Components": [
             "PA",
@@ -1299,11 +1328,11 @@
         "Name": "Raptor Machete",
         "Properties": [
             "+30 Physical Attack",
-            "+15% Physical Pen",
+            "+15% Physical Penetration",
             "Unique 30% Damage to Monsters",
-            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of maximum health and 10% of mana after monster kill.",
+            "Unique Passive Greed: Get an extra 30% exp when jungling. Regain 4% of max health and 10% of mana after monster kill.",
             "Unique passive Gorge: Slaying Jungle monster increases your physical attack by 4. Stacks up to 10 times.",
-            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed by 70% (The effect will decay within 3s) and reduces target's Magic Resistance. Buying other advance jungle gear will disable this effect."
+            "Unique Passive: Makes the battle spell retribution applicable to heroes: Reduces target's movement speed 70% (decays over 3s) and dealing a small amount of true damage to the target within 3s. Buying other advance jungle gear will disable this effect."
         ],
         "Components": [
             "NB",

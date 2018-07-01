@@ -1,9 +1,11 @@
 ---
 title: Mobile Legends Item Recipes
-date: 2018-03-24 19:02:00 +0700
+date: 2018-07-01 11:52:00 +0700
 layout: blogdetail
 published: true
 ---
+
+Update July 2018: adding Golden Staff, etc.
 
 As of March 2018 Mobile Legends [official website](https://www.mobilelegends.com/) doesn't have enough documentation about items. The only available item documentation in that website is the recommended items for each hero. There is no descriptions about the items themselves, not even item names.
 
