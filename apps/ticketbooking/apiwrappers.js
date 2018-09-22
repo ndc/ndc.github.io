@@ -76,9 +76,9 @@ angular
     Wrapper.BookSeat = function (cinema, movie, showdate, audi, showtime, seats, partnercode) {
         var booking = $http({
             method: "POST",
-            url: Settings.BookingURL + "/onlinebooking/bookseat",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            data: $.param({
+            url: Settings.BookingURL + "/bookseat",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify({
                 cinema: cinema,
                 movie: movie,
                 showdate: showdate,

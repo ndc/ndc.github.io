@@ -622,6 +622,29 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
             $scope.$broadcast("notifyError", msg);
             return;
         };
+
+        $scope.isprocessing = true;
+
+        BlitzAPI.BookSeat(
+            BookingState.selectedshow.cinema,
+            BookingState.selectedshow.movie,
+            BookingState.selectedshow.showdate,
+            BookingState.selectedaudi,
+            BookingState.selectedshow.showtime,
+            selectedseats,
+            Settings.PartnerCode
+        )
+        .then(
+            function(response) {
+                $scope.$broadcast("notifyError", response.data)
+            },
+            function(response) {
+                $scope.$broadcast("notifyError", response.data)
+            }
+        )
+        .then(function() {
+            $scope.isprocessing = false;
+        });
     };
 
     $scope.checkgap = function () {
