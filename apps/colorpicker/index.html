@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Old Folk's HSL Color Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <svg id="cp" viewBox="0 0 1700 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="saturationGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="gray" id="saturationFromColor" />
+                <stop offset="100%" stop-color="red" id="saturationToColor" />
+            </linearGradient>
+            <linearGradient id="luminanceGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="black" id="luminanceLowColor" />
+                <stop offset="50%" stop-color="gray" id="luminanceMidColor" />
+                <stop offset="100%" stop-color="white" id="luminanceHighColor" />
+            </linearGradient>
+            <linearGradient id="hueGradient">
+                <stop offset="0" stop-color="rgb(255,0,0)" />
+                <stop offset="0.002777777777777778" stop-color="rgb(255,4,0)" />
+                <stop offset="0.005555555555555556" stop-color="rgb(255,9,0)" />
+                <stop offset="0.008333333333333333" stop-color="rgb(255,13,0)" />
+                <stop offset="0.011111111111111112" stop-color="rgb(255,17,0)" />
+                <stop offset="0.013888888888888888" stop-color="rgb(255,21,0)" />
+                <stop offset="0.016666666666666666" stop-color="rgb(255,26,0)" />
+                <stop offset="0.019444444444444445" stop-color="rgb(255,30,0)" />
+                <stop offset="0.022222222222222223" stop-color="rgb(255,34,0)" />
+                <stop offset="0.025" stop-color="rgb(255,38,0)" />
+                <stop offset="0.027777777777777776" stop-color="rgb(255,43,0)" />
+                <stop offset="0.030555555555555555" stop-color="rgb(255,47,0)" />
+                <stop offset="0.03333333333333333" stop-color="rgb(255,51,0)" />
+                <stop offset="0.03611111111111111" stop-color="rgb(255,55,0)" />
+                <stop offset="0.03888888888888889" stop-color="rgb(255,60,0)" />
+                <stop offset="0.041666666666666664" stop-color="rgb(255,64,0)" />
+                <stop offset="0.044444444444444446" stop-color="rgb(255,68,0)" />
+                <stop offset="0.04722222222222222" stop-color="rgb(255,72,0)" />
+                <stop offset="0.05" stop-color="rgb(255,77,0)" />
+                <stop offset="0.05277777777777778" stop-color="rgb(255,81,0)" />
+                <stop offset="0.05555555555555555" stop-color="rgb(255,85,0)" />
+                <stop offset="0.058333333333333334" stop-color="rgb(255,89,0)" />
+                <stop offset="0.06111111111111111" stop-color="rgb(255,94,0)" />
+                <stop offset="0.06388888888888888" stop-color="rgb(255,98,0)" />
+                <stop offset="0.06666666666666667" stop-color="rgb(255,102,0)" />
+                <stop offset="0.06944444444444445" stop-color="rgb(255,106,0)" />
+                <stop offset="0.07222222222222222" stop-color="rgb(255,110,0)" />
+                <stop offset="0.075" stop-color="rgb(255,115,0)" />
+                <stop offset="0.07777777777777778" stop-color="rgb(255,119,0)" />
+                <stop offset="0.08055555555555556" stop-color="rgb(255,123,0)" />
+                <stop offset="0.08333333333333333" stop-color="rgb(255,128,0)" />
+                <stop offset="0.08611111111111111" stop-color="rgb(255,132,0)" />
+                <stop offset="0.08888888888888889" stop-color="rgb(255,136,0)" />
+                <stop offset="0.09166666666666666" stop-color="rgb(255,140,0)" />
+                <stop offset="0.09444444444444444" stop-color="rgb(255,145,0)" />
+                <stop offset="0.09722222222222222" stop-color="rgb(255,149,0)" />
+                <stop offset="0.1" stop-color="rgb(255,153,0)" />
+                <stop offset="0.10277777777777777" stop-color="rgb(255,157,0)" />
+                <stop offset="0.10555555555555556" stop-color="rgb(255,162,0)" />
+                <stop offset="0.10833333333333334" stop-color="rgb(255,166,0)" />
+                <stop offset="0.1111111111111111" stop-color="rgb(255,170,0)" />
+                <stop offset="0.11388888888888889" stop-color="rgb(255,174,0)" />
+                <stop offset="0.11666666666666667" stop-color="rgb(255,179,0)" />
+                <stop offset="0.11944444444444445" stop-color="rgb(255,183,0)" />
+                <stop offset="0.12222222222222222" stop-color="rgb(255,187,0)" />
+                <stop offset="0.125" stop-color="rgb(255,191,0)" />
+                <stop offset="0.12777777777777777" stop-color="rgb(255,195,0)" />
+                <stop offset="0.13055555555555556" stop-color="rgb(255,200,0)" />
+                <stop offset="0.13333333333333333" stop-color="rgb(255,204,0)" />
+                <stop offset="0.1361111111111111" stop-color="rgb(255,208,0)" />
+                <stop offset="0.1388888888888889" stop-color="rgb(255,213,0)" />
+                <stop offset="0.14166666666666666" stop-color="rgb(255,217,0)" />
+                <stop offset="0.14444444444444443" stop-color="rgb(255,221,0)" />
+                <stop offset="0.14722222222222223" stop-color="rgb(255,225,0)" />
+                <stop offset="0.15" stop-color="rgb(255,229,0)" />
+                <stop offset="0.1527777777777778" stop-color="rgb(255,234,0)" />
+                <stop offset="0.15555555555555556" stop-color="rgb(255,238,0)" />
+                <stop offset="0.15833333333333333" stop-color="rgb(255,242,0)" />
+                <stop offset="0.16111111111111112" stop-color="rgb(255,247,0)" />
+                <stop offset="0.1638888888888889" stop-color="rgb(255,251,0)" />
+                <stop offset="0.16666666666666666" stop-color="rgb(255,255,0)" />
+                <stop offset="0.16944444444444445" stop-color="rgb(251,255,0)" />
+                <stop offset="0.17222222222222222" stop-color="rgb(246,255,0)" />
+                <stop offset="0.175" stop-color="rgb(242,255,0)" />
+                <stop offset="0.17777777777777778" stop-color="rgb(238,255,0)" />
+                <stop offset="0.18055555555555555" stop-color="rgb(234,255,0)" />
+                <stop offset="0.18333333333333332" stop-color="rgb(230,255,0)" />
+                <stop offset="0.18611111111111112" stop-color="rgb(225,255,0)" />
+                <stop offset="0.18888888888888888" stop-color="rgb(221,255,0)" />
+                <stop offset="0.19166666666666668" stop-color="rgb(217,255,0)" />
+                <stop offset="0.19444444444444445" stop-color="rgb(212,255,0)" />
+                <stop offset="0.19722222222222222" stop-color="rgb(208,255,0)" />
+                <stop offset="0.2" stop-color="rgb(204,255,0)" />
+                <stop offset="0.20277777777777778" stop-color="rgb(200,255,0)" />
+                <stop offset="0.20555555555555555" stop-color="rgb(195,255,0)" />
+                <stop offset="0.20833333333333334" stop-color="rgb(191,255,0)" />
+                <stop offset="0.2111111111111111" stop-color="rgb(187,255,0)" />
+                <stop offset="0.21388888888888888" stop-color="rgb(183,255,0)" />
+                <stop offset="0.21666666666666667" stop-color="rgb(178,255,0)" />
+                <stop offset="0.21944444444444444" stop-color="rgb(174,255,0)" />
+                <stop offset="0.2222222222222222" stop-color="rgb(170,255,0)" />
+                <stop offset="0.225" stop-color="rgb(166,255,0)" />
+                <stop offset="0.22777777777777777" stop-color="rgb(161,255,0)" />
+                <stop offset="0.23055555555555557" stop-color="rgb(157,255,0)" />
+                <stop offset="0.23333333333333334" stop-color="rgb(153,255,0)" />
+                <stop offset="0.2361111111111111" stop-color="rgb(149,255,0)" />
+                <stop offset="0.2388888888888889" stop-color="rgb(145,255,0)" />
+                <stop offset="0.24166666666666667" stop-color="rgb(140,255,0)" />
+                <stop offset="0.24444444444444444" stop-color="rgb(136,255,0)" />
+                <stop offset="0.24722222222222223" stop-color="rgb(132,255,0)" />
+                <stop offset="0.25" stop-color="rgb(128,255,0)" />
+                <stop offset="0.25277777777777777" stop-color="rgb(123,255,0)" />
+                <stop offset="0.25555555555555554" stop-color="rgb(119,255,0)" />
+                <stop offset="0.25833333333333336" stop-color="rgb(115,255,0)" />
+                <stop offset="0.2611111111111111" stop-color="rgb(110,255,0)" />
+                <stop offset="0.2638888888888889" stop-color="rgb(106,255,0)" />
+                <stop offset="0.26666666666666666" stop-color="rgb(102,255,0)" />
+                <stop offset="0.26944444444444443" stop-color="rgb(98,255,0)" />
+                <stop offset="0.2722222222222222" stop-color="rgb(94,255,0)" />
+                <stop offset="0.275" stop-color="rgb(89,255,0)" />
+                <stop offset="0.2777777777777778" stop-color="rgb(85,255,0)" />
+                <stop offset="0.28055555555555556" stop-color="rgb(81,255,0)" />
+                <stop offset="0.2833333333333333" stop-color="rgb(76,255,0)" />
+                <stop offset="0.2861111111111111" stop-color="rgb(72,255,0)" />
+                <stop offset="0.28888888888888886" stop-color="rgb(68,255,0)" />
+                <stop offset="0.2916666666666667" stop-color="rgb(64,255,0)" />
+                <stop offset="0.29444444444444445" stop-color="rgb(59,255,0)" />
+                <stop offset="0.2972222222222222" stop-color="rgb(55,255,0)" />
+                <stop offset="0.3" stop-color="rgb(51,255,0)" />
+                <stop offset="0.30277777777777776" stop-color="rgb(47,255,0)" />
+                <stop offset="0.3055555555555556" stop-color="rgb(43,255,0)" />
+                <stop offset="0.30833333333333335" stop-color="rgb(38,255,0)" />
+                <stop offset="0.3111111111111111" stop-color="rgb(34,255,0)" />
+                <stop offset="0.3138888888888889" stop-color="rgb(30,255,0)" />
+                <stop offset="0.31666666666666665" stop-color="rgb(26,255,0)" />
+                <stop offset="0.3194444444444444" stop-color="rgb(21,255,0)" />
+                <stop offset="0.32222222222222224" stop-color="rgb(17,255,0)" />
+                <stop offset="0.325" stop-color="rgb(13,255,0)" />
+                <stop offset="0.3277777777777778" stop-color="rgb(8,255,0)" />
+                <stop offset="0.33055555555555555" stop-color="rgb(4,255,0)" />
+                <stop offset="0.3333333333333333" stop-color="rgb(0,255,0)" />
+                <stop offset="0.33611111111111114" stop-color="rgb(0,255,4)" />
+                <stop offset="0.3388888888888889" stop-color="rgb(0,255,9)" />
+                <stop offset="0.3416666666666667" stop-color="rgb(0,255,13)" />
+                <stop offset="0.34444444444444444" stop-color="rgb(0,255,17)" />
+                <stop offset="0.3472222222222222" stop-color="rgb(0,255,21)" />
+                <stop offset="0.35" stop-color="rgb(0,255,25)" />
+                <stop offset="0.3527777777777778" stop-color="rgb(0,255,30)" />
+                <stop offset="0.35555555555555557" stop-color="rgb(0,255,34)" />
+                <stop offset="0.35833333333333334" stop-color="rgb(0,255,38)" />
+                <stop offset="0.3611111111111111" stop-color="rgb(0,255,43)" />
+                <stop offset="0.3638888888888889" stop-color="rgb(0,255,47)" />
+                <stop offset="0.36666666666666664" stop-color="rgb(0,255,51)" />
+                <stop offset="0.36944444444444446" stop-color="rgb(0,255,55)" />
+                <stop offset="0.37222222222222223" stop-color="rgb(0,255,60)" />
+                <stop offset="0.375" stop-color="rgb(0,255,64)" />
+                <stop offset="0.37777777777777777" stop-color="rgb(0,255,68)" />
+                <stop offset="0.38055555555555554" stop-color="rgb(0,255,72)" />
+                <stop offset="0.38333333333333336" stop-color="rgb(0,255,77)" />
+                <stop offset="0.3861111111111111" stop-color="rgb(0,255,81)" />
+                <stop offset="0.3888888888888889" stop-color="rgb(0,255,85)" />
+                <stop offset="0.39166666666666666" stop-color="rgb(0,255,89)" />
+                <stop offset="0.39444444444444443" stop-color="rgb(0,255,94)" />
+                <stop offset="0.3972222222222222" stop-color="rgb(0,255,98)" />
+                <stop offset="0.4" stop-color="rgb(0,255,102)" />
+                <stop offset="0.4027777777777778" stop-color="rgb(0,255,106)" />
+                <stop offset="0.40555555555555556" stop-color="rgb(0,255,111)" />
+                <stop offset="0.4083333333333333" stop-color="rgb(0,255,115)" />
+                <stop offset="0.4111111111111111" stop-color="rgb(0,255,119)" />
+                <stop offset="0.41388888888888886" stop-color="rgb(0,255,123)" />
+                <stop offset="0.4166666666666667" stop-color="rgb(0,255,128)" />
+                <stop offset="0.41944444444444445" stop-color="rgb(0,255,132)" />
+                <stop offset="0.4222222222222222" stop-color="rgb(0,255,136)" />
+                <stop offset="0.425" stop-color="rgb(0,255,140)" />
+                <stop offset="0.42777777777777776" stop-color="rgb(0,255,145)" />
+                <stop offset="0.4305555555555556" stop-color="rgb(0,255,149)" />
+                <stop offset="0.43333333333333335" stop-color="rgb(0,255,153)" />
+                <stop offset="0.4361111111111111" stop-color="rgb(0,255,157)" />
+                <stop offset="0.4388888888888889" stop-color="rgb(0,255,162)" />
+                <stop offset="0.44166666666666665" stop-color="rgb(0,255,166)" />
+                <stop offset="0.4444444444444444" stop-color="rgb(0,255,170)" />
+                <stop offset="0.44722222222222224" stop-color="rgb(0,255,174)" />
+                <stop offset="0.45" stop-color="rgb(0,255,179)" />
+                <stop offset="0.4527777777777778" stop-color="rgb(0,255,183)" />
+                <stop offset="0.45555555555555555" stop-color="rgb(0,255,187)" />
+                <stop offset="0.4583333333333333" stop-color="rgb(0,255,191)" />
+                <stop offset="0.46111111111111114" stop-color="rgb(0,255,196)" />
+                <stop offset="0.4638888888888889" stop-color="rgb(0,255,200)" />
+                <stop offset="0.4666666666666667" stop-color="rgb(0,255,204)" />
+                <stop offset="0.46944444444444444" stop-color="rgb(0,255,208)" />
+                <stop offset="0.4722222222222222" stop-color="rgb(0,255,213)" />
+                <stop offset="0.475" stop-color="rgb(0,255,217)" />
+                <stop offset="0.4777777777777778" stop-color="rgb(0,255,221)" />
+                <stop offset="0.48055555555555557" stop-color="rgb(0,255,225)" />
+                <stop offset="0.48333333333333334" stop-color="rgb(0,255,230)" />
+                <stop offset="0.4861111111111111" stop-color="rgb(0,255,234)" />
+                <stop offset="0.4888888888888889" stop-color="rgb(0,255,238)" />
+                <stop offset="0.49166666666666664" stop-color="rgb(0,255,242)" />
+                <stop offset="0.49444444444444446" stop-color="rgb(0,255,247)" />
+                <stop offset="0.49722222222222223" stop-color="rgb(0,255,251)" />
+                <stop offset="0.5" stop-color="rgb(0,255,255)" />
+                <stop offset="0.5027777777777778" stop-color="rgb(0,251,255)" />
+                <stop offset="0.5055555555555555" stop-color="rgb(0,246,255)" />
+                <stop offset="0.5083333333333333" stop-color="rgb(0,242,255)" />
+                <stop offset="0.5111111111111111" stop-color="rgb(0,238,255)" />
+                <stop offset="0.5138888888888888" stop-color="rgb(0,234,255)" />
+                <stop offset="0.5166666666666667" stop-color="rgb(0,229,255)" />
+                <stop offset="0.5194444444444445" stop-color="rgb(0,225,255)" />
+                <stop offset="0.5222222222222223" stop-color="rgb(0,221,255)" />
+                <stop offset="0.525" stop-color="rgb(0,217,255)" />
+                <stop offset="0.5277777777777778" stop-color="rgb(0,212,255)" />
+                <stop offset="0.5305555555555556" stop-color="rgb(0,208,255)" />
+                <stop offset="0.5333333333333333" stop-color="rgb(0,204,255)" />
+                <stop offset="0.5361111111111111" stop-color="rgb(0,200,255)" />
+                <stop offset="0.5388888888888889" stop-color="rgb(0,195,255)" />
+                <stop offset="0.5416666666666666" stop-color="rgb(0,191,255)" />
+                <stop offset="0.5444444444444444" stop-color="rgb(0,187,255)" />
+                <stop offset="0.5472222222222223" stop-color="rgb(0,183,255)" />
+                <stop offset="0.55" stop-color="rgb(0,178,255)" />
+                <stop offset="0.5527777777777778" stop-color="rgb(0,174,255)" />
+                <stop offset="0.5555555555555556" stop-color="rgb(0,170,255)" />
+                <stop offset="0.5583333333333333" stop-color="rgb(0,166,255)" />
+                <stop offset="0.5611111111111111" stop-color="rgb(0,161,255)" />
+                <stop offset="0.5638888888888889" stop-color="rgb(0,157,255)" />
+                <stop offset="0.5666666666666667" stop-color="rgb(0,153,255)" />
+                <stop offset="0.5694444444444444" stop-color="rgb(0,149,255)" />
+                <stop offset="0.5722222222222222" stop-color="rgb(0,145,255)" />
+                <stop offset="0.575" stop-color="rgb(0,140,255)" />
+                <stop offset="0.5777777777777777" stop-color="rgb(0,136,255)" />
+                <stop offset="0.5805555555555556" stop-color="rgb(0,132,255)" />
+                <stop offset="0.5833333333333334" stop-color="rgb(0,127,255)" />
+                <stop offset="0.5861111111111111" stop-color="rgb(0,123,255)" />
+                <stop offset="0.5888888888888889" stop-color="rgb(0,119,255)" />
+                <stop offset="0.5916666666666667" stop-color="rgb(0,115,255)" />
+                <stop offset="0.5944444444444444" stop-color="rgb(0,110,255)" />
+                <stop offset="0.5972222222222222" stop-color="rgb(0,106,255)" />
+                <stop offset="0.6" stop-color="rgb(0,102,255)" />
+                <stop offset="0.6027777777777777" stop-color="rgb(0,98,255)" />
+                <stop offset="0.6055555555555555" stop-color="rgb(0,94,255)" />
+                <stop offset="0.6083333333333333" stop-color="rgb(0,89,255)" />
+                <stop offset="0.6111111111111112" stop-color="rgb(0,85,255)" />
+                <stop offset="0.6138888888888889" stop-color="rgb(0,81,255)" />
+                <stop offset="0.6166666666666667" stop-color="rgb(0,76,255)" />
+                <stop offset="0.6194444444444445" stop-color="rgb(0,72,255)" />
+                <stop offset="0.6222222222222222" stop-color="rgb(0,68,255)" />
+                <stop offset="0.625" stop-color="rgb(0,64,255)" />
+                <stop offset="0.6277777777777778" stop-color="rgb(0,59,255)" />
+                <stop offset="0.6305555555555555" stop-color="rgb(0,55,255)" />
+                <stop offset="0.6333333333333333" stop-color="rgb(0,51,255)" />
+                <stop offset="0.6361111111111111" stop-color="rgb(0,47,255)" />
+                <stop offset="0.6388888888888888" stop-color="rgb(0,43,255)" />
+                <stop offset="0.6416666666666667" stop-color="rgb(0,38,255)" />
+                <stop offset="0.6444444444444445" stop-color="rgb(0,34,255)" />
+                <stop offset="0.6472222222222223" stop-color="rgb(0,30,255)" />
+                <stop offset="0.65" stop-color="rgb(0,25,255)" />
+                <stop offset="0.6527777777777778" stop-color="rgb(0,21,255)" />
+                <stop offset="0.6555555555555556" stop-color="rgb(0,17,255)" />
+                <stop offset="0.6583333333333333" stop-color="rgb(0,13,255)" />
+                <stop offset="0.6611111111111111" stop-color="rgb(0,8,255)" />
+                <stop offset="0.6638888888888889" stop-color="rgb(0,4,255)" />
+                <stop offset="0.6666666666666666" stop-color="rgb(0,0,255)" />
+                <stop offset="0.6694444444444444" stop-color="rgb(4,0,255)" />
+                <stop offset="0.6722222222222223" stop-color="rgb(8,0,255)" />
+                <stop offset="0.675" stop-color="rgb(13,0,255)" />
+                <stop offset="0.6777777777777778" stop-color="rgb(17,0,255)" />
+                <stop offset="0.6805555555555556" stop-color="rgb(21,0,255)" />
+                <stop offset="0.6833333333333333" stop-color="rgb(25,0,255)" />
+                <stop offset="0.6861111111111111" stop-color="rgb(30,0,255)" />
+                <stop offset="0.6888888888888889" stop-color="rgb(34,0,255)" />
+                <stop offset="0.6916666666666667" stop-color="rgb(38,0,255)" />
+                <stop offset="0.6944444444444444" stop-color="rgb(42,0,255)" />
+                <stop offset="0.6972222222222222" stop-color="rgb(47,0,255)" />
+                <stop offset="0.7" stop-color="rgb(51,0,255)" />
+                <stop offset="0.7027777777777777" stop-color="rgb(55,0,255)" />
+                <stop offset="0.7055555555555556" stop-color="rgb(60,0,255)" />
+                <stop offset="0.7083333333333334" stop-color="rgb(64,0,255)" />
+                <stop offset="0.7111111111111111" stop-color="rgb(68,0,255)" />
+                <stop offset="0.7138888888888889" stop-color="rgb(72,0,255)" />
+                <stop offset="0.7166666666666667" stop-color="rgb(77,0,255)" />
+                <stop offset="0.7194444444444444" stop-color="rgb(81,0,255)" />
+                <stop offset="0.7222222222222222" stop-color="rgb(85,0,255)" />
+                <stop offset="0.725" stop-color="rgb(89,0,255)" />
+                <stop offset="0.7277777777777777" stop-color="rgb(94,0,255)" />
+                <stop offset="0.7305555555555555" stop-color="rgb(98,0,255)" />
+                <stop offset="0.7333333333333333" stop-color="rgb(102,0,255)" />
+                <stop offset="0.7361111111111112" stop-color="rgb(106,0,255)" />
+                <stop offset="0.7388888888888889" stop-color="rgb(110,0,255)" />
+                <stop offset="0.7416666666666667" stop-color="rgb(115,0,255)" />
+                <stop offset="0.7444444444444445" stop-color="rgb(119,0,255)" />
+                <stop offset="0.7472222222222222" stop-color="rgb(123,0,255)" />
+                <stop offset="0.75" stop-color="rgb(127,0,255)" />
+                <stop offset="0.7527777777777778" stop-color="rgb(132,0,255)" />
+                <stop offset="0.7555555555555555" stop-color="rgb(136,0,255)" />
+                <stop offset="0.7583333333333333" stop-color="rgb(140,0,255)" />
+                <stop offset="0.7611111111111111" stop-color="rgb(144,0,255)" />
+                <stop offset="0.7638888888888888" stop-color="rgb(149,0,255)" />
+                <stop offset="0.7666666666666667" stop-color="rgb(153,0,255)" />
+                <stop offset="0.7694444444444445" stop-color="rgb(157,0,255)" />
+                <stop offset="0.7722222222222223" stop-color="rgb(162,0,255)" />
+                <stop offset="0.775" stop-color="rgb(166,0,255)" />
+                <stop offset="0.7777777777777778" stop-color="rgb(170,0,255)" />
+                <stop offset="0.7805555555555556" stop-color="rgb(174,0,255)" />
+                <stop offset="0.7833333333333333" stop-color="rgb(179,0,255)" />
+                <stop offset="0.7861111111111111" stop-color="rgb(183,0,255)" />
+                <stop offset="0.7888888888888889" stop-color="rgb(187,0,255)" />
+                <stop offset="0.7916666666666666" stop-color="rgb(191,0,255)" />
+                <stop offset="0.7944444444444444" stop-color="rgb(195,0,255)" />
+                <stop offset="0.7972222222222223" stop-color="rgb(200,0,255)" />
+                <stop offset="0.8" stop-color="rgb(204,0,255)" />
+                <stop offset="0.8027777777777778" stop-color="rgb(208,0,255)" />
+                <stop offset="0.8055555555555556" stop-color="rgb(212,0,255)" />
+                <stop offset="0.8083333333333333" stop-color="rgb(217,0,255)" />
+                <stop offset="0.8111111111111111" stop-color="rgb(221,0,255)" />
+                <stop offset="0.8138888888888889" stop-color="rgb(225,0,255)" />
+                <stop offset="0.8166666666666667" stop-color="rgb(229,0,255)" />
+                <stop offset="0.8194444444444444" stop-color="rgb(234,0,255)" />
+                <stop offset="0.8222222222222222" stop-color="rgb(238,0,255)" />
+                <stop offset="0.825" stop-color="rgb(242,0,255)" />
+                <stop offset="0.8277777777777777" stop-color="rgb(246,0,255)" />
+                <stop offset="0.8305555555555556" stop-color="rgb(251,0,255)" />
+                <stop offset="0.8333333333333334" stop-color="rgb(255,0,255)" />
+                <stop offset="0.8361111111111111" stop-color="rgb(255,0,251)" />
+                <stop offset="0.8388888888888889" stop-color="rgb(255,0,246)" />
+                <stop offset="0.8416666666666667" stop-color="rgb(255,0,242)" />
+                <stop offset="0.8444444444444444" stop-color="rgb(255,0,238)" />
+                <stop offset="0.8472222222222222" stop-color="rgb(255,0,234)" />
+                <stop offset="0.85" stop-color="rgb(255,0,230)" />
+                <stop offset="0.8527777777777777" stop-color="rgb(255,0,225)" />
+                <stop offset="0.8555555555555555" stop-color="rgb(255,0,221)" />
+                <stop offset="0.8583333333333333" stop-color="rgb(255,0,217)" />
+                <stop offset="0.8611111111111112" stop-color="rgb(255,0,212)" />
+                <stop offset="0.8638888888888889" stop-color="rgb(255,0,208)" />
+                <stop offset="0.8666666666666667" stop-color="rgb(255,0,204)" />
+                <stop offset="0.8694444444444445" stop-color="rgb(255,0,200)" />
+                <stop offset="0.8722222222222222" stop-color="rgb(255,0,195)" />
+                <stop offset="0.875" stop-color="rgb(255,0,191)" />
+                <stop offset="0.8777777777777778" stop-color="rgb(255,0,187)" />
+                <stop offset="0.8805555555555555" stop-color="rgb(255,0,183)" />
+                <stop offset="0.8833333333333333" stop-color="rgb(255,0,178)" />
+                <stop offset="0.8861111111111111" stop-color="rgb(255,0,174)" />
+                <stop offset="0.8888888888888888" stop-color="rgb(255,0,170)" />
+                <stop offset="0.8916666666666667" stop-color="rgb(255,0,166)" />
+                <stop offset="0.8944444444444445" stop-color="rgb(255,0,161)" />
+                <stop offset="0.8972222222222223" stop-color="rgb(255,0,157)" />
+                <stop offset="0.9" stop-color="rgb(255,0,153)" />
+                <stop offset="0.9027777777777778" stop-color="rgb(255,0,149)" />
+                <stop offset="0.9055555555555556" stop-color="rgb(255,0,145)" />
+                <stop offset="0.9083333333333333" stop-color="rgb(255,0,140)" />
+                <stop offset="0.9111111111111111" stop-color="rgb(255,0,136)" />
+                <stop offset="0.9138888888888889" stop-color="rgb(255,0,132)" />
+                <stop offset="0.9166666666666666" stop-color="rgb(255,0,128)" />
+                <stop offset="0.9194444444444444" stop-color="rgb(255,0,123)" />
+                <stop offset="0.9222222222222223" stop-color="rgb(255,0,119)" />
+                <stop offset="0.925" stop-color="rgb(255,0,115)" />
+                <stop offset="0.9277777777777778" stop-color="rgb(255,0,110)" />
+                <stop offset="0.9305555555555556" stop-color="rgb(255,0,106)" />
+                <stop offset="0.9333333333333333" stop-color="rgb(255,0,102)" />
+                <stop offset="0.9361111111111111" stop-color="rgb(255,0,98)" />
+                <stop offset="0.9388888888888889" stop-color="rgb(255,0,93)" />
+                <stop offset="0.9416666666666667" stop-color="rgb(255,0,89)" />
+                <stop offset="0.9444444444444444" stop-color="rgb(255,0,85)" />
+                <stop offset="0.9472222222222222" stop-color="rgb(255,0,81)" />
+                <stop offset="0.95" stop-color="rgb(255,0,76)" />
+                <stop offset="0.9527777777777777" stop-color="rgb(255,0,72)" />
+                <stop offset="0.9555555555555556" stop-color="rgb(255,0,68)" />
+                <stop offset="0.9583333333333334" stop-color="rgb(255,0,64)" />
+                <stop offset="0.9611111111111111" stop-color="rgb(255,0,59)" />
+                <stop offset="0.9638888888888889" stop-color="rgb(255,0,55)" />
+                <stop offset="0.9666666666666667" stop-color="rgb(255,0,51)" />
+                <stop offset="0.9694444444444444" stop-color="rgb(255,0,47)" />
+                <stop offset="0.9722222222222222" stop-color="rgb(255,0,43)" />
+                <stop offset="0.975" stop-color="rgb(255,0,38)" />
+                <stop offset="0.9777777777777777" stop-color="rgb(255,0,34)" />
+                <stop offset="0.9805555555555555" stop-color="rgb(255,0,30)" />
+                <stop offset="0.9833333333333333" stop-color="rgb(255,0,26)" />
+                <stop offset="0.9861111111111112" stop-color="rgb(255,0,21)" />
+                <stop offset="0.9888888888888889" stop-color="rgb(255,0,17)" />
+                <stop offset="0.9916666666666667" stop-color="rgb(255,0,13)" />
+                <stop offset="0.9944444444444445" stop-color="rgb(255,0,8)" />
+                <stop offset="0.9972222222222222" stop-color="rgb(255,0,4)" />
+                <stop offset="1" stop-color="rgb(255,0,0)" />
+            </linearGradient>
+        </defs>
+
+        <rect x="0" y="0" width="90" height="1000" fill="url(#saturationGradient)"
+            onclick="ChangeSaturation(evt)" id="saturationSlider" />
+        <circle cx="45" cy="1000" r="20" fill="none" stroke="green" id="saturationSelector" />
+
+        <rect x="1610" y="0" width="90" height="1000" fill="url(#luminanceGradient)"
+            onclick="ChangeLuminance(evt)" id="luminanceSlider" />
+        <circle cx="1655" cy="500" r="20" fill="none" stroke="green" id="luminanceSelector" />
+
+        <rect x="90" y="667" width="1520" height="333" fill="url(#hueGradient)"
+            onclick="ChangeHue(evt)" id="hueSlider" />
+        <circle cx="500" cy="834" r="20" fill="none" stroke="black" id="hueSelector" />
+
+        <rect x="90" y="0" width="1520" height="667" fill="rgb(0,255,0)" id="mainViewer" />
+        <text x="90" y="50" class="label" id="rgbLabel">rgb(0,255,0)</text>
+        <text x="90" y="100" class="label" id="hslLabel">120 100% 50%</text>
+        <a href="http://www.endycahyono.com/article/my-attempt-at-creating-a-better-color-picker">
+            <text x="1610" y="650" text-anchor="end" class="label">Explanation</text>
+        </a>
+    </svg>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: lightgray;
+        }
+
+        #cp {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: white;
+        }
+
+        .label {
+            font-size: 45px;
+            font-family: Arial, Helvetica, sans-serif;
+            fill: black;
+        }
+    </style>
+    <script>
+        "use strict";
+
+        let svgCanvas = document.getElementById("cp");
+        let svgPoint = svgCanvas.createSVGPoint();
+
+        let saturationSlider = document.getElementById("saturationSlider");
+        let saturationSliderHeight = saturationSlider.getBBox().height;
+        let saturationSelector = document.getElementById("saturationSelector");
+        let saturationFromColor = document.getElementById("saturationFromColor");
+        let saturationToColor = document.getElementById("saturationToColor");
+
+        let luminanceSlider = document.getElementById("luminanceSlider");
+        let luminanceSliderHeight = luminanceSlider.getBBox().height;
+        let luminanceSelector = document.getElementById("luminanceSelector");
+        let luminanceLowColor = document.getElementById("luminanceLowColor");
+        let luminanceMidColor = document.getElementById("luminanceMidColor");
+        let luminanceHighColor = document.getElementById("luminanceHighColor");
+
+        let hueSlider = document.getElementById("hueSlider");
+        let hueSliderX = hueSlider.getBBox().x;
+        let hueSliderWidth = hueSlider.getBBox().width;
+        let hueSelector = document.getElementById("hueSelector");
+
+        let mainViewer = document.getElementById("mainViewer");
+        let rgbLabel = document.getElementById("rgbLabel");
+        let hslLabel = document.getElementById("hslLabel");
+
+        let currentHsl = [0.33333333, 1.0, 0.5];
+
+        updateMainViewer(currentHsl);
+
+        function ChangeSaturation(clickEvent) {
+            let coord = getSvgCoord(clickEvent);
+            let newSaturation = coord.y / saturationSliderHeight;
+
+            currentHsl[1] = newSaturation;
+
+            updateMainViewer(currentHsl);
+        }
+
+        function ChangeLuminance(clickEvent) {
+            let coord = getSvgCoord(clickEvent);
+            let newLuminance = coord.y / luminanceSliderHeight;
+
+            currentHsl[2] = newLuminance;
+
+            updateMainViewer(currentHsl);
+        }
+
+        function ChangeHue(clickEvent) {
+            let coord = getSvgCoord(clickEvent);
+            let newHue = (coord.x - hueSliderX) / hueSliderWidth;
+
+            currentHsl[0] = newHue;
+
+            updateMainViewer(currentHsl);
+        }
+
+        function updateMainViewer(hslVal) {
+            let currentRgb = hslToRgb(...hslVal);
+            let hslStr = getHslString(hslVal);
+            let rgbStr = getRgbString(currentRgb);
+            let satSelCy = hslVal[1] * saturationSliderHeight;
+            let lumSelCy = hslVal[2] * luminanceSliderHeight;
+            let hueSelCx = hslVal[0] * hueSliderWidth + hueSliderX;
+
+            saturationSelector.setAttribute("cy", satSelCy);
+            saturationFromColor.setAttribute("stop-color", getRgbString(hslToRgb(hslVal[0], 0, 0.5)));
+            saturationToColor.setAttribute("stop-color", getRgbString(hslToRgb(hslVal[0], 1, 0.5)));
+
+            luminanceSelector.setAttribute("cy", lumSelCy);
+            luminanceLowColor.setAttribute("stop-color", getRgbString(hslToRgb(hslVal[0], 1, 0)));
+            luminanceMidColor.setAttribute("stop-color", getRgbString(hslToRgb(hslVal[0], 1, 0.5)));
+            luminanceHighColor.setAttribute("stop-color", getRgbString(hslToRgb(hslVal[0], 1, 1)));
+
+            hueSelector.setAttribute("cx", hueSelCx);
+
+            mainViewer.setAttribute("fill", rgbStr);
+            rgbLabel.textContent = rgbStr;
+            hslLabel.textContent = hslStr;
+        }
+
+        function getSvgCoord(clickEvent) {
+            svgPoint.x = clickEvent.clientX;
+            svgPoint.y = clickEvent.clientY;
+            let coord = svgPoint.matrixTransform(svgCanvas.getScreenCTM().inverse());
+            return coord;
+        }
+
+        function getRgbString(rgbArr) {
+            let rgbStr = "rgb(" + rgbArr.map(rgb => Math.round(rgb)).join(",") + ")";
+            return rgbStr;
+        }
+
+        function getHslString(hslArr) {
+            let hue = Math.round(hslArr[0] * 360 * 100) / 100;
+            let saturation = Math.round(hslArr[1] * 100 * 100) / 100;
+            let luminance = Math.round(hslArr[2] * 100 * 100) / 100;
+            let hslStr = "" + hue + " " + saturation + "% " + luminance + "%";
+            return hslStr;
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255, g /= 255, b /= 255;
+            var max = Math.max(r, g, b), min = Math.min(r, g, b);
+            var h, s, l = (max + min) / 2;
+
+            if (max == min) {
+                h = s = 0; // achromatic
+            } else {
+                var d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            return [h, s, l];
+        }
+
+        function hslToRgb(h, s, l) {
+            var r, g, b;
+
+            if (s == 0) {
+                r = g = b = l; // achromatic
+            } else {
+                function hue2rgb(p, q, t) {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1 / 6) return p + (q - p) * 6 * t;
+                    if (t < 1 / 2) return q;
+                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                    return p;
+                }
+
+                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                var p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1 / 3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1 / 3);
+            }
+
+            return [r * 255, g * 255, b * 255];
+        }
+    </script>
+    <script type="text/javascript" id="inspectletjs">
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 1830692624]);
+        (function () {
+            function ldinsp() { if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+            setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+        })();
+    </script>
+</body>
+
+</html>

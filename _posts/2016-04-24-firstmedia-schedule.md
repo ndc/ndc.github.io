@@ -17,4 +17,4 @@ The result is not too shabby if I may say so myself :)
 
 You can create several lists, each list contains a bunch of channels you want to display. For example you create a list called 'Movies', containing channels like HBO and Cinemax, and another list called 'News', containing CNN and Al Jazeera. You can choose which date to show, and whether to show past shows. The list can be grouped by channel or ordered by time. Also, it looks quite acceptable in mobile devices.
 
-#### [Check it out!](http://www.endycahyono.com/apps/firstmedia)
+#### [Check it out!]({{site.url}}/apps/firstmedia)
