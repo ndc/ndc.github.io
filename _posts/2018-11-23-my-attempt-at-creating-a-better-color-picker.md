@@ -15,6 +15,8 @@ Since I couldn't find a decent HSL color picker, I decided to [create my own]({{
 
 Formula for converting HSL to RGB and back I got from: https://gist.github.com/mjackson/5311256
 
+Source code of the color picker is available on https://github.com/ndc/old-folks-hsl-color-picker
+
 Once the color picker is working and I had a chance to play with it, I realized some things that I wasn't aware before.
 
 I used to wonder about the differences between saturation and luminance. By changing saturation while keeping hue and luminance the same, I think I now have a better feel for it. By reducing saturation the value of red, green, and blue are getting closer, _while having the same brightness_. By increasing saturation the value of red, green, and blue are getting farther apart, while having the same brightness.
