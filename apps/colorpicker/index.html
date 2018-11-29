@@ -385,23 +385,23 @@
             </linearGradient>
         </defs>
 
-        <rect x="0" y="0" width="90" height="1000" fill="url(#saturationGradient)"
-            onclick="ChangeSaturation(evt)" id="saturationSlider" />
-        <circle cx="45" cy="1000" r="20" fill="none" stroke="green" id="saturationSelector" />
+        <rect x="0" y="0" width="170" height="1000" fill="url(#saturationGradient)"
+            id="saturationSlider" />
+        <circle cx="85" cy="1000" r="20" fill="none" stroke="green" id="saturationSelector" />
 
-        <rect x="1610" y="0" width="90" height="1000" fill="url(#luminanceGradient)"
-            onclick="ChangeLuminance(evt)" id="luminanceSlider" />
-        <circle cx="1655" cy="500" r="20" fill="none" stroke="green" id="luminanceSelector" />
+        <rect x="1530" y="0" width="170" height="1000" fill="url(#luminanceGradient)"
+            id="luminanceSlider" />
+        <circle cx="1615" cy="500" r="20" fill="none" stroke="green" id="luminanceSelector" />
 
-        <rect x="90" y="667" width="1520" height="333" fill="url(#hueGradient)"
-            onclick="ChangeHue(evt)" id="hueSlider" />
+        <rect x="170" y="667" width="1360" height="333" fill="url(#hueGradient)"
+            id="hueSlider" />
         <circle cx="500" cy="834" r="20" fill="none" stroke="black" id="hueSelector" />
 
-        <rect x="90" y="0" width="1520" height="667" fill="rgb(0,255,0)" id="mainViewer" />
-        <text x="90" y="50" class="label" id="rgbLabel">rgb(0,255,0)</text>
-        <text x="90" y="100" class="label" id="hslLabel">120 100% 50%</text>
+        <rect x="170" y="0" width="1360" height="667" fill="rgb(0,255,0)" id="mainViewer" />
+        <text x="170" y="55" class="label" id="rgbLabel">rgb(0,255,0)</text>
+        <text x="170" y="110" class="label" id="hslLabel">120 100% 50%</text>
         <a href="http://www.endycahyono.com/article/my-attempt-at-creating-a-better-color-picker">
-            <text x="1610" y="650" text-anchor="end" class="label">Explanation</text>
+            <text x="1530" y="650" text-anchor="end" class="label">Explanation</text>
         </a>
     </svg>
     <style>
@@ -412,16 +412,18 @@
         }
 
         #cp {
+            display: block;
             position: fixed;
-            width: 100%;
-            height: 100%;
+            top: 2%;
+            left: 2%;
+            width: 96%;
+            height: 96%;
             background: white;
         }
 
         .label {
             font-size: 45px;
             font-family: Arial, Helvetica, sans-serif;
-            fill: black;
         }
     </style>
     <script>
@@ -431,12 +433,14 @@
         let svgPoint = svgCanvas.createSVGPoint();
 
         let saturationSlider = document.getElementById("saturationSlider");
+        saturationSlider.addEventListener("click", ChangeSaturation);
         let saturationSliderHeight = saturationSlider.getBBox().height;
         let saturationSelector = document.getElementById("saturationSelector");
         let saturationFromColor = document.getElementById("saturationFromColor");
         let saturationToColor = document.getElementById("saturationToColor");
 
         let luminanceSlider = document.getElementById("luminanceSlider");
+        luminanceSlider.addEventListener("click", ChangeLuminance);
         let luminanceSliderHeight = luminanceSlider.getBBox().height;
         let luminanceSelector = document.getElementById("luminanceSelector");
         let luminanceLowColor = document.getElementById("luminanceLowColor");
@@ -444,6 +448,7 @@
         let luminanceHighColor = document.getElementById("luminanceHighColor");
 
         let hueSlider = document.getElementById("hueSlider");
+        hueSlider.addEventListener("click", ChangeHue);
         let hueSliderX = hueSlider.getBBox().x;
         let hueSliderWidth = hueSlider.getBBox().width;
         let hueSelector = document.getElementById("hueSelector");
@@ -505,6 +510,14 @@
             mainViewer.setAttribute("fill", rgbStr);
             rgbLabel.textContent = rgbStr;
             hslLabel.textContent = hslStr;
+
+            if (hslVal[2] < 0.33) {
+                rgbLabel.setAttribute("fill", "white");
+                hslLabel.setAttribute("fill", "white");
+            } else {
+                rgbLabel.setAttribute("fill", "black");
+                hslLabel.setAttribute("fill", "black");
+            }
         }
 
         function getSvgCoord(clickEvent) {
@@ -580,6 +593,17 @@
             function ldinsp() { if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
             setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
         })();
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-26515809-2', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
     </script>
 </body>
 
