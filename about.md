@@ -7,7 +7,7 @@ layout: pages
 
 This website is hosted on [GitHub Pages](http://pages.github.com/).
 
-Background image is from [Subtle Patterns](http://subtlepatterns.com/) website.
+The Greyzz background image is from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/greyzz/).
 
 Libraries, services, products used to build this website:
 
@@ -20,6 +20,7 @@ Libraries, services, products used to build this website:
 * [Font Awesome](https://fontawesome.com/)
 * [Git](https://git-scm.com/)
 * [Google Analytics](https://www.google.com/analytics/)
+* [ImgSafe](https://imgsafe.org/)
 * [Jekyll](https://jekyllrb.com/)
 * [jQuery](https://jquery.com/)
 * [Lodash](https://lodash.com/)
