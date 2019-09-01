@@ -611,7 +611,7 @@ function ($scope, $location, $q, Settings, BlitzAPI, BookingState) {
     };
 
     $scope.reserveseats = function () {
-        var selectedseats = _.where($scope.SeatLayout.seats, { selected: true });
+        var selectedseats = _.where($scope.SeatLayout.seats, { selected: true }).map(s => s.code);
         if (selectedseats.length < 1) {
             $scope.$broadcast("notifyError", "Please select some seats first.");
             return;
