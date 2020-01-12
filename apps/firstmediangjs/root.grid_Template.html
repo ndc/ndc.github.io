@@ -1,0 +1,77 @@
+<div class="container">
+
+    <form ng-submit="vm.Refresh()" class="form-inline">
+        <label>Channel Lists:</label>
+        <label class="radio-inline" ng-repeat="fav in vm.UserData.Favorites">
+            <input type="radio" ng-model="vm.UserData.SelectedFavorite"
+                ng-change="vm.ChangeFavorite()"
+                ng-value="vm.UserData.Favorites.indexOf(fav)">
+            {{fav.Code}}
+            <a ui-sref="favoriteEdit({favoriteid:vm.UserData.Favorites.indexOf(fav)})"
+                    class="btn btn-default btn-xs" title="Edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            &nbsp;
+        </label>
+        <a ui-sref="favoriteEdit({favoriteid:-1})" class="btn btn-default btn-xs" title="Create">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a> &nbsp;
+        <button ng-click="vm.Reset()" type="button" class="btn btn-danger btn-xs" title="Reset">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </button> &nbsp;
+        <div class="form-group">
+            <label for="showdate">Date:</label>
+            <input ng-model="vm.ShowDate" type="date" class="form-control" id="showdate" />
+        </div>
+        <button type="submit" class="btn btn-default">Refresh</button>
+    </form>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Channels:</label>
+            <span class="form-control-static"></span>
+            <span ng-repeat="channel in vm.UserData.Favorites[vm.UserData.SelectedFavorite].Channels" class="form-control-static">
+                {{channel.Name}}
+                &nbsp;
+            </span>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="checkbox">
+            <label>
+                <input ng-model="vm.UserData.FilterPast" ng-change="vm.ChangeFilterPast()" type="checkbox" />
+                Filter Past Shows
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Channel</th>
+            <th ng-repeat="milestone in vm.Milestones">
+                {{milestone | date:"HH:mm"}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(channelIdx, row) in vm.ChannelRows">
+            <td>{{vm.Channels[channelIdx].Name}}</td>
+            <td ng-repeat="(timeIdx, col) in row" ng-if="col.Generate" colspan="{{col.Show.Span}}" ng-class="{'text-muted': col.Show.isPast}">
+                <a ng-if="!!col.Show" ng-click="vm.ShowDetail(col.Show)">
+                    {{col.Show.Title}}
+                </a>
+                <br/>
+                <span ng-if="!!col.Show">
+                    {{col.Show.Channel.Name}} ({{col.Show.Channel.Number}}) {{col.Show.ShowTime | date:"HH:mm"}} - {{col.Show.Until | date:"HH:mm"}}
+                </span>
+                <br/>
+            </td>
+        </tr>
+    </tbody>
+</table>
