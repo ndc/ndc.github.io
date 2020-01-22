@@ -11,7 +11,6 @@ layout: null
 </url>
 {% endfor %}
 
-<url><loc>{{site.url}}/apps/firstmedia/</loc></url>
 <url><loc>{{site.url}}/apps/imagemap/</loc></url>
 <url><loc>{{site.url}}/apps/multiplication/</loc></url>
 <url><loc>{{site.url}}/apps/ticketbooking/</loc></url>

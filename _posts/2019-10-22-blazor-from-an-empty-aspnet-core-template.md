@@ -2,7 +2,7 @@
 title: Blazor from an Empty ASP.NET Core Template
 date: 2019-10-22 18:25:00 +0700
 layout: blogdetail
-published: true
+published: false
 ---
 
 This is a note for myself when I tried Blazor (server side) for the first time. I prefer to start from an empty ASP.Net Core project and then adding parts one by one while learning the purpose of each part.
