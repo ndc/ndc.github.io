@@ -2,7 +2,7 @@
 title: Blazor from an Empty ASP.NET Core Template
 date: 2019-10-22 18:25:00 +0700
 layout: blogdetail
-published: false
+published: true
 ---
 
 This is a note for myself when I tried Blazor (server side) for the first time. I prefer to start from an empty ASP.Net Core project and then adding parts one by one while learning the purpose of each part.
@@ -57,7 +57,7 @@ So 5 things:
 
 `_Host.cshtml` doesn't exist yet. We need to create this razor page. Usually `_Host.cshtml` is put under `Pages` folder.
 
-```html
+```razor
 @page "/"
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -89,7 +89,7 @@ If you notice the tag name matches the type name used by `Html.RenderComponentAs
 
 Now let's create the `App.razor` component. Usually `App.razor` is put under the top folder adjacent to `Startup.cs`.
 
-```html
+```razor
 <Microsoft.AspNetCore.Components.Routing.Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" />
