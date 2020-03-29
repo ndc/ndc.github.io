@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Show (Vue Multi-Paged App)</title>
+</head>
+
+<body>
+    <div id="main-app">
+        <select-date :datevalue="ShowDate" @showdatechanged="ShowDateChanged"></select-date>
+        <selection-summary :showdate="ShowDate"></selection-summary>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+
+        const AllData = {
+            Movies: [
+                {
+                    Code: "MOV0002",
+                    Title: "300",
+                    Genre: "ACTION",
+                    Rating: "D",
+                    Cast: "Gerard Butler, Lena Headey",
+                    Director: "Zack Snyder",
+                    Language: "ENGLISH",
+                    Subtitle: "BAHASA INDONESIA"
+                },
+                {
+                    Code: "MOV0003",
+                    Title: "Cars",
+                    Genre: "ANIMATION",
+                    Rating: "SU",
+                    Cast: "Owen Wilson, Bonnie Hunt",
+                    Director: "John Lasseter",
+                    Language: "ENGLISH",
+                    Subtitle: "BAHASA INDONESIA"
+                },
+                {
+                    Code: "MOV0001",
+                    Title: "Casino Royale",
+                    Genre: "ACTION",
+                    Rating: "D",
+                    Cast: "Daniel Craig, Eva Green, Judi Dench",
+                    Director: "Martin Campbell",
+                    Language: "ENGLISH",
+                    Subtitle: "BAHASA INDONESIA"
+                }
+            ],
+            Cinemas: [
+                {
+                    Code: "0100",
+                    Name: "Paris van Java",
+                    ShortName: "PVJ",
+                    Address: "Sukajadi #137 - 139",
+                    City: "Bandung",
+                    Telephone: "+622282063630",
+                    AudiTypes: [
+                        "N",
+                        "V"
+                    ]
+                },
+                {
+                    Code: "0200",
+                    Name: "Grand Indonesia",
+                    ShortName: "GI",
+                    Address: "MH Thamrin 1",
+                    City: "Jakarta",
+                    Telephone: "+622123580484",
+                    AudiTypes: [
+                        "N",
+                        "Y"
+                    ]
+                },
+                {
+                    Code: "0300",
+                    Name: "Pacific Place",
+                    ShortName: "PP",
+                    Address: "Sudirman 52 - 53",
+                    City: "Jakarta",
+                    Telephone: "+622151400800",
+                    AudiTypes: [
+                        "N",
+                        "V"
+                    ]
+                }
+            ],
+            Schedules: [
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 30000,
+                    ShowTime: "11:00",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 5
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 40000,
+                    ShowTime: "15:15",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 5
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 50000,
+                    ShowTime: "19:30",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 5
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 60000,
+                    ShowTime: "23:45",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 5
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 40000,
+                    ShowTime: "11:00",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 50000,
+                    ShowTime: "15:15",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 60000,
+                    ShowTime: "19:30",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0100",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 70000,
+                    ShowTime: "23:45",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 50000,
+                    ShowTime: "11:00",
+                    AudiType: "V",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 60000,
+                    ShowTime: "15:15",
+                    AudiType: "V",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 70000,
+                    ShowTime: "19:30",
+                    AudiType: "V",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 80000,
+                    ShowTime: "23:45",
+                    AudiType: "V",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 12
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 60000,
+                    ShowTime: "11:00",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 1
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 70000,
+                    ShowTime: "15:15",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 1
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 80000,
+                    ShowTime: "19:30",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 1
+                },
+                {
+                    CinemaCode: "0200",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0002",
+                    Price: 30000,
+                    ShowTime: "23:45",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 1
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 70000,
+                    ShowTime: "11:00",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 6
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 80000,
+                    ShowTime: "15:15",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 6
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 30000,
+                    ShowTime: "19:30",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 6
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0003",
+                    Price: 40000,
+                    ShowTime: "23:45",
+                    AudiType: "N",
+                    MovieFormat: "C",
+                    Midnight: 0,
+                    Capacity: 6
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 80000,
+                    ShowTime: "11:00",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 4
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 30000,
+                    ShowTime: "15:15",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 4
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 40000,
+                    ShowTime: "19:30",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 4
+                },
+                {
+                    CinemaCode: "0300",
+                    ShowDate: "2020-03-29",
+                    MovieCode: "MOV0001",
+                    Price: 50000,
+                    ShowTime: "23:45",
+                    AudiType: "N",
+                    MovieFormat: "2D",
+                    Midnight: 0,
+                    Capacity: 4
+                }
+            ]
+        }
+
+
+
+        Vue.component('select-date', {
+            props: ['datevalue'],
+            template: `
+<input type="date" @change="$emit('showdatechanged', $event.target.value)" :value="datevalue">
+`
+        })
+
+        Vue.component('selection-summary', {
+            props: ['showdate'],
+            template: `
+<div>
+    <p>Show Date: {{showdate}}</p>
+</div>
+`
+        })
+
+        const app = new Vue({
+            el: "#main-app",
+            data() {
+                return {
+                    ShowDate: moment().local().format().substr(0, 10)
+                };
+            },
+            computed: {
+                //
+            },
+            methods: {
+                ShowDateChanged(newValue) {
+                    this.ShowDate = newValue
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
