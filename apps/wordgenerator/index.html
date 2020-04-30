@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Generator</title>
+</head>
+
+<body>
+    <div id="main-app">
+        <input type="number" v-model="SyllableCount" title="Syllable Count">
+        <input type="number" v-model="WordCount" title="Word Count">
+        <button @click="GenerateWords(WordCount, SyllableCount)">Generate</button>
+        <div>
+            <p v-for="word in GeneratedWords">{{word}}</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+
+        const MainApp = new Vue({
+            el: "#main-app",
+            data() {
+                return {
+                    ShowDate: moment().local().format().substr(0, 10),
+                    Vowels: ["a", "e", "i", "o", "u"],
+                    Consonants: ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"],
+                    SyllableTypes: [[this.GenV, 1], [this.GenVV, 1], [this.GenCV, 2], [this.GenVC, 2], [this.GenCVC, 3]],
+                    SyllableCount: "3",
+                    WordCount: "10",
+                    GeneratedWords: []
+                };
+            },
+            computed: {
+                SyllableTypesFlattened() {
+                    return this.SyllableTypes
+                        .reduce(
+                            (tot, cur) => tot.concat(Array(cur[1]).fill().map(a => cur[0])),
+                            [])
+                        .flat();
+                }
+            },
+            methods: {
+                GenerateRandomIntegerInclusive(min, max) {
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                },
+                Rand(array) {
+                    let whichOne = this.GenerateRandomIntegerInclusive(0, array.length - 1);
+                    return array[whichOne];
+                },
+                GenV() {
+                    return this.Rand(this.Vowels);
+                },
+                GenVV() {
+                    return this.Rand(this.Vowels) + this.Rand(this.Vowels);
+                },
+                GenCV() {
+                    return this.Rand(this.Consonants) + this.Rand(this.Vowels);
+                },
+                GenVC() {
+                    return this.Rand(this.Vowels) + this.Rand(this.Consonants);
+                },
+                GenCVC() {
+                    return this.Rand(this.Consonants) + this.Rand(this.Vowels) + this.Rand(this.Consonants);
+                },
+                GenSyllables(howMany) {
+                    let syllables = Array(howMany).fill().map(a => this.Rand(this.SyllableTypesFlattened)()).join("-");
+                    return syllables;
+                },
+                GenerateWords(wrdCnt, sylCnt) {
+                    this.GeneratedWords = Array(Number(wrdCnt)).fill().map(w => this.GenSyllables(Number(sylCnt)));
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
