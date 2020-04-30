@@ -5,15 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-    <div id="main-app">
-        <input type="number" v-model="SyllableCount" title="Syllable Count">
-        <input type="number" v-model="WordCount" title="Word Count">
-        <button @click="GenerateWords(WordCount, SyllableCount)">Generate</button>
-        <div>
-            <p v-for="word in GeneratedWords">{{word}}</p>
+    <div id="main-app" class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Word Generator</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="iSyllableCount">Syllable Count</label>
+                        <input v-model="SyllableCount" type="number" title="Syllable Count" id="iSyllableCount"
+                            class="form-control">
+                        <small class="form-text text-muted">Set to 0 or empty for random syllable count.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="iWordCount">Word Count</label>
+                        <input v-model="WordCount" type="number" title="Word Count" class="form-control"
+                            id="iWordCount">
+                    </div>
+                    <button @click="GenerateWords(WordCount, SyllableCount)" type="button"
+                        class="btn btn-primary">Generate</button>
+                </form>
+                <div>
+                    <hr>
+                    <p v-for="word in GeneratedWords">{{word}}</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
@@ -24,11 +44,11 @@
             el: "#main-app",
             data() {
                 return {
-                    ShowDate: moment().local().format().substr(0, 10),
                     Vowels: ["a", "e", "i", "o", "u"],
                     Consonants: ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"],
                     SyllableTypes: [[this.GenV, 1], [this.GenVV, 1], [this.GenCV, 2], [this.GenVC, 2], [this.GenCVC, 3]],
-                    SyllableCount: "3",
+                    SyllableCountFrequency: [[1, 4], [2, 12], [3, 10], [4, 6], [5, 1], [6, 1], [7, 1], [8, 1]],
+                    SyllableCount: "",
                     WordCount: "10",
                     GeneratedWords: []
                 };
@@ -38,8 +58,16 @@
                     return this.SyllableTypes
                         .reduce(
                             (tot, cur) => tot.concat(Array(cur[1]).fill().map(a => cur[0])),
-                            [])
+                            []
+                        )
                         .flat();
+                },
+                SyllableCountFrequencyFlattened() {
+                    return this.SyllableCountFrequency
+                        .reduce(
+                            (tot, cur) => tot.concat(Array(cur[1]).fill().map(a => cur[0])),
+                            []
+                        );
                 }
             },
             methods: {
@@ -68,6 +96,9 @@
                     return this.Rand(this.Consonants) + this.Rand(this.Vowels) + this.Rand(this.Consonants);
                 },
                 GenSyllables(howMany) {
+                    if (!howMany) {
+                        howMany = this.Rand(this.SyllableCountFrequencyFlattened);
+                    }
                     let syllables = Array(howMany).fill().map(a => this.Rand(this.SyllableTypesFlattened)()).join("-");
                     return syllables;
                 },
