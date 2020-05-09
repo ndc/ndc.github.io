@@ -40,7 +40,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FmApiService = (function () {
     function FmApiService(http) {
         this.http = http;
-        this.rootUrl = 'http://app.endycahyono.com/first';
+        this.rootUrl = 'https://app.endycahyono.com/first';
     }
     // private rootUrl = 'https://xj5ldtkzwsgekvhk.azurewebsites.net';
     // private rootUrl = 'https://uspcahharhjy5eb4.apphb.com';
