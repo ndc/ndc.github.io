@@ -1,7 +1,10 @@
 permalink: /article/:title
 paginate: 5
-exclude: [excludethis]
 timezone: Asia/Jakarta
+exclude: [excludethis]
+include:
+  - "_bin"
+  - "_framework"
 
 gems:
   - jekyll-paginate
