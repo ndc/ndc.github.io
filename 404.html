@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+</head>
+
+<body>
+    <h1>404</h1>
+    <p>Not Found</p>
+    <script type="text/javascript">
+        /*
+        Adapted from Rafael Pedicini's Single Page Apps for GitHub Pages:
+        https://github.com/rafrex/spa-github-pages
+
+        Must be put at the website's root.
+
+        https://mydomain/asubdir/one/two?a=b&c=d#qwe
+        becomes
+        https://mydomain/asubdir/?p=/one/two&q=a=b~and~c=d#qwe
+
+        This 404.html file must be at least 512 bytes for it to work with IE.
+        */
+
+        (function () {
+            var segments = window.location.pathname.split("/");
+            if (segments.length > 2 && String(segments[2]).toLowerCase() == "firstmediabwa") {
+                var segmentCount = 2;
+                var wl = window.location;
+                var basePath = wl.pathname.split("/").slice(0, segmentCount + 1).join("/");
+                var restPath = wl.pathname.slice(1).split("/").slice(segmentCount).join("/").replace(/&/g, "~and~");
+                var search = wl.search ? "&q=" + wl.search.slice(1).replace(/&/g, "~and~") : "";
+                var targetUrl = wl.protocol
+                    + "//"
+                    + wl.hostname
+                    + (wl.port ? ":" + wl.port : "")
+                    + basePath
+                    + "/?p=/"
+                    + restPath
+                    + search
+                    + wl.hash;
+                wl.replace(targetUrl);
+            }
+        })();
+    </script>
+</body>
+
+</html>
