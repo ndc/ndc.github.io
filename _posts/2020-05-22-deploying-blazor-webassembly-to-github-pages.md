@@ -1,6 +1,6 @@
 ---
 title: Deploying Blazor WebAssembly to GitHub Pages
-date: 2020-05-22 19:23:00 +0700
+date: 2020-07-26 15:04:00 +0700
 layout: blogdetail
 published: true
 ---
@@ -43,6 +43,24 @@ app/mybwa/** binary
 
 Notice the double asterisks. It means consider as binary all files in said folder, and all subfolders under it.
 
+Third difference is my app is in a subdirectory, not at the root of the website. GHP only uses the `404.html` at the root of the website. At first the `404.html` page was at the root of my app, and the redirect didn't work. I had to move the `404.html` to the root of my website and modified the javascript to add a check: if the URL is for the BWA app, then proceed with the redirect, if not, then just tell the user the page is not found. The javascript ends up looking like this:
+
+```javascript
+(function () {
+    var segments = window.location.pathname.split("/");
+    if (segments.length > 2 && String(segments[2]).toLowerCase() == "mybwa") {
+        var segmentCount = 2;
+        var wl = window.location;
+        var basePath = wl.pathname.split("/").slice(0, segmentCount + 1).join("/");
+        var restPath = wl.pathname.slice(1).split("/").slice(segmentCount).join("/").replace(/&/g, "~and~");
+        var search = wl.search ? "&q=" + wl.search.slice(1).replace(/&/g, "~and~") : "";
+        var targetUrl = wl.protocol + "//" + wl.hostname + (wl.port ? ":" + wl.port : "")
+            + basePath + "/?p=/" + restPath + search + wl.hash;
+        wl.replace(targetUrl);
+    }
+})();
+```
+
 So is my BWA running now? Not yet.
 
 I did something else that caused the package integrity to fail. BWA needs to know the actual base URL it is running from in order to generate correct URLs. It is set in `index.html`'s `base` tag:
@@ -51,11 +69,9 @@ I did something else that caused the package integrity to fail. BWA needs to kno
 <base href="/app/mybwa/" />
 ```
 
-I would really prefer not to include the deployment location in the source code. I believe it is deployment concern and not a development concern. If I give this app to 5 people I don't want to compile for each person. Base path should be set in config file or environment variable, but I haven't found a way to do that.
+But in the source code I set `base` to `/` like the default. I would really prefer not to include the deployment location in the source code. I believe it is deployment concern and not a development concern. If I give this app to 5 people I don't want to compile for each person. Base path should be set in config file or environment variable, but I haven't found a way to do that. Setting `base` to `/` simplifies debugging too.
 
-So for now I set `base` to `/` in the source code like the default. This simplifies debugging too. When deploying I will publish the app and then change the published `index.html`'s `base` to `/app/mybwa/`.
-
-This will break the integrity check. To make the app run I disabled integrity check by following [Steven Sanderson's note](https://github.com/dotnet/aspnetcore/issues/19828#issuecomment-601823319) to add `BlazorCacheBootResources` tag in the app's `.csproj` file:
+When deploying I will publish the app and then change the published `index.html`'s `base` to `/app/mybwa/`. This will break the integrity check. To make the app run I disabled integrity check by following [Steven Sanderson's note](https://github.com/dotnet/aspnetcore/issues/19828#issuecomment-601823319) to add `BlazorCacheBootResources` tag in the app's `.csproj` file:
 
 ```xml
 <PropertyGroup>
