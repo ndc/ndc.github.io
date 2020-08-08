@@ -9,7 +9,7 @@ I have a diesel generator. The type is Maxtron MX 6500 D, capacity 5 KVA. Recent
 
 This is my personal note on how to change the oil so next time I'll do it myself. Perhaps other owners of MX 6500 D may find this useful too. Maybe.
 
-<img src="http://i1144.photobucket.com/albums/o484/nnddcc/article/oilchange_zpsaurkyto4.jpg" alt="diagram" style="width: 740px;"/>
+<img src="https://i.imgur.com/VrHNokg.jpg" alt="diagram" style="width: 740px;"/>
 
 First put a tray under the oil drain (under A).
 

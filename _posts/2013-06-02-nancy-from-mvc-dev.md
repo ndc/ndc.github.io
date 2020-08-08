@@ -94,7 +94,7 @@ Nancy will look for a razor file with file name that matches the class name of t
 
 For fun, try not to have any razor file to handle an action. This cute little fella will show up:
 
-![cute little fella](http://i1144.photobucket.com/albums/o484/nnddcc/article/gerbil_zpse3ea4823.png)
+![cute little fella](https://i.imgur.com/T6a9XEE.png)
 
     Nancy.RequestExecutionException: Oh noes! ---> Nancy.ViewEngines.ViewNotFoundException: Unable to locate view 'Index'
     Currently available view engine extensions: sshtml,html,htm,cshtml,vbhtml
