@@ -3,7 +3,7 @@
 ###############################################################################
 * text=auto
 
-apps/firstmediabwa/** binary
+#apps/firstmediabwa/** binary
 
 ###############################################################################
 # Set default behavior for command prompt diff.
