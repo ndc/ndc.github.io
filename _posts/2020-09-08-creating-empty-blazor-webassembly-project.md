@@ -88,11 +88,12 @@ Here is my checklist to clean up blazor webassembly project before the first com
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Blank Blazor WebAssembly</title>
-        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/app.css" rel="stylesheet" />
 
         <!-- Don't forget to set this base path to the right value -->
         <base href="/" />
+
+        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/app.css" rel="stylesheet" />
     </head>
 
     <body>
