@@ -94,10 +94,12 @@ Here is my checklist to clean up blazor webassembly project before the first com
 
         <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link href="css/app.css" rel="stylesheet" />
+        <!-- Don't forget to match the following CSS to your application name -->
+        <link href="WebApplication1.styles.css" rel="stylesheet" />
     </head>
 
     <body>
-        <app>Loading...</app>
+        <div id="app">Loading...</div>
 
         <!-- if using authentication
         <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
@@ -111,3 +113,5 @@ Here is my checklist to clean up blazor webassembly project before the first com
 1. Customize `wwwroot/favicon.ico`
 
     Just drop your usual logo here.
+
+Update March 2021: updated index.html to fit blazor 5.
