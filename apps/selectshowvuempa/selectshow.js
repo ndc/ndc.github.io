@@ -1,5 +1,5 @@
+import { DateTime } from "https://cdn.jsdelivr.net/npm/luxon@1.26.0/src/luxon.js";
 import * as BlitzAPI from "./blitzapi.js"
-import * as luxon from "https://cdn.jsdelivr.net/npm/luxon@1.26.0/src/luxon.js";
 
 export default {
     template: `
@@ -72,7 +72,7 @@ export default {
             cinemas: [],
             movies: [],
             shows: [],
-            selecteddate: luxon.DateTime.now().toISODate(),
+            selecteddate: DateTime.now().toISODate(),
             selectedcity: "",
             selectedcinema: "",
             selectedmovie: "",
@@ -157,7 +157,7 @@ export default {
             }
         },
         formatDate(adate) {
-            return luxon.DateTime.fromISO(adate).toLocaleString(luxon.DateTime.DATE_MED_WITH_WEEKDAY);
+            return DateTime.fromISO(adate).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
         },
     }
 }
