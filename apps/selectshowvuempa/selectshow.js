@@ -51,7 +51,7 @@ export default {
         </div>
     </form>
     <div class="row">
-        <div class="col">
+        <div class="col-10">
             Selection: {{formatDate(selecteddate)}}
             {{allcinemas.find(c => c.code == selectedcinema)?.name}}
             {{selectedcity}}
@@ -60,6 +60,14 @@ export default {
             {{selectedshow ? formatMovieFormat(selectedshow.movieformat) : ""}}
             {{selectedshow ? formatAudiType(selectedshow.auditype) : ""}}
             {{selectedshow?.price}}
+        </div>
+        <div class="col">
+            <router-link v-if="!!selectedshow" :to="{name: 'selectseat', params: {
+                showdate: selecteddate, cinema: selectedcinema, movie: selectedmovie, showtime: selectedshow.showtime,
+                auditype: selectedshow.auditype, movieformat: selectedshow.movieformat}}"
+                class="btn btn-outline-primary btn-block">
+                Select Seat
+            </router-link>
         </div>
     </div>
 </div>
