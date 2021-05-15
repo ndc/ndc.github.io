@@ -5,7 +5,7 @@
   */
 import { getCurrentInstance, inject, onUnmounted, onDeactivated, onActivated, computed, unref, defineComponent,
     reactive, watchEffect, h, provide, ref, watch, shallowRef, nextTick }
-    from 'https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.esm-browser.js';
+    from './vue.esm-browser.js';
 
 const hasSymbol = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
 const PolySymbol = (name) => 

@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from './vue-router.esm-browser.js'
+import { createRouter, createWebHashHistory } from './lib/vue-router.esm-browser.js'
 import SelectShow from './selectshow.js'
 import SelectSeat from './selectseat.js'
 

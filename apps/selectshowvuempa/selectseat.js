@@ -1,4 +1,5 @@
-import { DateTime } from "https://cdn.jsdelivr.net/npm/luxon@1.26.0/src/luxon.js";
+import { ref, computed } from './lib/vue.esm-browser.js'
+import { DateTime } from "./lib/luxon.js";
 import * as BlitzAPI from "./blitzapi.js"
 
 export default {
@@ -16,14 +17,19 @@ export default {
     </div>
 </div>
 `,
-    props: ['showdate', 'cinema', 'movie', 'showtime', 'auditype', 'movieformat'],
-    data() {
-        return {
-        }
+    props: {
+        showdate: String,
+        cinema: String,
+        movie: String,
+        showtime: String,
+        auditype: String,
+        movieformat: String
     },
-    methods: {
-        formatDate(adate) {
+    setup(props, context) {
+        function formatDate(adate) {
             return DateTime.fromISO(adate).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
-        },
+        }
+
+        return { formatDate };
     }
 }
