@@ -1,3 +1,4 @@
+import { ref, computed } from './lib/vue.esm-browser.js'
 import { DateTime } from "./lib/luxon.js";
 import * as BlitzAPI from "./blitzapi.js"
 
@@ -73,70 +74,71 @@ export default {
 </div>
 `,
     components: {},
-    data() {
-        return {
-            allcinemas: [],
-            cities: [],
-            cinemas: [],
-            movies: [],
-            shows: [],
-            selecteddate: DateTime.now().toISODate(),
-            selectedcity: "",
-            selectedcinema: "",
-            selectedmovie: "",
-            selectedshow: null,
-            lastshowid: 0
+    setup() {
+        const allcinemas = ref([]);
+        const cities = ref([]);
+        const cinemas = ref([]);
+        const movies = ref([]);
+        const shows = ref([]);
+        const selecteddate = ref(DateTime.now().toISODate());
+        const selectedcity = ref("");
+        const selectedcinema = ref("");
+        const selectedmovie = ref("");
+        const selectedshow = ref(null);
+        const lastshowid = ref(0);
+
+        async function loadData() {
+            allcinemas.value = await BlitzAPI.Cinema();
+            cities.value = allcinemas.value.map(c => c.city).sort();
+            cities.value = [...new Set(cities.value)];
+            movies.value = await BlitzAPI.Movie();
         }
-    },
-    async created() {
-        await this.loadData();
-    },
-    methods: {
-        async loadData() {
-            this.allcinemas = await BlitzAPI.Cinema();
-            this.cities = this.allcinemas.map(c => c.city).sort();
-            this.cities = [...new Set(this.cities)];
-            this.movies = await BlitzAPI.Movie();
-        },
-        async changedate(event) {
-            this.selecteddate = event.target.value;
-            await this.loadShow();
-        },
-        async changecity(event) {
-            this.selectedcity = event.target.value;
-            if (this.selectedcity == "") {
-                this.cinemas = [];
+
+        async function changedate(event) {
+            selecteddate.value = event.target.value;
+            await loadShow();
+        }
+
+        async function changecity(event) {
+            selectedcity.value = event.target.value;
+            if (selectedcity.value == "") {
+                cinemas.value = [];
             } else {
-                this.cinemas = this.allcinemas.filter(c => c.city == this.selectedcity)
+                cinemas.value = allcinemas.value.filter(c => c.city == selectedcity.value)
                     .sort((a, b) => a.name < b.name ? -1 : (a.name == b.name ? 0 : 1));
             }
-            this.selectedcinema = "";
-            await this.loadShow();
-        },
-        async changecinema(event) {
-            this.selectedcinema = event.target.value;
-            await this.loadShow();
-        },
-        async changemovie(event) {
-            this.selectedmovie = event.target.value;
-            await this.loadShow();
-        },
-        changeshow(show) {
-            this.selectedshow = show;
-        },
-        async loadShow() {
-            this.selectedshow = null;
-            if (this.selectedmovie == "" || this.selectedcinema == "" || this.selecteddate == "") {
-                this.shows = [];
+            selectedcinema.value = "";
+            await loadShow();
+        }
+
+        async function changecinema(event) {
+            selectedcinema.value = event.target.value;
+            await loadShow();
+        }
+
+        async function changemovie(event) {
+            selectedmovie.value = event.target.value;
+            await loadShow();
+        }
+
+        function changeshow(show) {
+            selectedshow.value = show;
+        }
+
+        async function loadShow() {
+            selectedshow.value = null;
+            if (selectedmovie.value == "" || selectedcinema.value == "" || selecteddate.value == "") {
+                shows.value = [];
                 return;
             }
-            this.shows = await BlitzAPI.Schedule(this.selecteddate, this.selectedcinema, this.selectedmovie);
-            this.shows.forEach(s => {
-                this.lastshowid += 1;
-                s.id = this.lastshowid;
+            shows.value = await BlitzAPI.Schedule(selecteddate.value, selectedcinema.value, selectedmovie.value);
+            shows.value.forEach(s => {
+                lastshowid.value += 1;
+                s.id = lastshowid.value;
             });
-        },
-        formatAudiType(auditype) {
+        }
+
+        function formatAudiType(auditype) {
             switch (auditype) {
                 case 'N':
                     return "Regular";
@@ -151,8 +153,9 @@ export default {
                 default:
                     return auditype;
             }
-        },
-        formatMovieFormat(movieformat) {
+        }
+
+        function formatMovieFormat(movieformat) {
             switch (movieformat) {
                 case 'C':
                     return "Celluloid"
@@ -163,9 +166,19 @@ export default {
                 default:
                     return movieformat;
             }
-        },
-        formatDate(adate) {
+        }
+
+        function formatDate(adate) {
             return DateTime.fromISO(adate).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
-        },
+        }
+
+        loadData();
+
+        return {
+            allcinemas, cities, cinemas, movies, shows, selecteddate, selectedcity, selectedcinema, selectedmovie,
+            selectedshow, lastshowid,
+            loadData, changedate, changecity, changecinema, changemovie, changeshow, loadShow, formatAudiType,
+            formatMovieFormat, formatDate
+        }
     }
 }
