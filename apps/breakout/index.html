@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout</title>
+    <script src="rxjs.umd.js"></script>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="480" height="320">
+    </canvas>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+    <script type="module">
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const game = {
+            tickms: 10,
+            lives: 3,
+            score: 0,
+        }
+
+        const ball = {
+            radius: 10,
+            x: 0,
+            y: 0,
+            direction: 0,
+            speed: 3,
+        }
+
+        const resetBall = () => {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height - 30;
+            ball.direction = Math.random() * Math.PI / 2 + Math.PI / 4;
+        }
+        resetBall();
+
+        const paddle = {
+            height: 10,
+            width: 75,
+            x: 0,
+            dx: 7,
+            leftPressed: false,
+            rightPressed: false,
+        }
+        paddle.x = (canvas.width - paddle.width) / 2;
+
+        const brick = {
+            rowCount: 3,
+            columnCount: 5,
+            width: 75,
+            height: 20,
+            padding: 10,
+            offsetTop: 30,
+            offsetLeft: 30,
+            bricks: [],
+        }
+
+        const resetBrick = () => {
+            brick.bricks.length = 0;
+            for (let colidx = 0; colidx < brick.columnCount; colidx++) {
+                for (let rowidx = 0; rowidx < brick.rowCount; rowidx++) {
+                    brick.bricks.push({
+                        x: colidx * (brick.width + brick.padding) + brick.offsetLeft,
+                        y: rowidx * (brick.height + brick.padding) + brick.offsetTop,
+                        visible: true,
+                    });
+                }
+            }
+        }
+        resetBrick();
+
+        const drawBall = () => {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        const drawPaddle = () => {
+            ctx.beginPath();
+            ctx.rect(paddle.x, canvas.height - paddle.height, paddle.width, paddle.height);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        const drawLives = () => {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText(`Lives: ${game.lives}`, canvas.width - 65, 20);
+        }
+
+        const drawScore = () => {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText(`Score: ${game.score}`, 8, 20);
+        }
+
+        const drawBricks = () => {
+            brick.bricks.filter(b => b.visible).forEach(b => {
+                ctx.beginPath();
+                ctx.rect(b.x, b.y, brick.width, brick.height);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            });
+        }
+
+        const endIndicator = new rxjs.Subject();
+
+        const keyDownOb = rxjs.fromEvent(document, "keydown").pipe(
+            rxjs.map(e => e.code),
+            rxjs.takeUntil(endIndicator)
+        ).subscribe(e => {
+            switch (e) {
+                case "ArrowLeft":
+                    paddle.leftPressed = true;
+                    break;
+                case "ArrowRight":
+                    paddle.rightPressed = true;
+                    break;
+            }
+        });
+
+        const keyUpOb = rxjs.fromEvent(document, "keyup").pipe(
+            rxjs.map(e => e.code),
+            rxjs.takeUntil(endIndicator)
+        ).subscribe(e => {
+            switch (e) {
+                case "ArrowLeft":
+                    paddle.leftPressed = false;
+                    break;
+                case "ArrowRight":
+                    paddle.rightPressed = false;
+                    break;
+            }
+        });
+
+        const mouseMoveOb = rxjs.merge(
+            rxjs.fromEvent(document, "mousemove").pipe(rxjs.map(e => e.clientX)),
+            rxjs.fromEvent(document, "touchmove").pipe(rxjs.map(e => e.touches[0].clientX))
+        ).pipe(rxjs.takeUntil(endIndicator)).subscribe(clientX => {
+            let relativeX = clientX - canvas.offsetLeft;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddle.x = relativeX - paddle.width / 2;
+            }
+        });
+
+        const animationFrameObservable = rxjs.defer(() => {
+            // using defer so startTime is set on subscribe, not now
+            const startTime = rxjs.animationFrameScheduler.now();
+            let lastTime = startTime;
+            // using interval but not using the default scheduler
+            return rxjs.interval(0, rxjs.animationFrameScheduler).pipe(
+                // modify output to return elapsed time and time diff from last frame
+                rxjs.map(() => {
+                    const currentTime = rxjs.animationFrameScheduler.now();
+                    const diff = currentTime - lastTime;
+                    lastTime = currentTime;
+                    return [currentTime - startTime, diff];
+                }));
+        }).pipe(
+            rxjs.tap(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBall();
+                drawPaddle();
+                drawLives();
+                drawScore();
+                drawBricks();
+            }),
+            rxjs.takeUntil(endIndicator)
+        ).subscribe(tickData => {
+            // calculate future ball position
+            let proportionalize = x => x * tickData[1] / game.tickms;
+
+            let ballspeed = proportionalize(ball.speed);
+            let balldx = ballspeed * Math.cos(ball.direction);
+            let balldy = -ballspeed * Math.sin(ball.direction);
+            ball.x += balldx;
+            ball.y += balldy;
+
+            if (ball.y + balldy < ball.radius) {
+                // bump top
+                ball.direction = Math.PI * 2 - ball.direction;
+            } else if (ball.y + balldy > canvas.height - ball.radius) {
+                // bump bottom
+                if (ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+                    // bump paddle
+                    let skewPct = (ball.x - paddle.x - paddle.width / 2) / (paddle.width / 2);
+                    ball.direction = (Math.PI * 2 - ball.direction) - skewPct * Math.PI / 6;
+                    if (ball.direction < Math.PI / 18) ball.direction = Math.PI / 18;
+                    if (ball.direction > Math.PI * 17 / 18) ball.direction = Math.PI * 17 / 18;
+                } else {
+                    game.lives--;
+                    if (!game.lives) {
+                        endIndicator.next(true);
+                    } else {
+                        resetBall();
+                    }
+                }
+            }
+
+            if (ball.x + balldx > canvas.width - ball.radius || ball.x + balldx < ball.radius) {
+                // bump left right
+                ball.direction = (Math.PI * 3 - ball.direction) % (Math.PI * 2);
+            }
+
+            let brickCollide = brick.bricks.find(b => b.visible
+                && ball.x > b.x && ball.x < b.x + brick.width
+                && ball.y > b.y && ball.y < b.y + brick.height);
+
+            if (!!brickCollide) {
+                brickCollide.visible = false;
+                game.score++
+                ball.direction = Math.PI * 2 - ball.direction;
+                if (!brick.bricks.some(b => b.visible)) {
+                    // all bricks destroyed
+                    resetBall();
+                    resetBrick();
+                    ball.speed += 1;
+                }
+            }
+
+            // move paddle with keyboard left right
+            let paddledx = proportionalize(paddle.dx);
+            if (paddle.rightPressed) {
+                paddle.x += paddledx;
+                if (paddle.x + paddle.width > canvas.width) {
+                    paddle.x = canvas.width - paddle.width;
+                }
+            } else if (paddle.leftPressed) {
+                paddle.x -= paddledx;
+                if (paddle.x < 0) {
+                    paddle.x = 0;
+                }
+            }
+        });
+
+    </script>
+
+    <br>
+    <p style="width: 480px; margin: 0 auto;">This is the result of me following
+        <a href="https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript">
+            the excellent tutorial from MDN about creating game with javascript</a> while also learning about RxJS.
+    </p>
+</body>
+
+</html>
