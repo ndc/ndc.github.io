@@ -15,7 +15,7 @@ layout: null
 <url><loc>{{site.url}}/apps/multiplication/</loc></url>
 <url><loc>{{site.url}}/apps/ticketbooking/</loc></url>
 <url><loc>{{site.url}}/apps/colorpicker/</loc></url>
-<url><loc>{{site.url}}/apps/reorderyoutubeplaylist/</loc></url>
+<url><loc>{{site.url}}/apps/reorderplaylist/</loc></url>
 
 {% for post in site.posts %}
 <url>
