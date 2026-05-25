@@ -498,13 +498,13 @@
             switch (e.code) {
                 case "ArrowLeft":
                 case "KeyA":
-                    currentHsl[0] -= 0.001;
+                    currentHsl[0] = Math.round(currentHsl[0] * 360 - 1) / 360;
                     if (currentHsl[0] < 0) currentHsl[0] += 1;
                     updateMainViewer(currentHsl);
                     break;
                 case "ArrowRight":
                 case "KeyD":
-                    currentHsl[0] += 0.001;
+                    currentHsl[0] = Math.round(currentHsl[0] * 360 + 1) / 360;
                     if (currentHsl[0] > 1) currentHsl[0] -= 1;
                     updateMainViewer(currentHsl);
                     break;
