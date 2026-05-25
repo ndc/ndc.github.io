@@ -9,7 +9,7 @@ angular.module("MyApp").factory("API", [
         endpoints.Channels = Channels;
         endpoints.ClearCache = ClearCache;
 
-        var rootUrl = "https://uspcahharhjy5eb4.apphb.com";
+        var rootUrl = "https://app.endycahyono.com/first";
         // var rootUrl = "http://localhost:55429";
 
         return endpoints;
@@ -18,7 +18,7 @@ angular.module("MyApp").factory("API", [
             var url = "";
             switch (UserData.UseAPIVersion) {
                 case 3:
-                    url = rootUrl + "/firstmedia/v3/schedule";
+                    url = rootUrl + "/firstmedia/v4/schedule";
                     break;
                 default:
                     url = rootUrl + "/firstmedia/schedule";
@@ -36,7 +36,7 @@ angular.module("MyApp").factory("API", [
             var url = ""
             switch (UserData.UseAPIVersion) {
                 case 3:
-                    url = rootUrl + "/firstmedia/v3/channel";
+                    url = rootUrl + "/firstmedia/v4/channel";
                     break;
                 default:
                     url = rootUrl + "/firstmedia/channel";
