@@ -510,23 +510,23 @@
                     break;
                 case "ArrowUp":
                 case "KeyW":
-                    currentHsl[2] -= 0.01;
+                    currentHsl[2] = Math.round(currentHsl[2] * 100 - 1) / 100;
                     if (currentHsl[2] < 0) currentHsl[2] = 0;
                     updateMainViewer(currentHsl);
                     break;
                 case "ArrowDown":
                 case "KeyS":
-                    currentHsl[2] += 0.01;
+                    currentHsl[2] = Math.round(currentHsl[2] * 100 + 1) / 100;
                     if (currentHsl[2] > 1) currentHsl[2] = 1;
                     updateMainViewer(currentHsl);
                     break;
                 case "KeyQ":
-                    currentHsl[1] -= 0.01;
+                    currentHsl[1] = Math.round(currentHsl[1] * 100 - 1) / 100;
                     if (currentHsl[1] < 0) currentHsl[1] = 0;
                     updateMainViewer(currentHsl);
                     break;
                 case "KeyE":
-                    currentHsl[1] += 0.01;
+                    currentHsl[1] = Math.round(currentHsl[1] * 100 + 1) / 100;
                     if (currentHsl[1] > 1) currentHsl[1] = 1;
                     updateMainViewer(currentHsl);
                     break;
