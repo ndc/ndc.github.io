@@ -13,14 +13,15 @@ Second the selector for hue and saturation is usually combined. Sometimes as a r
 
 Since I couldn't find a decent HSL color picker, I decided to [create my own]({{site.url}}/apps/colorpicker/). My color picker takes up all the available browser space. The viewer for the selected color is the biggest component. Hue selector is separated from saturation selector. It is the second biggest component. Hue selector is put horizontally so in a landscape monitor it has more space to show all the available colors. Saturation and luminance are just sliders on the side. Saturation on the left, luminance on the right.
 
+It also has keyboard shortcuts: left and right or A and D for hue, up and down or W and S for luminance, Q and E for saturation.
+
 Formula for converting HSL to RGB and back I got from: https://gist.github.com/mjackson/5311256
 
 Source code of the color picker is available on https://github.com/ndc/old-folks-hsl-color-picker
 
-Once the color picker is working and I had a chance to play with it, I realized some things that I wasn't aware before.
+Once the color picker is working and I had a chance to play with it, I realized some things that I wasn't aware before:
 
-I used to wonder about the differences between saturation and luminance. By changing saturation while keeping hue and luminance the same, I think I now have a better feel for it. By reducing saturation the value of red, green, and blue are getting closer, _while having the same brightness_. By increasing saturation the value of red, green, and blue are getting farther apart, while having the same brightness.
-
-Increasing luminance means the value of red, green, and blue are getting closer to 255. Reducing luminance means the value of red, green, and blue are getting closer to zero.
+1. I used to wonder about the differences between saturation and luminance. By changing saturation while keeping hue and luminance the same, I think I now have a better feel for it. By reducing saturation the value of red, green, and blue are getting closer, _while having the same brightness_. By increasing saturation the value of red, green, and blue are getting farther apart, while having the same brightness.
+1. Increasing luminance means the value of red, green, and blue are getting closer to 255. Reducing luminance means the value of red, green, and blue are getting closer to zero.
 
 #### If you are curious about it, [why don't you try it for yourself?]({{site.url}}/apps/colorpicker/)
