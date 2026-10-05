@@ -11,11 +11,18 @@ layout: null
 </url>
 {% endfor %}
 
+<url><loc>{{site.url}}/apps/breakout/</loc></url>
+<url><loc>{{site.url}}/apps/colorpicker/</loc></url>
+<url><loc>{{site.url}}/apps/firstmediangjs/</loc></url>
+<url><loc>{{site.url}}/apps/firstmediang/</loc></url>
+<url><loc>{{site.url}}/apps/firstmediavue/</loc></url>
 <url><loc>{{site.url}}/apps/imagemap/</loc></url>
 <url><loc>{{site.url}}/apps/multiplication/</loc></url>
-<url><loc>{{site.url}}/apps/ticketbooking/</loc></url>
-<url><loc>{{site.url}}/apps/colorpicker/</loc></url>
 <url><loc>{{site.url}}/apps/reorderplaylist/</loc></url>
+<url><loc>{{site.url}}/apps/ticketbooking/</loc></url>
+<url><loc>{{site.url}}/apps/selectshowvuempa/</loc></url>
+<url><loc>{{site.url}}/apps/watersort/</loc></url>
+<url><loc>{{site.url}}/apps/wordgenerator/</loc></url>
 
 {% for post in site.posts %}
 <url>
